@@ -14,7 +14,6 @@
 }
 body{font-family:var(--font);color:var(--gray-dark);background:var(--white);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
 a{color:var(--scarlet);}
-/* ── HERO ── */
 .hero{max-width:calc(var(--max)+64px);margin:0 auto;padding:0 32px;display:grid;grid-template-columns:1fr 1fr;min-height:240px;align-items:center;overflow:hidden;}
 .hero-text{padding:24px 40px 24px 0;}
 .hero-title{font-size:clamp(24px,3.2vw,36px);font-weight:800;color:var(--black);letter-spacing:-.02em;line-height:1.1;margin-bottom:10px;}
@@ -27,24 +26,17 @@ a{color:var(--scarlet);}
 .hero-img{height:240px;overflow:hidden;}
 .hero-img-placeholder{width:100%;height:100%;background:linear-gradient(135deg,#b3001b 0%,#cc0033 50%,#e8003a 100%);display:flex;align-items:center;justify-content:center;}
 .hero-img-placeholder svg{width:70px;height:70px;opacity:.2;color:#fff;}
-/* ── PAGE BODY ── */
 .page-body{max-width:calc(var(--max)+64px);margin:0 auto;padding:0 32px;}
-/* ── SECTION DIVIDER ── */
 .section-divider{border:none;border-top:1px solid var(--gray-border);margin:4px 0 0;}
-/* ── SECTION HEADER ── */
 .section-hd{padding:22px 0 16px;}
 .section-hd h2{font-size:18px;font-weight:800;color:var(--black);letter-spacing:-.01em;margin-bottom:2px;}
 .section-hd p{font-size:12px;color:var(--gray-mid);}
 .section-num{color:var(--scarlet);}
-/* ── SHARED UTILITIES ── */
 .icon-circle{border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .icon-circle svg{display:block;}
-.ic-sm{width:36px;height:36px;}
-.ic-sm svg{width:17px;height:17px;}
-.ic-md{width:48px;height:48px;}
-.ic-md svg{width:22px;height:22px;}
-.ic-lg{width:58px;height:58px;}
-.ic-lg svg{width:26px;height:26px;}
+.ic-sm{width:36px;height:36px;}.ic-sm svg{width:17px;height:17px;}
+.ic-md{width:48px;height:48px;}.ic-md svg{width:22px;height:22px;}
+.ic-lg{width:58px;height:58px;}.ic-lg svg{width:26px;height:26px;}
 .ic-scarlet{background:var(--scarlet-bg);color:var(--scarlet);}
 .ic-teal{background:var(--teal-bg);color:var(--teal);}
 .ic-gold{background:var(--gold-bg);color:var(--gold);}
@@ -53,25 +45,15 @@ a{color:var(--scarlet);}
 .ic-purple{background:var(--purple-bg);color:var(--purple);}
 .clr-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;text-decoration:none;}
 .clr-link:hover{text-decoration:underline;}
-.clr-scarlet{color:var(--scarlet);}
-.clr-teal{color:var(--teal);}
-.clr-gold{color:var(--gold);}
-.clr-navy{color:var(--navy);}
-.clr-green{color:var(--green);}
-.clr-purple{color:var(--purple);}
-/* ══ SECTION 1: Start Here ══ */
+.clr-scarlet{color:var(--scarlet);}.clr-teal{color:var(--teal);}.clr-gold{color:var(--gold);}.clr-navy{color:var(--navy);}.clr-green{color:var(--green);}.clr-purple{color:var(--purple);}
 .start-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;margin-bottom:28px;}
 .start-card{padding:24px 18px 18px;border-right:1px solid var(--gray-border);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:3px solid transparent;transition:background .12s;}
 .start-card:last-child{border-right:none;}
 .start-card:hover{background:var(--gray-light);}
-.start-card.c-scarlet{border-top-color:var(--scarlet);}
-.start-card.c-teal{border-top-color:var(--teal);}
-.start-card.c-gold{border-top-color:var(--gold);}
-.start-card.c-navy{border-top-color:var(--navy);}
+.start-card.c-scarlet{border-top-color:var(--scarlet);}.start-card.c-teal{border-top-color:var(--teal);}.start-card.c-gold{border-top-color:var(--gold);}.start-card.c-navy{border-top-color:var(--navy);}
 .start-card h3{font-size:13px;font-weight:700;color:var(--black);margin:14px 0 7px;line-height:1.3;}
 .start-card p{font-size:11px;color:var(--gray-mid);line-height:1.5;flex:1;}
 .start-card .clr-link{margin-top:12px;font-size:11px;}
-/* ══ SECTION 2: Course Setup Checklist ══ */
 .checklist-stepper{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-bottom:28px;position:relative;}
 .checklist-stepper::before{content:'';position:absolute;top:17px;left:calc(10% + 0px);right:calc(10% + 0px);height:2px;background:var(--gray-border);z-index:0;}
 .cs-step{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;padding:0 10px;}
@@ -81,29 +63,20 @@ a{color:var(--scarlet);}
 .cs-step h4{font-size:12px;font-weight:700;color:var(--black);margin-bottom:6px;line-height:1.3;}
 .cs-step p{font-size:11px;color:var(--gray-mid);line-height:1.4;}
 .cs-step .clr-link{margin-top:8px;font-size:11px;}
-/* ══ SECTION 3: Teaching with Canvas ══ */
 .teaching-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;margin-bottom:28px;}
 .teaching-card{padding:20px 14px 16px;border-right:1px solid var(--gray-border);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:3px solid transparent;transition:background .12s;}
 .teaching-card:last-child{border-right:none;}
 .teaching-card:hover{background:var(--gray-light);}
-.teaching-card.c-scarlet{border-top-color:var(--scarlet);}
-.teaching-card.c-teal{border-top-color:var(--teal);}
-.teaching-card.c-gold{border-top-color:var(--gold);}
-.teaching-card.c-navy{border-top-color:var(--navy);}
-.teaching-card.c-green{border-top-color:var(--green);}
+.teaching-card.c-scarlet{border-top-color:var(--scarlet);}.teaching-card.c-teal{border-top-color:var(--teal);}.teaching-card.c-gold{border-top-color:var(--gold);}.teaching-card.c-navy{border-top-color:var(--navy);}.teaching-card.c-green{border-top-color:var(--green);}
 .teaching-card h3{font-size:12px;font-weight:700;color:var(--black);margin:10px 0 6px;line-height:1.3;}
 .teaching-card p{font-size:11px;color:var(--gray-mid);line-height:1.4;flex:1;}
 .teaching-card .clr-link{margin-top:10px;font-size:11px;}
-/* ══ SECTIONS 4 + 5 ══ */
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px;align-items:start;}
 .support-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;}
 .support-card{padding:16px 13px 14px;border-right:1px solid var(--gray-border);display:flex;flex-direction:column;align-items:center;text-align:center;border-top:3px solid transparent;transition:background .12s;}
 .support-card:last-child{border-right:none;}
 .support-card:hover{background:var(--gray-light);}
-.support-card.c-scarlet{border-top-color:var(--scarlet);}
-.support-card.c-teal{border-top-color:var(--teal);}
-.support-card.c-gold{border-top-color:var(--gold);}
-.support-card.c-navy{border-top-color:var(--navy);}
+.support-card.c-scarlet{border-top-color:var(--scarlet);}.support-card.c-teal{border-top-color:var(--teal);}.support-card.c-gold{border-top-color:var(--gold);}.support-card.c-navy{border-top-color:var(--navy);}
 .support-card h4{font-size:12px;font-weight:700;color:var(--black);margin:9px 0 5px;line-height:1.3;}
 .support-card p{font-size:11px;color:var(--gray-mid);line-height:1.4;flex:1;}
 .support-card .clr-link{margin-top:9px;font-size:11px;}
@@ -114,7 +87,6 @@ a{color:var(--scarlet);}
 .wn-icon svg{width:16px;height:16px;}
 .wn-text h4{font-size:12px;font-weight:700;color:var(--black);margin-bottom:2px;line-height:1.3;}
 .wn-text p{font-size:11px;color:var(--gray-mid);line-height:1.4;margin-bottom:4px;}
-/* ── HELP BAR ── */
 .help-bar{background:var(--gray-light);border-top:1px solid var(--gray-border);padding:20px 32px;margin-top:4px;}
 .help-bar-inner{max-width:calc(var(--max)+64px);margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;align-items:start;}
 .hb-item{display:flex;align-items:flex-start;gap:12px;}
@@ -127,35 +99,22 @@ a{color:var(--scarlet);}
 .hb-text p,.hb-text a{font-size:11px;color:var(--gray-mid);text-decoration:none;line-height:1.5;display:block;}
 .hb-text a:hover{color:var(--scarlet);text-decoration:underline;}
 .hb-link{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;text-decoration:none;margin-top:4px;}
-/* ── RESPONSIVE ── */
 @media(max-width:900px){
-  .hero{grid-template-columns:1fr;}
-  .hero-text{padding:24px 0 18px;}
-  .hero-img{height:180px;}
-  .start-grid{grid-template-columns:1fr 1fr;}
-  .start-card:nth-child(2){border-right:none;}
-  .start-card:nth-child(1),.start-card:nth-child(2){border-bottom:1px solid var(--gray-border);}
-  .checklist-stepper{grid-template-columns:1fr 1fr 1fr;}
-  .checklist-stepper::before{display:none;}
-  .teaching-grid{grid-template-columns:1fr 1fr 1fr;}
-  .teaching-card:nth-child(3){border-right:none;}
-  .teaching-card:nth-child(1),.teaching-card:nth-child(2),.teaching-card:nth-child(3){border-bottom:1px solid var(--gray-border);}
+  .hero{grid-template-columns:1fr;}.hero-text{padding:24px 0 18px;}.hero-img{height:180px;}
+  .start-grid{grid-template-columns:1fr 1fr;}.start-card:nth-child(2){border-right:none;}.start-card:nth-child(1),.start-card:nth-child(2){border-bottom:1px solid var(--gray-border);}
+  .checklist-stepper{grid-template-columns:1fr 1fr 1fr;}.checklist-stepper::before{display:none;}
+  .teaching-grid{grid-template-columns:1fr 1fr 1fr;}.teaching-card:nth-child(3){border-right:none;}.teaching-card:nth-child(1),.teaching-card:nth-child(2),.teaching-card:nth-child(3){border-bottom:1px solid var(--gray-border);}
   .two-col{grid-template-columns:1fr;}
-  .support-grid{grid-template-columns:1fr 1fr;}
-  .support-card:nth-child(2){border-right:none;}
-  .support-card:nth-child(1),.support-card:nth-child(2){border-bottom:1px solid var(--gray-border);}
+  .support-grid{grid-template-columns:1fr 1fr;}.support-card:nth-child(2){border-right:none;}.support-card:nth-child(1),.support-card:nth-child(2){border-bottom:1px solid var(--gray-border);}
   .help-bar-inner{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:580px){
-  .start-grid{grid-template-columns:1fr;}
-  .start-card{border-right:none;border-bottom:1px solid var(--gray-border);}
+  .start-grid{grid-template-columns:1fr;}.start-card{border-right:none;border-bottom:1px solid var(--gray-border);}
   .checklist-stepper{grid-template-columns:1fr 1fr;}
-  .teaching-grid{grid-template-columns:1fr 1fr;}
-  .teaching-card:nth-child(2){border-right:none;}
+  .teaching-grid{grid-template-columns:1fr 1fr;}.teaching-card:nth-child(2){border-right:none;}
   .help-bar-inner{grid-template-columns:1fr;}
 }
 </style></head><body>
-<!-- ══ HERO ══ -->
 <div class="hero">
   <div class="hero-text">
     <h1 class="hero-title">Getting Started<br>with Canvas</h1>
@@ -181,9 +140,7 @@ a{color:var(--scarlet);}
     </div>
   </div>
 </div>
-<!-- ══ PAGE BODY ══ -->
 <div class="page-body">
-  <!-- ══ SECTION 1: Start Here ══ -->
   <hr class="section-divider">
   <div class="section-hd">
     <h2><span class="section-num">1. </span>Start Here</h2>
@@ -196,7 +153,7 @@ a{color:var(--scarlet);}
       </div>
       <h3>Prepare Your Course</h3>
       <p>Set up your course, import content, and organize your materials.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-scarlet">Get Started →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/tkb-p/Instructor" target="_blank" rel="noopener" class="clr-link clr-scarlet">Get Started →</a>
     </div>
     <div class="start-card c-teal">
       <div class="icon-circle ic-lg ic-teal">
@@ -204,7 +161,7 @@ a{color:var(--scarlet);}
       </div>
       <h3>Communicate with Students</h3>
       <p>Connect with your students and keep them informed throughout the semester.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-teal">Learn How →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-use-the-Inbox-as-an-instructor/ta-p/842" target="_blank" rel="noopener" class="clr-link clr-teal">Learn How →</a>
     </div>
     <div class="start-card c-gold">
       <div class="icon-circle ic-lg ic-gold">
@@ -212,7 +169,7 @@ a{color:var(--scarlet);}
       </div>
       <h3>Create Assignments &amp; Discussions</h3>
       <p>Build learning activities that support your course goals.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-gold">Explore Activities →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-create-an-assignment/ta-p/740" target="_blank" rel="noopener" class="clr-link clr-gold">Explore Activities →</a>
     </div>
     <div class="start-card c-navy">
       <div class="icon-circle ic-lg ic-navy">
@@ -220,10 +177,9 @@ a{color:var(--scarlet);}
       </div>
       <h3>Publish Your Course</h3>
       <p>Review and publish your course to make it visible to students.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-navy">Publish Guide →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-publish-a-course/ta-p/1188" target="_blank" rel="noopener" class="clr-link clr-navy">Publish Guide →</a>
     </div>
   </div>
-  <!-- ══ SECTION 2: Course Setup Checklist ══ -->
   <hr class="section-divider">
   <div class="section-hd">
     <h2><span class="section-num">2. </span>Course Setup Checklist</h2>
@@ -232,51 +188,40 @@ a{color:var(--scarlet);}
   <div class="checklist-stepper">
     <div class="cs-step">
       <div class="cs-bubble">1</div>
-      <div class="cs-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-      </div>
+      <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
       <h4>Import or copy your course</h4>
       <p>Start with a template or copy content from a previous course.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-scarlet">How to Import →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-import-a-Canvas-course-export-package/ta-p/796" target="_blank" rel="noopener" class="clr-link clr-scarlet">How to Import →</a>
     </div>
     <div class="cs-step">
       <div class="cs-bubble">2</div>
-      <div class="cs-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-      </div>
+      <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></div>
       <h4>Update your syllabus</h4>
       <p>Add or update your syllabus and course policies.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-teal">Update Syllabus →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-use-the-Syllabus-as-an-instructor/ta-p/638" target="_blank" rel="noopener" class="clr-link clr-teal">Update Syllabus →</a>
     </div>
     <div class="cs-step">
       <div class="cs-bubble">3</div>
-      <div class="cs-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      </div>
+      <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></div>
       <h4>Organize course materials</h4>
       <p>Add content and organize it into modules or weekly folders.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-gold">Organize Content →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-use-the-Modules-Index-Page/ta-p/926" target="_blank" rel="noopener" class="clr-link clr-gold">Organize Content →</a>
     </div>
     <div class="cs-step">
       <div class="cs-bubble">4</div>
-      <div class="cs-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      </div>
+      <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
       <h4>Create assignments</h4>
       <p>Build assignments, quizzes, and discussions for your students.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-navy">Create Activities →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-create-an-assignment/ta-p/740" target="_blank" rel="noopener" class="clr-link clr-navy">Create Activities →</a>
     </div>
     <div class="cs-step">
       <div class="cs-bubble">5</div>
-      <div class="cs-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-      </div>
+      <div class="cs-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
       <h4>Publish your course</h4>
       <p>Review your course settings and make your course available to students.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-green">Publish Course →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-publish-a-course/ta-p/1188" target="_blank" rel="noopener" class="clr-link clr-green">Publish Course →</a>
     </div>
   </div>
-  <!-- ══ SECTION 3: Teaching with Canvas ══ -->
   <hr class="section-divider">
   <div class="section-hd">
     <h2><span class="section-num">3. </span>Teaching with Canvas</h2>
@@ -289,7 +234,7 @@ a{color:var(--scarlet);}
       </div>
       <h3>Communicating with Students</h3>
       <p>Announcements, inbox, discussions, and more.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-scarlet">Learn More →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-add-an-announcement-in-a-course/ta-p/1003" target="_blank" rel="noopener" class="clr-link clr-scarlet">Learn More →</a>
     </div>
     <div class="teaching-card c-teal">
       <div class="icon-circle ic-md ic-teal">
@@ -297,7 +242,7 @@ a{color:var(--scarlet);}
       </div>
       <h3>Supporting Student Engagement</h3>
       <p>Encourage participation with interactive tools and activities.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-teal">Learn More →</a>
+      <a href="https://account577280.wixsite.com/mytechnewark/engage-students" target="_top" class="clr-link clr-teal">Learn More →</a>
     </div>
     <div class="teaching-card c-gold">
       <div class="icon-circle ic-md ic-gold">
@@ -305,7 +250,7 @@ a{color:var(--scarlet);}
       </div>
       <h3>Organizing Weekly Content</h3>
       <p>Use modules and pages to create a clear learning structure.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-gold">Learn More →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-use-the-Modules-Index-Page/ta-p/926" target="_blank" rel="noopener" class="clr-link clr-gold">Learn More →</a>
     </div>
     <div class="teaching-card c-navy">
       <div class="icon-circle ic-md ic-navy">
@@ -313,7 +258,7 @@ a{color:var(--scarlet);}
       </div>
       <h3>Providing Feedback</h3>
       <p>Use feedback tools and rubrics to support student learning.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-navy">Learn More →</a>
+      <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-use-SpeedGrader/ta-p/757" target="_blank" rel="noopener" class="clr-link clr-navy">Learn More →</a>
     </div>
     <div class="teaching-card c-green">
       <div class="icon-circle ic-md ic-green">
@@ -321,10 +266,9 @@ a{color:var(--scarlet);}
       </div>
       <h3>Managing Assessments</h3>
       <p>Create quizzes, exams, and projects to assess learning.</p>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-green">Learn More →</a>
+      <a href="https://account577280.wixsite.com/mytechnewark/assessments-and-grading" target="_top" class="clr-link clr-green">Learn More →</a>
     </div>
   </div>
-  <!-- ══ SECTIONS 4 + 5 ══ -->
   <hr class="section-divider">
   <div class="two-col" style="margin-top:0;">
     <div>
@@ -355,7 +299,7 @@ a{color:var(--scarlet);}
           </div>
           <h4>Canvas Help</h4>
           <p>Find guides, videos, and documentation from Canvas.</p>
-          <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-gold">Visit Canvas Guides →</a>
+          <a href="https://community.canvaslms.com/t5/Instructor-Guide/tkb-p/Instructor" target="_blank" rel="noopener" class="clr-link clr-gold">Visit Canvas Guides →</a>
         </div>
         <div class="support-card c-navy">
           <div class="icon-circle ic-sm ic-navy">
@@ -380,7 +324,7 @@ a{color:var(--scarlet);}
           <div class="wn-text">
             <h4>New Gradebook Improvements</h4>
             <p>View and manage grades more easily with new filtering options.</p>
-            <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-scarlet" style="font-size:11px;">Learn more →</a>
+            <a href="https://community.canvaslms.com/t5/Canvas-Releases/bg-p/CanvasReleases" target="_blank" rel="noopener" class="clr-link clr-scarlet" style="font-size:11px;">Learn more →</a>
           </div>
         </div>
         <div class="wn-item">
@@ -390,7 +334,7 @@ a{color:var(--scarlet);}
           <div class="wn-text">
             <h4>Announcements Enhancements</h4>
             <p>Schedule announcements and send to multiple sections at once.</p>
-            <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-scarlet" style="font-size:11px;">Learn more →</a>
+            <a href="https://community.canvaslms.com/t5/Canvas-Releases/bg-p/CanvasReleases" target="_blank" rel="noopener" class="clr-link clr-scarlet" style="font-size:11px;">Learn more →</a>
           </div>
         </div>
         <div class="wn-item">
@@ -400,15 +344,14 @@ a{color:var(--scarlet);}
           <div class="wn-text">
             <h4>Canvas Student App Updates</h4>
             <p>New features in the mobile app help students stay on track anywhere.</p>
-            <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-scarlet" style="font-size:11px;">Learn more →</a>
+            <a href="https://community.canvaslms.com/t5/Canvas-Releases/bg-p/CanvasReleases" target="_blank" rel="noopener" class="clr-link clr-scarlet" style="font-size:11px;">Learn more →</a>
           </div>
         </div>
       </div>
-      <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="clr-link clr-scarlet" style="margin-top:14px;display:inline-flex;">View All Updates →</a>
+      <a href="https://community.canvaslms.com/t5/Canvas-Releases/bg-p/CanvasReleases" target="_blank" rel="noopener" class="clr-link clr-scarlet" style="margin-top:14px;display:inline-flex;">View All Updates →</a>
     </div>
   </div>
 </div>
-<!-- ══ HELP BAR ══ -->
 <div class="help-bar">
   <div class="help-bar-inner">
     <div class="hb-item">
@@ -428,7 +371,7 @@ a{color:var(--scarlet);}
       <div class="hb-text">
         <strong>Canvas Help</strong>
         <p>Find guides and documentation about Canvas.</p>
-        <a href="https://rutgers.instructure.com/login/saml/" target="_blank" rel="noopener" class="hb-link clr-navy">Visit Canvas Guides →</a>
+        <a href="https://community.canvaslms.com/t5/Instructor-Guide/tkb-p/Instructor" target="_blank" rel="noopener" class="hb-link clr-navy">Visit Canvas Guides →</a>
       </div>
     </div>
     <div class="hb-item">
