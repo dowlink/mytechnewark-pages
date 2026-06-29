@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teaching in Auditoriums — myTech@Newark Knowledge Base</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #1B3A6B;
+      --scarlet: #CC0033;
+      --teal:    #00626D;
+      --gold:    #C96A00;
+      --f3-bg:   #FDF5F1;
+      --f3-border: #D14124;
+      --f3-text: #D14124;
+      --body-bg: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --text:    #1A1A1A;
+      --muted:   #555555;
+      --border:  #E0E0E0;
+      --step-bg: #F4F7FB;
+    }
+
+    body {
+      font-family: 'Libre Franklin', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--body-bg);
+    }
+
+    .identity-bar {
+      background: #FFFFFF; border-bottom: 1px solid var(--border);
+      padding: 12px 32px; display: flex; align-items: center; gap: 14px;
+    }
+    .identity-bar .logo-block { display: flex; flex-direction: column; gap: 1px; }
+    .identity-bar .site-name { font-size: 17px; font-weight: 700; color: var(--navy); letter-spacing: -0.01em; }
+    .identity-bar .site-sub { font-size: 12px; color: var(--muted); font-weight: 400; }
+    .identity-bar .logo-mark {
+      width: 40px; height: 40px; background: var(--scarlet); border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 18px; font-weight: 800; letter-spacing: -1px; flex-shrink: 0;
+    }
+
+    .breadcrumb {
+      background: #F0F4F9; border-bottom: 1px solid var(--border);
+      padding: 8px 32px; font-size: 13px; color: var(--muted);
+    }
+    .breadcrumb a { color: var(--navy); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 6px; }
+
+    .article-wrap { max-width: 860px; margin: 0 auto; padding: 40px 32px 64px; }
+
+    .audience-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--f3-bg); border: 1.5px solid var(--f3-border);
+      color: var(--f3-text); border-radius: 999px; padding: 5px 14px;
+      font-size: 13px; font-weight: 600; margin-bottom: 20px;
+    }
+
+    .article-header { margin-bottom: 28px; }
+    .article-header h1 { font-size: 32px; font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 12px; }
+    .article-header .overview { font-size: 16px; color: var(--muted); max-width: 720px; }
+    .article-divider { border: none; border-top: 2px solid var(--border); margin: 32px 0; }
+
+    .section-heading { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 16px; }
+    .section-sub { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+
+    .steps { display: flex; flex-direction: column; gap: 12px; margin-bottom: 8px; }
+    .step { display: flex; gap: 16px; background: var(--step-bg); border-radius: 8px; padding: 16px 20px; align-items: flex-start; }
+    .step-num {
+      min-width: 32px; height: 32px; background: var(--navy); color: #fff;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .step-content strong { display: block; font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 3px; }
+    .step-content p { font-size: 14px; color: var(--muted); }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 8px; }
+    .feature-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px 16px; }
+    .feature-card .fc-icon { font-size: 22px; margin-bottom: 8px; }
+    .feature-card strong { font-size: 14px; font-weight: 600; display: block; margin-bottom: 4px; }
+    .feature-card p { font-size: 13px; color: var(--muted); }
+
+    .present-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 8px; }
+    .present-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-left: 4px solid var(--navy); border-radius: 8px; padding: 18px 16px;
+    }
+    .present-card strong { font-size: 15px; font-weight: 700; display: block; margin-bottom: 6px; color: var(--navy); }
+    .present-card p { font-size: 14px; color: var(--muted); }
+
+    .detail-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 8px; }
+    .detail-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 20px 18px; }
+    .detail-card h3 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .detail-card p { font-size: 14px; color: var(--muted); margin-bottom: 10px; }
+    .detail-card ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+    .detail-card ul li { font-size: 13px; color: var(--text); padding-left: 18px; position: relative; }
+    .detail-card ul li::before { content: "✓"; position: absolute; left: 0; color: var(--teal); font-weight: 700; }
+    .detail-card.fits-card ul li::before { content: "›"; color: var(--navy); }
+
+    /* ── Signs Grid ───────────────────────────────────── */
+    .signs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .sign-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .sign-img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+    }
+    .sign-desc strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .sign-desc p {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .buildings-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px; margin-bottom: 8px;
+    }
+    .building-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: 8px; padding: 14px 16px; text-align: center;
+    }
+    .building-card .b-icon { font-size: 22px; margin-bottom: 6px; }
+    .building-card strong { display: block; font-size: 14px; font-weight: 700; color: var(--navy); }
+    .building-card span { font-size: 12px; color: var(--muted); }
+
+    .resources-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 8px; }
+    .resource-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 18px 16px; }
+    .resource-card h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .resource-card ul { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .resource-card ul li { font-size: 13px; }
+    .resource-card ul li a { color: var(--navy); text-decoration: none; }
+    .resource-card ul li a:hover { text-decoration: underline; }
+    .resource-card ul li::before { content: "→ "; color: var(--scarlet); font-weight: 700; }
+
+    .related-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+    .related-list li a { color: var(--navy); text-decoration: none; font-size: 15px; font-weight: 500; }
+    .related-list li a:hover { text-decoration: underline; }
+    .related-list li::before { content: "→ "; color: var(--scarlet); font-weight: 700; }
+
+    .support-block {
+      background: #FFF5F7; border: 1.5px solid var(--scarlet);
+      border-radius: 10px; padding: 28px 28px 24px; margin-top: 40px;
+    }
+    .support-block h2 { font-size: 20px; font-weight: 700; color: var(--scarlet); margin-bottom: 6px; }
+    .support-block .support-intro { font-size: 14px; color: var(--muted); margin-bottom: 20px; }
+    .support-contact { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 14px; margin-bottom: 20px; }
+    .sc-item { display: flex; flex-direction: column; gap: 3px; }
+    .sc-item .sc-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--scarlet); }
+    .sc-item .sc-value { font-size: 15px; font-weight: 600; color: var(--text); }
+    .sc-item .sc-value a { color: var(--navy); text-decoration: none; }
+    .sc-item .sc-value a:hover { text-decoration: underline; }
+    .support-cta {
+      display: inline-block; background: var(--scarlet); color: #fff;
+      font-weight: 700; font-size: 14px; padding: 11px 24px;
+      border-radius: 6px; text-decoration: none; letter-spacing: 0.02em;
+    }
+    .support-cta:hover { background: #A8002A; }
+
+    .brand-footer {
+      background: #FFFFFF; border-top: 1px solid var(--border);
+      padding: 28px 32px; text-align: center;
+    }
+    .brand-footer .bf-name { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.01em; }
+    .brand-footer .bf-tagline { font-size: 13px; color: var(--muted); font-style: italic; margin-top: 3px; }
+
+    @media (max-width: 680px) {
+      .feature-grid, .present-grid, .detail-grid, .resources-grid { grid-template-columns: 1fr; }
+      .article-header h1 { font-size: 24px; }
+      .article-wrap { padding: 24px 18px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Identity Bar -->
+  <header class="identity-bar">
+    <div class="logo-mark">R</div>
+    <div class="logo-block">
+      <div class="site-name">myTech@Newark Knowledge Base</div>
+      <div class="site-sub">Rutgers University–Newark · Academic Technology Services</div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="#">myTech@Newark</a>
+    <span>›</span>
+    <a href="#">Teaching &amp; Learning</a>
+    <span>›</span>
+    Teaching in Auditoriums
+  </nav>
+
+  <!-- Article -->
+  <main class="article-wrap">
+
+    <!-- Audience Badge -->
+    <div class="audience-badge">🏫 Faculty Teaching in Rutgers–Newark Classrooms</div>
+
+    <!-- Article Header -->
+    <header class="article-header">
+      <h1>Teaching in Auditoriums</h1>
+      <p class="overview">Our auditoriums are designed for lectures, presentations, and events — and equipped with interactive technology to support in-person, hybrid, and recorded teaching.</p>
+    </header>
+
+    <hr class="article-divider" />
+
+    <!-- Getting Started -->
+    <section aria-labelledby="gs-heading">
+      <h2 class="section-heading" id="gs-heading">Getting Started in Your Auditorium</h2>
+      <p class="section-sub">Follow these steps to start the auditorium technology and prepare your presentation.</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>Log into the podium computer</strong>
+            <p>Use your NetID and password to log into the podium PC. The podium computer should already be powered on.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>Tap the touchscreen to start the AV system</strong>
+            <p>Touch the control panel at the podium to wake the AV system and begin using the room technology.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>Select your presentation source</strong>
+            <p>Choose the source you want to display, such as the podium PC, your laptop, wireless presentation, or document camera.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>Configure the display</strong>
+            <p>Use the touch panel to select which screens show your content. Adjust the display layout if needed.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-content">
+            <strong>Turn on and use the microphone</strong>
+            <p>Take the handheld or lapel microphone from the podium drawer or holder. Turn it on before class begins and test the audio in the room.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-content">
+            <strong>Adjust room technology during class</strong>
+            <p>Use the touch control panel to manage display output, audio levels, source selection, and room lighting throughout class.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="article-divider" />
+
+    <!-- What You Can Do -->
+    <section aria-labelledby="features-heading">
+      <h2 class="section-heading" id="features-heading">What You Can Do in Auditorium Spaces</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="fc-icon">🖥️</div>
+          <strong>Present with Impact</strong>
+          <p>Display content on multiple large screens and monitors throughout the auditorium.</p>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🎙️</div>
+          <strong>Be Heard Clearly</strong>
+          <p>Use podium and ceiling microphones for clear room-wide audio amplification.</p>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📡</div>
+          <strong>Connect and Engage</strong>
+          <p>Use InstructorCam and video conferencing tools to support hybrid instruction and remote participation.</p>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">👆</div>
+          <strong>Touch Interactively</strong>
+          <p>Use dual touch-screen interactive displays to annotate, interact, and control classroom displays.</p>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">📲</div>
+          <strong>Share from Anywhere</strong>
+          <p>Present from your laptop, phone, or computer wirelessly using AirMedia.</p>
+        </div>
+        <div class="feature-card">
+          <div class="fc-icon">🎬</div>
+          <strong>Record Your Class</strong>
+          <p>Capture auditorium sessions including video using Kaltura Classroom Capture.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="article-divider" />
+
+    <!-- Classroom Technology Signs -->
+    <section aria-labelledby="signs-heading">
+      <h2 class="section-heading" id="signs-heading">Auditorium Technology Signs</h2>
+      <p class="section-sub">These signs are posted in auditoriums to identify available technology features at-a-glance. Look for them on the door, podium, or wall near the equipment they describe.</p>
+      <div class="signs-grid">
+        <div class="sign-card">
+          <img src="sign-instructorcam.svg" alt="InstructorCam sign" class="sign-img" />
+          <div class="sign-desc">
+            <strong>InstructorCam</strong>
+            <p>Auto-tracking camera supports hybrid and recorded class sessions.</p>
+          </div>
+        </div>
+        <div class="sign-card">
+          <img src="sign-adjustable-height.svg" alt="Adjustable Height sign" class="sign-img" />
+          <div class="sign-desc">
+            <strong>Adjustable Height</strong>
+            <p>The podium height can be adjusted for accessibility and ergonomic teaching.</p>
+          </div>
+        </div>
+        <div class="sign-card">
+          <img src="sign-wireless-projector.svg" alt="Wireless Projector sign" class="sign-img" />
+          <div class="sign-desc">
+            <strong>Wireless Projector</strong>
+            <p>Present wirelessly from any device using AirMedia.</p>
+          </div>
+        </div>
+        <div class="sign-card">
+          <img src="PowerSymbolGreen.png" alt="Power Available sign" class="sign-img" />
+          <div class="sign-desc">
+            <strong>Power Available</strong>
+            <p>Standard power outlets are available at student seats and the podium.</p>
+          </div>
+        </div>
+        <div class="sign-card">
+          <img src="TouchScreenWhite.svg" alt="Touch Screen sign" class="sign-img" />
+          <div class="sign-desc">
+            <strong>Touch Screen</strong>
+            <p>An interactive touch display is available for annotation and direct interaction with on-screen content.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="article-divider" />
+
+    <!-- Present Content Your Way -->
+    <section aria-labelledby="present-heading">
+      <h2 class="section-heading" id="present-heading">Present Content Your Way</h2>
+      <p class="section-sub">Choose the source that works best for your class.</p>
+      <div class="present-grid">
+        <div class="present-card">
+          <strong>Podium Computer</strong>
+          <p>The auditorium podium PC runs Windows with all standard Rutgers software. Log in with your NetID to access slides, browsers, and applications directly.</p>
+        </div>
+        <div class="present-card">
+          <strong>Laptop (HDMI)</strong>
+          <p>Connect your laptop using the HDMI cable at the podium. USB-C and DisplayPort adapters are available. Your display will mirror to all auditorium screens.</p>
+        </div>
+        <div class="present-card">
+          <strong>Wireless Presentation</strong>
+          <p>Share your screen wirelessly from any device using AirMedia. Follow the on-screen instructions displayed when no source is active.</p>
+        </div>
+        <div class="present-card">
+          <strong>Interactive Touch Displays</strong>
+          <p>Use touch-enabled monitors to annotate slides, interact with content, and control classroom display from the front of the room.</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="article-divider" />
+
+    <!-- InstructorCam, Course Capture & FITS -->
+    <section aria-labelledby="capture-heading">
+      <h2 class="section-heading" id="capture-heading">InstructorCam, Course Capture &amp; FITS</h2>
+      <div class="detail-grid">
+        <div class="detail-card">
+          <h3>InstructorCam &amp; Hybrid Teaching</h3>
+          <p>Use InstructorCam for video conferencing, hybrid instruction, and remote participation in auditorium spaces. Auto-tracking camera follows the presenter.</p>
+          <ul>
+            <li>Video conferencing support</li>
+            <li>Hybrid class delivery</li>
+            <li>Manual camera control</li>
+            <li>Clear audio for remote attendees</li>
+            <li>Works with Zoom, Teams, Webex</li>
+          </ul>
+        </div>
+        <div class="detail-card">
+          <h3>Course Capture</h3>
+          <p>Record classroom sessions using Kaltura Classroom Capture. Captures audio, video, and presentation content automatically.</p>
+          <ul>
+            <li>Capture audio, video, and presentation slides</li>
+            <li>Stores recordings in Canvas</li>
+            <li>Create review materials for students</li>
+            <li>Add captions and chapters</li>
+            <li>Review recordings in Canvas/Mediaspace</li>
+          </ul>
+        </div>
+        <div class="detail-card fits-card">
+          <h3>Faculty Innovation &amp; Teaching Studio (FITS)</h3>
+          <p>Practice and explore the same technology in a hands-on environment before your auditorium session.</p>
+          <ul>
+            <li>Try InstructorCam and AV systems</li>
+            <li>Test hybrid teaching workflows</li>
+            <li>Practice auditorium presentation tools</li>
+            <li>Build confidence with new tools</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+
+    <hr class="article-divider" />
+
+    <!-- Resources & Support -->
+    <section aria-labelledby="resources-heading">
+      <h2 class="section-heading" id="resources-heading">Resources &amp; Support</h2>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <h3>📅 In-Person Training</h3>
+          <ul>
+            <li><a href="#">Register for a session</a></li>
+            <li><a href="#">Walk-in hours available</a></li>
+            <li><a href="#">One-on-one training by request</a></li>
+          </ul>
+        </div>
+        <div class="resource-card">
+          <h3>📖 User Guides</h3>
+          <ul>
+            <li><a href="#">Auditorium quick-start guide</a></li>
+            <li><a href="#">Touch panel user guide</a></li>
+            <li><a href="#">InstructorCam setup guide</a></li>
+            <li><a href="#">Kaltura recording guide</a></li>
+            <li><a href="#">Hybrid teaching checklist</a></li>
+          </ul>
+        </div>
+        <div class="resource-card">
+          <h3>🛠️ Report an Issue</h3>
+          <ul>
+            <li><a href="tel:9733531713">📞 (973) 353-1713</a></li>
+            <li><a href="mailto:atshelp@newark.rutgers.edu">✉️ atshelp@newark.rutgers.edu</a></li>
+            <li><a href="#">Submit a ticket online</a></li>
+            <li><a href="#">Emergency AV support available</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <hr class="article-divider" />
+
+    <!-- Related Articles -->
+    <section aria-labelledby="related-heading">
+      <h2 class="section-heading" id="related-heading">Related Articles</h2>
+      <ul class="related-list">
+        <li><a href="#">Teaching in Digital Classrooms</a></li>
+        <li><a href="#">Teaching in Lecture Halls</a></li>
+        <li><a href="#">Canvas Learning Management System</a></li>
+        <li><a href="#">Kaltura Lecture Recording</a></li>
+        <li><a href="#">Faculty Innovation &amp; Teaching Studio (FITS)</a></li>
+        <li><a href="#">Rutgers Newark IT Services</a></li>
+      </ul>
+    </section>
+
+    <!-- Still Need Help? -->
+    <section class="support-block" aria-labelledby="support-heading">
+      <h2 id="support-heading">Still Need Help?</h2>
+      <p class="support-intro">Academic Technology Services (ATS) supports Rutgers–Newark classroom technology and instructional spaces.</p>
+      <div class="support-contact">
+        <div class="sc-item">
+          <span class="sc-label">Phone</span>
+          <span class="sc-value"><a href="tel:9733531713">973-353-1713</a></span>
+        </div>
+        <div class="sc-item">
+          <span class="sc-label">Email</span>
+          <span class="sc-value"><a href="mailto:atshelp@newark.rutgers.edu">atshelp@newark.rutgers.edu</a></span>
+        </div>
+        <div class="sc-item">
+          <span class="sc-label">Drop-in</span>
+          <span class="sc-value">Hill Hall, Room 107</span>
+        </div>
+        <div class="sc-item">
+          <span class="sc-label">Hours</span>
+          <span class="sc-value">Mon–Fri: 8:00 AM – 6:30 PM</span>
+        </div>
+      </div>
+      <a href="#" class="support-cta">Request Classroom Assistance</a>
+    </section>
+
+  </main>
+
+  <!-- Brand Footer -->
+  <footer class="brand-footer">
+    <div class="bf-name">myTech@Newark</div>
+    <div class="bf-tagline">Innovation at Rutgers University–Newark</div>
+  </footer>
+
+</body>
+</html>
