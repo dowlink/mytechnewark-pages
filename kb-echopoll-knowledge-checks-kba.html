@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using EchoPoll for Knowledge Checks and Formative Assessment — myTech@Newark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:    #1B3A6B;
+      --scarlet: #CC0033;
+      --teal:    #00626D;
+      --gold:    #C96A00;
+      --text:    #1a1a1a;
+      --muted:   #555;
+      --border:  #e2e2e2;
+      --card-bg: #ffffff;
+      --soft-bg: #F7F8FA;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Libre Franklin', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+      background: #fff;
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .article-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 36px 28px 64px;
+    }
+
+    /* ── Audience Badge (F1) ──────────────────────────── */
+    .audience-badge {
+      display: inline-block;
+      background: #FDF2F4;
+      border: 1px solid #CC0033;
+      color: #CC0033;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 4px;
+      margin-bottom: 18px;
+    }
+
+    /* ── Article Header ───────────────────────────────── */
+    .article-header { margin-bottom: 28px; }
+    .article-header h1 {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .meta-tag {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 3px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .meta-tag.type-bp     { background: #FFF4E6; color: var(--gold); }
+    .meta-tag.type-engage { background: #EAF7F5; color: var(--teal); }
+    .meta-tag.type-scope  { background: #FFF8E1; color: var(--gold); }
+    .meta-tag.type-system { background: #F5F5F5; color: #555; }
+
+    /* ── Section Headings ─────────────────────────────── */
+    .article-wrap h2 {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--navy);
+      margin: 36px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .article-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 36px 0;
+    }
+
+    /* ── Intro / Prose ────────────────────────────────── */
+    .intro-text {
+      font-size: 15.5px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .prose {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 12px;
+    }
+
+    /* ── Scope Callout ────────────────────────────────── */
+    .scope-callout {
+      background: #FDF2F4;
+      border-left: 4px solid var(--scarlet);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 16px 0 24px;
+      font-size: 13.5px;
+      color: #7a0020;
+      line-height: 1.6;
+    }
+    .scope-callout strong { color: var(--scarlet); }
+
+    /* ── Bullet List ──────────────────────────────────── */
+    .content-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin: 10px 0;
+      padding-left: 4px;
+    }
+    .content-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .content-list li::before {
+      content: "•";
+      color: var(--scarlet);
+      font-weight: 900;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── When To Use — timing cards ──────────────────── */
+    .timing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .timing-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .timing-card .tc-when {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .timing-card .tc-example {
+      font-size: 12.5px;
+      color: var(--teal);
+      font-style: italic;
+      margin-bottom: 6px;
+      line-height: 1.5;
+    }
+    .timing-card .tc-best {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .timing-card .tc-best strong { color: var(--navy); font-weight: 700; }
+
+    /* ── Best Practices ───────────────────────────────── */
+    .bp-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .bp-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .bp-icon { font-size: 22px; flex-shrink: 0; line-height: 1.3; }
+    .bp-body strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .bp-body p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Peer Instruction Steps ───────────────────────── */
+    .peer-steps {
+      background: #EEF2F8;
+      border: 1px solid #c5d3e8;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 12px 0 4px;
+    }
+    .peer-steps .ps-label {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .peer-step-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .peer-step-list li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      font-size: 13.5px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .ps-num {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .peer-step-list li strong { color: var(--navy); }
+
+    /* ── Activity Ideas ───────────────────────────────── */
+    .activity-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .activity-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+    .activity-card .ac-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 4px;
+    }
+    .activity-card p { font-size: 13.5px; color: var(--muted); line-height: 1.55; }
+    .activity-card .ac-best {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 5px;
+    }
+
+    /* ── Workflow Steps ───────────────────────────────── */
+    .step-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 14px 0;
+    }
+    .step-list li {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--navy);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step-body { font-size: 14px; line-height: 1.6; color: var(--text); }
+    .step-body strong { color: var(--navy); }
+
+    /* ── Mistakes ─────────────────────────────────────── */
+    .mistake-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 16px 0;
+    }
+    .mistake-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .mistake-item strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .mistake-item p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+    /* ── ATS Recommendation ───────────────────────────── */
+    .ats-callout {
+      background: #EAF7F5;
+      border-left: 4px solid var(--teal);
+      border-radius: 6px;
+      padding: 16px 18px;
+      margin: 16px 0;
+      font-size: 14px;
+      color: #003f44;
+      line-height: 1.65;
+    }
+    .ats-callout strong {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--teal);
+      margin-bottom: 6px;
+    }
+
+    /* ── Related Articles ─────────────────────────────── */
+    .related-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .related-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .related-list li .ri-icon { font-size: 16px; flex-shrink: 0; }
+    .related-list li a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: none;
+      flex: 1;
+    }
+    .related-list li a:hover { text-decoration: underline; color: var(--scarlet); }
+    .related-list li .ri-arrow { color: #bbb; font-size: 14px; }
+
+    /* ── Support Block (sb1) ──────────────────────────── */
+    .sb1{font-family:'Libre Franklin',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:13.5px;line-height:1.6;}
+    .sb1 *{box-sizing:border-box;}
+    .sb1-section{margin:28px 0 8px;padding-bottom:8px;border-bottom:2px solid #1a1a1a;}
+    .sb1-section-label{font-size:9.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#1a1a1a;}
+    .sb1-card{border-radius:6px;padding:16px;background:#FDF2F4;border:1px solid #f5c6d0;border-top:3px solid #CC0033;max-width:420px;margin-top:14px;}
+    .sb1-card-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+    .sb1-card-icon{width:28px;height:28px;border-radius:5px;background:#f5c6d0;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+    .sb1-card-name{font-size:11.5px;font-weight:900;color:#9e0025;line-height:1.2;}
+    .sb1-card-role{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#b3002c;opacity:.7;margin-top:1px;}
+    .sb1-contact-list{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:6px;}
+    .sb1-contact-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;}
+    .sb1-contact-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#CC0033;min-width:52px;padding-top:1px;}
+    .sb1-contact-value{color:#333;line-height:1.45;}
+    .sb1-contact-value a{font-weight:700;color:#CC0033;text-decoration:none;}
+    .sb1-contact-value a:hover{text-decoration:underline;}
+    .sb1-cta{display:inline-flex;align-items:center;font-size:11.5px;font-weight:800;padding:8px 14px;border-radius:5px;text-decoration:none;background:#CC0033;color:#fff;}
+    .sb1-cta:hover{background:#a3002a;}
+    .sb1-audience-note{font-size:10px;color:#888;margin-top:10px;font-style:italic;}
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 680px) {
+      .timing-grid { grid-template-columns: 1fr; }
+      .article-header h1 { font-size: 22px; }
+      .article-wrap { padding: 24px 18px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-wrap">
+
+    <div class="audience-badge">🎓 Rutgers–Newark &amp; Rutgers Business School Faculty</div>
+
+    <div class="article-header">
+      <h1>Using EchoPoll for Knowledge Checks and Formative Assessment</h1>
+      <div class="article-meta">
+        <span class="meta-tag type-bp">Best Practice</span>
+        <span class="meta-tag type-engage">Engage Your Students</span>
+        <span class="meta-tag type-scope">RU-N &amp; RBS Only</span>
+        <span class="meta-tag type-system">EchoPoll · Canvas</span>
+      </div>
+    </div>
+
+    <p class="intro-text">EchoPoll can be used to assess student understanding throughout a class session using low-stakes formative assessment activities. By collecting responses from every student, EchoPoll helps instructors identify misconceptions, monitor understanding, and adjust instruction in real time.</p>
+
+    <div class="scope-callout">
+      <strong>⚑ RU-N &amp; RBS Faculty Only</strong>
+      EchoPoll is licensed exclusively for Rutgers University–Newark and Rutgers Business School faculty. This tool is not available at other Rutgers campuses. Contact ATS at <a href="mailto:atshelp@newark.rutgers.edu" style="color:#CC0033;font-weight:700;">atshelp@newark.rutgers.edu</a> if you have questions about access.
+    </div>
+
+    <!-- 1. Overview -->
+    <h2>Overview</h2>
+    <p class="prose">Unlike exams and graded assignments, formative assessments are designed to provide immediate feedback to both students and instructors. Knowledge checks can help instructors:</p>
+    <ul class="content-list">
+      <li>Identify misconceptions before they become learning barriers</li>
+      <li>Monitor student understanding during class</li>
+      <li>Adjust instruction in real time</li>
+      <li>Increase participation and engagement</li>
+      <li>Reinforce key concepts and improve learning outcomes</li>
+    </ul>
+
+    <!-- 2. What is Formative Assessment? -->
+    <h2>What Is Formative Assessment?</h2>
+    <p class="prose">Formative assessment is the process of gathering information about student learning while instruction is taking place. The goal is not to assign grades — it is to help instructors and students understand where learning is and where it needs to go.</p>
+    <p class="prose">Formative assessment helps instructors answer questions such as:</p>
+    <ul class="content-list">
+      <li>Do students understand this concept?</li>
+      <li>Are there misconceptions that need to be addressed?</li>
+      <li>Is the class ready to move on?</li>
+      <li>Should additional examples or practice be provided?</li>
+    </ul>
+    <p class="prose" style="margin-top:10px;">EchoPoll provides immediate insight into student understanding, allowing instructors to make instructional decisions based on real-time feedback rather than assumptions.</p>
+
+    <!-- 3. When to Use -->
+    <h2>When to Use Knowledge Checks</h2>
+    <p class="prose">Knowledge checks can be used at any point in a class session:</p>
+    <div class="timing-grid">
+      <div class="timing-card">
+        <div class="tc-when">🌅 Before Instruction</div>
+        <div class="tc-example">"How familiar are you with today's topic?"</div>
+        <div class="tc-best"><strong>Best for:</strong> activating prior knowledge and preparing students for new material</div>
+      </div>
+      <div class="timing-card">
+        <div class="tc-when">🔍 During Instruction</div>
+        <div class="tc-example">"Which explanation best describes the relationship we just discussed?"</div>
+        <div class="tc-best"><strong>Best for:</strong> identifying misconceptions and deciding whether to move on</div>
+      </div>
+      <div class="timing-card">
+        <div class="tc-when">📖 After a Major Concept</div>
+        <div class="tc-example">"Which concept remains unclear?"</div>
+        <div class="tc-best"><strong>Best for:</strong> determining whether additional review or examples are needed</div>
+      </div>
+      <div class="timing-card">
+        <div class="tc-when">🎟️ End of Class</div>
+        <div class="tc-example">"What was the most important thing you learned today?"</div>
+        <div class="tc-best"><strong>Best for:</strong> reflection, retention, and instructional planning</div>
+      </div>
+    </div>
+
+    <!-- 4. Best Practices -->
+    <h2>Best Practices</h2>
+    <div class="bp-grid">
+      <div class="bp-card">
+        <div class="bp-icon">🧠</div>
+        <div class="bp-body">
+          <strong>Ask Questions That Require Thinking</strong>
+          <p>Avoid relying exclusively on recall or memorization. Instead of asking "What year did this event occur?", ask "Why was this event significant?" Questions that require analysis, interpretation, or application generate deeper learning and more meaningful discussion.</p>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-icon">🤔</div>
+        <div class="bp-body">
+          <strong>Poll Before Revealing the Answer</strong>
+          <p>Allow students to commit to an answer before reviewing the correct response. This increases engagement, improves retention, encourages more honest responses, and builds critical thinking. Students are more likely to remember concepts when they actively reason through a question before receiving feedback.</p>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-icon">📊</div>
+        <div class="bp-body">
+          <strong>Use Results to Guide Instruction</strong>
+          <p>The value of polling comes from what happens after students respond. Review common misconceptions, ask students to explain their reasoning, compare different perspectives, and revisit difficult concepts. Knowledge checks should inform teaching decisions, not simply collect data.</p>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-icon">👥</div>
+        <div class="bp-body">
+          <strong>Encourage Peer Discussion</strong>
+          <p>When responses are mixed, use the results as a structured discussion opportunity. This approach — sometimes called Peer Instruction — often leads to meaningful gains in understanding in just a few minutes:</p>
+          <div class="peer-steps">
+            <div class="ps-label">Peer Instruction Sequence</div>
+            <ol class="peer-step-list">
+              <li><span class="ps-num">1</span><span><strong>Ask the question</strong> — display it to the class</span></li>
+              <li><span class="ps-num">2</span><span><strong>Display the results</strong> — show the distribution without revealing the correct answer</span></li>
+              <li><span class="ps-num">3</span><span><strong>Have students discuss</strong> — pairs or small groups explain their reasoning</span></li>
+              <li><span class="ps-num">4</span><span><strong>Poll again</strong> — re-run the same question to see whether understanding has shifted</span></li>
+              <li><span class="ps-num">5</span><span><strong>Review together</strong> — discuss the correct answer and explore why responses differed</span></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-icon">🔓</div>
+        <div class="bp-body">
+          <strong>Keep Activities Low Stakes</strong>
+          <p>Students should feel comfortable making mistakes. Knowledge checks work best when participation is encouraged, responses are anonymous or low pressure, and mistakes are treated as learning opportunities. The goal is to improve learning, not evaluate performance.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Activity Ideas -->
+    <h2>Activity Ideas</h2>
+    <div class="activity-grid">
+      <div class="activity-card">
+        <div class="ac-title">✅ Concept Check</div>
+        <p>Ask students to apply a concept immediately after instruction.</p>
+        <div class="ac-best">Best for: identifying misconceptions in real time</div>
+      </div>
+      <div class="activity-card">
+        <div class="ac-title">🌍 Scenario-Based Question</div>
+        <p>Present a real-world situation and ask students to apply course concepts.</p>
+        <div class="ac-best">Best for: critical thinking and application</div>
+      </div>
+      <div class="activity-card">
+        <div class="ac-title">🔮 Prediction Question</div>
+        <p>Ask students to predict an outcome before revealing the answer.</p>
+        <div class="ac-best">Best for: building curiosity and engagement</div>
+      </div>
+      <div class="activity-card">
+        <div class="ac-title">💯 Confidence Poll</div>
+        <p>Ask: <em>How confident are you in your understanding of today's material?</em> (Very / Somewhat / Not Yet Confident)</p>
+        <div class="ac-best">Best for: identifying areas that need additional review</div>
+      </div>
+      <div class="activity-card">
+        <div class="ac-title">💬 Muddiest Point</div>
+        <p>Ask: <em>What concept remains most confusing?</em></p>
+        <div class="ac-best">Best for: gathering feedback and planning future instruction</div>
+      </div>
+      <div class="activity-card">
+        <div class="ac-title">🎟️ Exit Ticket</div>
+        <p>Ask: <em>What is one thing you learned today?</em></p>
+        <div class="ac-best">Best for: reflection and reinforcement at the end of class</div>
+      </div>
+    </div>
+
+    <!-- 6. Sample Workflow -->
+    <h2>Sample Classroom Workflow</h2>
+    <p class="prose">This six-step sequence integrates a knowledge check naturally into any lesson:</p>
+    <ol class="step-list">
+      <li><span class="step-num">1</span><div class="step-body"><strong>Introduce a concept</strong> — present new content, a demonstration, or an example.</div></li>
+      <li><span class="step-num">2</span><div class="step-body"><strong>Launch an EchoPoll question</strong> — ask students to apply or interpret what they have just learned.</div></li>
+      <li><span class="step-num">3</span><div class="step-body"><strong>Review responses</strong> — display results and identify patterns. Where is the class aligned? Where is there disagreement?</div></li>
+      <li><span class="step-num">4</span><div class="step-body"><strong>Discuss the results</strong> — explore student reasoning and address misconceptions. Call on students to explain their thinking.</div></li>
+      <li><span class="step-num">5</span><div class="step-body"><strong>Clarify concepts</strong> — provide additional explanation or examples where the results indicate confusion.</div></li>
+      <li><span class="step-num">6</span><div class="step-body"><strong>Continue instruction</strong> — move forward once students demonstrate understanding.</div></li>
+    </ol>
+
+    <!-- 7. Common Mistakes -->
+    <h2>Common Mistakes to Avoid</h2>
+    <div class="mistake-list">
+      <div class="mistake-item">
+        <strong>⚠️ Treating Polls Like Tests</strong>
+        <p>Knowledge checks should support learning rather than create anxiety. Avoid grading every activity. When students fear being wrong, they disengage — the opposite of what formative assessment is designed to achieve.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>⚠️ Ignoring the Results</strong>
+        <p>Students quickly recognize when polling activities are not being used meaningfully. Review and discuss results whenever possible. Even a 60-second debrief after a poll signals that their responses matter.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>⚠️ Asking Only Recall Questions</strong>
+        <p>Mix factual, conceptual, and application-based questions. The strongest discussions often emerge from questions that require reasoning — not questions with a single correct answer.</p>
+      </div>
+      <div class="mistake-item">
+        <strong>⚠️ Moving Too Quickly</strong>
+        <p>Give students adequate time to think before responding — at least 30 to 60 seconds for most questions. Allow time for discussion after reviewing results. Rushing undermines the learning value of the activity.</p>
+      </div>
+    </div>
+
+    <!-- 8. ATS Recommendation -->
+    <h2>ATS Recommendation</h2>
+    <div class="ats-callout">
+      <strong>💡 Build Regular Moments of Reflection into Every Class</strong>
+      A simple knowledge check every 10–15 minutes can help maintain attention, increase participation, identify misconceptions, and improve learning outcomes. The most effective instructors use polling not to evaluate students, but to understand what students are thinking — and to teach more responsively as a result.
+    </div>
+
+    <hr class="article-divider" />
+
+    <!-- 9. Related Articles -->
+    <h2>Related Articles</h2>
+    <ul class="related-list">
+      <li>
+        <span class="ri-icon">🚀</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019748">Getting Started with EchoPoll</a>
+        <span class="ri-arrow">›</span>
+      </li>
+      <li>
+        <span class="ri-icon">📊</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019747">Using EchoPoll to Increase Student Engagement</a>
+        <span class="ri-arrow">›</span>
+      </li>
+      <li>
+        <span class="ri-icon">✅</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019746">Using EchoPoll for Activity Tracking</a>
+        <span class="ri-arrow">›</span>
+      </li>
+      <li>
+        <span class="ri-icon">💡</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019740">EchoPoll Activity Ideas</a>
+        <span class="ri-arrow">›</span>
+      </li>
+      <li>
+        <span class="ri-icon">🔧</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019750">EchoPoll Troubleshooting</a>
+        <span class="ri-arrow">›</span>
+      </li>
+    </ul>
+
+    <hr class="article-divider" />
+
+    <!-- Support Block -->
+    <div class="sb1">
+      <div class="sb1-section"><div class="sb1-section-label">Getting Help</div></div>
+      <div class="sb1-card">
+        <div class="sb1-card-header">
+          <div class="sb1-card-icon">🎓</div>
+          <div>
+            <div class="sb1-card-name">RU-N Academic Technology Services</div>
+            <div class="sb1-card-role">Instructional Technology Support</div>
+          </div>
+        </div>
+        <ul class="sb1-contact-list">
+          <li><span class="sb1-contact-label">Phone</span><span class="sb1-contact-value"><a href="tel:9733531713">973-353-1713</a></span></li>
+          <li><span class="sb1-contact-label">Email</span><span class="sb1-contact-value"><a href="mailto:atshelp@newark.rutgers.edu">atshelp@newark.rutgers.edu</a></span></li>
+          <li><span class="sb1-contact-label">Location</span><span class="sb1-contact-value">Blumenthal Hall, Room 100</span></li>
+          <li><span class="sb1-contact-label">Tickets</span><span class="sb1-contact-value"><a href="https://go.rutgers.edu/RUN-Incident">go.rutgers.edu/RUN-Incident</a></span></li>
+        </ul>
+        <a href="mailto:atshelp@newark.rutgers.edu" class="sb1-cta">Schedule a Consultation →</a>
+        <div class="sb1-audience-note">For Rutgers–Newark &amp; Rutgers Business School faculty</div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using EchoPoll for Attendance Tracking — myTech@Newark Knowledge Base</title>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #1B3A6B;
+      --scarlet: #CC0033;
+      --teal:    #00626D;
+      --gold:    #C96A00;
+      --body-bg: #FAFAFA;
+      --card-bg: #FFFFFF;
+      --text:    #1A1A1A;
+      --muted:   #555555;
+      --border:  #E0E0E0;
+      --step-bg: #F4F7FB;
+    }
+
+    body {
+      font-family: 'Libre Franklin', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--body-bg);
+    }
+
+    /* ── Article Layout ───────────────────────────────── */
+    .article-wrap { max-width: 860px; margin: 0 auto; padding: 40px 32px 64px; }
+
+    /* ── Audience Badge (F1) ──────────────────────────── */
+    .audience-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #FDF2F4;
+      border: 1.5px solid #CC0033;
+      color: #CC0033;
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    /* ── Article Header ───────────────────────────────── */
+    .article-header { margin-bottom: 28px; }
+    .article-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    .meta-tag {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 4px;
+      background: #EEF2F8;
+      color: var(--navy);
+    }
+    .meta-tag.scope { background: #FFF4E6; color: var(--gold); }
+    .article-header .overview {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.7;
+    }
+    .article-divider {
+      border: none;
+      border-top: 2px solid var(--border);
+      margin: 32px 0;
+    }
+
+    /* ── Section Headings ─────────────────────────────── */
+    .section-heading {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    /* ── Callouts ─────────────────────────────────────── */
+    .callout {
+      display: flex;
+      gap: 14px;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin: 20px 0;
+      align-items: flex-start;
+    }
+    .callout-icon { font-size: 20px; flex-shrink: 0; line-height: 1.4; }
+    .callout-body { flex: 1; }
+    .callout-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .callout-text { font-size: 14px; line-height: 1.6; }
+    .callout-text strong { font-weight: 700; }
+    .callout-text a { font-weight: 600; text-decoration: none; }
+    .callout-text a:hover { text-decoration: underline; }
+    .callout.scarlet {
+      background: #FFF0F3;
+      border: 1px solid #f5c6d0;
+      border-left: 4px solid var(--scarlet);
+    }
+    .callout.scarlet .callout-label { color: var(--scarlet); }
+    .callout.scarlet .callout-text { color: #5a0015; }
+    .callout.navy {
+      background: #EEF2F8;
+      border: 1px solid #c4cfe0;
+      border-left: 4px solid var(--navy);
+    }
+    .callout.navy .callout-label { color: var(--navy); }
+    .callout.navy .callout-text { color: #0f2447; }
+    .callout.navy .callout-text a { color: var(--navy); }
+    .callout.teal {
+      background: #E3F3F0;
+      border: 1px solid #a8d5ce;
+      border-left: 4px solid var(--teal);
+    }
+    .callout.teal .callout-label { color: var(--teal); }
+    .callout.teal .callout-text { color: #004d55; }
+    .callout.gold {
+      background: #FFF4E6;
+      border: 1px solid #f5d9a8;
+      border-left: 4px solid var(--gold);
+    }
+    .callout.gold .callout-label { color: var(--gold); }
+    .callout.gold .callout-text { color: #5a3a00; }
+    .callout.gold .callout-text a { color: var(--gold); }
+
+    /* ── Compare Grid ─────────────────────────────────── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .compare-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 16px;
+    }
+    .compare-card .cc-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .compare-card .cc-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .compare-card strong {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .compare-card p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Best Practices Grid ──────────────────────────── */
+    .bp-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .bp-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .bp-icon { font-size: 22px; flex-shrink: 0; line-height: 1.3; }
+    .bp-body strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .bp-body p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Activity Ideas Table ─────────────────────────── */
+    .activity-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .activity-table thead tr {
+      background: var(--navy);
+      color: #fff;
+    }
+    .activity-table th {
+      padding: 10px 14px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .activity-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .activity-table tr:last-child td { border-bottom: none; }
+    .activity-table tr:nth-child(even) td { background: #FAFAFA; }
+    .activity-table td .ask { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+
+    /* ── Environment Grid ─────────────────────────────── */
+    .env-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+    .env-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 16px;
+    }
+    .env-card .ec-icon { font-size: 24px; margin-bottom: 8px; }
+    .env-card strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .env-card p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ── Challenges ───────────────────────────────────── */
+    .challenge-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .challenge-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 8px;
+      padding: 14px 16px;
+    }
+    .challenge-item strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .challenge-item p { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Related Articles ─────────────────────────────── */
+    .related-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .related-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    .related-list li .ri-icon { font-size: 16px; flex-shrink: 0; }
+    .related-list li a {
+      color: var(--navy);
+      font-weight: 600;
+      text-decoration: none;
+      flex: 1;
+    }
+    .related-list li a:hover { text-decoration: underline; color: var(--scarlet); }
+    .related-list li .ri-arrow { color: #bbb; font-size: 14px; }
+
+    /* ── Support Block (sb1 — F1 ATS standard) ───────── */
+    .sb1{font-family:'Libre Franklin',-apple-system,'Helvetica Neue',Arial,sans-serif;font-size:13.5px;line-height:1.6;}
+    .sb1 *{box-sizing:border-box;}
+    .sb1-section{margin:28px 0 8px;padding-bottom:8px;border-bottom:2px solid #1a1a1a;}
+    .sb1-section-label{font-size:9.5px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#1a1a1a;}
+    .sb1-card{border-radius:6px;padding:16px;background:#FDF2F4;border:1px solid #f5c6d0;border-top:3px solid #CC0033;max-width:420px;margin-top:14px;}
+    .sb1-card-header{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+    .sb1-card-icon{width:28px;height:28px;border-radius:5px;background:#f5c6d0;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+    .sb1-card-name{font-size:11.5px;font-weight:900;color:#9e0025;line-height:1.2;}
+    .sb1-card-role{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#b3002c;opacity:.7;margin-top:1px;}
+    .sb1-contact-list{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:6px;}
+    .sb1-contact-list li{display:flex;align-items:flex-start;gap:8px;font-size:12px;}
+    .sb1-contact-label{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#CC0033;min-width:52px;padding-top:1px;}
+    .sb1-contact-value{color:#333;line-height:1.45;}
+    .sb1-contact-value a{font-weight:700;color:#CC0033;text-decoration:none;}
+    .sb1-contact-value a:hover{text-decoration:underline;}
+    .sb1-cta{display:inline-flex;align-items:center;font-size:11.5px;font-weight:800;padding:8px 14px;border-radius:5px;text-decoration:none;background:#CC0033;color:#fff;}
+    .sb1-cta:hover{background:#a3002a;}
+    .sb1-audience-note{font-size:10px;color:#888;margin-top:10px;font-style:italic;}
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 680px) {
+      .compare-grid, .env-grid, .support-contacts { grid-template-columns: 1fr; }
+      .article-header h1 { font-size: 24px; }
+      .article-wrap { padding: 24px 18px 48px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="article-wrap">
+
+    <!-- Audience Badge (F1) -->
+    <div class="audience-badge">
+      🎓 Rutgers–Newark &amp; Rutgers Business School Faculty
+    </div>
+
+    <!-- Article Header -->
+    <div class="article-header">
+      <h1>Using EchoPoll for Attendance Tracking and Participation</h1>
+      <div class="article-meta">
+        <span class="meta-tag">How To</span>
+        <span class="meta-tag">Engage Your Students</span>
+        <span class="meta-tag scope">RU-N &amp; RBS Only</span>
+        <span class="meta-tag">EchoPoll · Canvas</span>
+      </div>
+      <p class="overview">EchoPoll allows instructors to verify attendance while simultaneously engaging students in learning activities. Rather than treating attendance as a separate administrative task, EchoPoll makes it a natural part of instruction — turning roll call into a moment of participation.</p>
+    </div>
+
+    <hr class="article-divider" />
+
+    <!-- Section 1: When to Use -->
+    <h2 class="section-heading">When to Use EchoPoll for Attendance</h2>
+    <p class="section-sub">EchoPoll can be used to track attendance and participation in face-to-face, hybrid, and online courses. Attendance activities work best when they are integrated naturally into class rather than treated as a separate administrative task.</p>
+
+    <div class="callout scarlet">
+      <div class="callout-icon">⚑</div>
+      <div class="callout-body">
+        <div class="callout-label">RU-N &amp; RBS Faculty Only</div>
+        <div class="callout-text">EchoPoll is licensed exclusively for Rutgers University–Newark and Rutgers Business School faculty. This tool is not available at other Rutgers campuses. Contact ATS at <a href="mailto:atshelp@newark.rutgers.edu">atshelp@newark.rutgers.edu</a> if you have questions about access.</div>
+      </div>
+    </div>
+
+    <p class="section-sub">Use EchoPoll to:</p>
+    <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; margin-bottom:20px;">
+      <li style="font-size:14px; color:var(--text); padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">✓</span> Verify attendance at the start of class</li>
+      <li style="font-size:14px; color:var(--text); padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">✓</span> Confirm participation throughout a lesson</li>
+      <li style="font-size:14px; color:var(--text); padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">✓</span> Award participation points</li>
+      <li style="font-size:14px; color:var(--text); padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">✓</span> Support active learning activities</li>
+      <li style="font-size:14px; color:var(--text); padding-left:18px; position:relative;"><span style="position:absolute;left:0;color:var(--teal);font-weight:700;">✓</span> Document attendance in large courses</li>
+    </ul>
+
+    <hr class="article-divider" />
+
+    <!-- Section 2: Attendance vs Participation -->
+    <h2 class="section-heading">Attendance vs. Participation</h2>
+    <p class="section-sub">EchoPoll supports two related but distinct approaches. Many instructors find that participation-based attendance provides more meaningful information than a simple roll call.</p>
+
+    <div class="compare-grid">
+      <div class="compare-card">
+        <div class="cc-header">
+          <div class="cc-dot" style="background:#1B3A6B;"></div>
+          <strong>Attendance</strong>
+        </div>
+        <p>Confirms that a student was present. A check-in question at the beginning of class is sufficient. Simple and quick — one response per student per session.</p>
+      </div>
+      <div class="compare-card">
+        <div class="cc-header">
+          <div class="cc-dot" style="background:#00626D;"></div>
+          <strong>Participation</strong>
+        </div>
+        <p>Demonstrates that a student engaged with course activities. Students complete multiple activities throughout the session — polls, word clouds, exit tickets. Provides richer data than a single check-in.</p>
+      </div>
+    </div>
+
+    <div class="callout teal">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-label">Recommended Approach</div>
+        <div class="callout-text">Participation-based approaches encourage more consistent engagement throughout a class session, rather than front-loading attendance at the start and disengaging after.</div>
+      </div>
+    </div>
+
+    <hr class="article-divider" />
+
+    <!-- Section 3: Best Practices -->
+    <h2 class="section-heading">Best Practices</h2>
+
+    <div class="bp-grid">
+      <div class="bp-card">
+        <div class="bp-icon">🎓</div>
+        <div class="bp-body">
+          <strong>Make Attendance Part of Learning</strong>
+          <p>Rather than asking "Are you here today?", ask students to think and respond. Examples: <em>What is one thing you remember from last class? Which topic would you like reviewed? How confident are you about today's material?</em> Students receive attendance credit while engaging with course content.</p>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-icon">⚡</div>
+        <div class="bp-body">
+          <strong>Use Low-Stakes Activities</strong>
+          <p>Attendance activities should be quick and easy to complete — check-in polls, opinion questions, knowledge checks, or word clouds. The goal is to verify participation, not assess mastery. Keep it to one to two minutes.</p>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-icon">📅</div>
+        <div class="bp-body">
+          <strong>Be Consistent</strong>
+          <p>Use a predictable attendance process throughout the semester. Students should know when attendance will be recorded, how participation is measured, whether points are awarded, and how missed activities are handled. Clear expectations reduce confusion and disputes.</p>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-icon">📍</div>
+        <div class="bp-body">
+          <strong>Consider Multiple Checkpoints</strong>
+          <p>Use multiple activities during class to encourage continued engagement — an attendance poll at the start, a knowledge check mid-class, and an exit ticket at the end. This approach rewards participation throughout the lesson rather than only at the start.</p>
+        </div>
+      </div>
+      <div class="bp-card">
+        <div class="bp-icon">📋</div>
+        <div class="bp-body">
+          <strong>Communicate Your Policy</strong>
+          <p>Include attendance and participation expectations in your syllabus. Students should understand how attendance is recorded, how participation is measured, how points are awarded, and what happens if technology issues occur.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="article-divider" />
+
+    <!-- Section 4: Activity Ideas -->
+    <h2 class="section-heading">Attendance Activity Ideas</h2>
+    <p class="section-sub">These activity types integrate naturally into class as attendance or participation checkpoints.</p>
+
+    <table class="activity-table">
+      <thead>
+        <tr>
+          <th>Activity</th>
+          <th>Ask Students</th>
+          <th>Best For</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>✋ Course Check-In</strong></td>
+          <td><span class="ask">How are you feeling about this week's material?</span></td>
+          <td>Beginning of class</td>
+        </tr>
+        <tr>
+          <td><strong>❓ Prior Knowledge Poll</strong></td>
+          <td><span class="ask">How familiar are you with today's topic?</span></td>
+          <td>Opening a lesson and gauging preparation</td>
+        </tr>
+        <tr>
+          <td><strong>☁️ Word Cloud Check-In</strong></td>
+          <td><span class="ask">What word best describes your current understanding?</span></td>
+          <td>Quick participation and reflection</td>
+        </tr>
+        <tr>
+          <td><strong>📊 Mid-Class Knowledge Check</strong></td>
+          <td><span class="ask">A concept question midway through the lesson</span></td>
+          <td>Verifying both attendance and continued engagement</td>
+        </tr>
+        <tr>
+          <td><strong>🎟️ Exit Ticket</strong></td>
+          <td><span class="ask">What was your biggest takeaway from today's class?</span></td>
+          <td>End-of-class participation and instructional planning</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="article-divider" />
+
+    <!-- Section 5: Participation Points -->
+    <h2 class="section-heading">Using Participation Points</h2>
+    <p class="section-sub">Many instructors choose to award participation points rather than attendance points. Participation activities can provide a more meaningful measure of student engagement than a binary present/absent record.</p>
+
+    <div class="bp-grid">
+      <div class="bp-card" style="border-left: 3px solid var(--teal);">
+        <div class="bp-icon">✅</div>
+        <div class="bp-body">
+          <strong>Benefits of Participation Points</strong>
+          <p>Encourages active engagement rather than passive presence. Rewards meaningful involvement with course activities. Supports active learning goals and reduces the emphasis on physical presence alone.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout navy">
+      <div class="callout-icon">📚</div>
+      <div class="callout-body">
+        <div class="callout-label">Grade Sync</div>
+        <div class="callout-text">EchoPoll participation scores can be synced to the Canvas Gradebook. For setup instructions, see the <a href="#">EchoPoll Grade Sync Guide</a>.</div>
+      </div>
+    </div>
+
+    <hr class="article-divider" />
+
+    <!-- Section 6: Teaching Environments -->
+    <h2 class="section-heading">Attendance in Different Teaching Environments</h2>
+
+    <div class="env-grid">
+      <div class="env-card">
+        <div class="ec-icon">🏫</div>
+        <strong>Face-to-Face Courses</strong>
+        <p>Use attendance activities at the beginning, middle, or end of class. Students respond on their own devices. Results are immediate and visible to the instructor in real time.</p>
+      </div>
+      <div class="env-card">
+        <div class="ec-icon">💻</div>
+        <strong>Hybrid Courses</strong>
+        <p>Use the same EchoPoll activity for both in-person and remote students. All students respond through the same link regardless of location, making hybrid attendance tracking straightforward.</p>
+      </div>
+      <div class="env-card">
+        <div class="ec-icon">🌐</div>
+        <strong>Online Courses</strong>
+        <p>Use participation activities during live Zoom sessions. Pair EchoPoll with Zoom chat or Breakout Rooms to create a fuller picture of student engagement throughout the session.</p>
+      </div>
+    </div>
+
+    <hr class="article-divider" />
+
+    <!-- Section 7: Common Challenges -->
+    <h2 class="section-heading">Common Challenges</h2>
+
+    <div class="challenge-list">
+      <div class="challenge-item">
+        <strong>Students join but do not participate</strong>
+        <p>Consider using multiple activities throughout class rather than a single attendance poll at the start. Students who join late or disengage early are more likely to participate if there are multiple opportunities to respond.</p>
+      </div>
+      <div class="challenge-item">
+        <strong>Students arrive late</strong>
+        <p>Establish and communicate a consistent policy — for example, students who respond within the first 10 minutes are marked present. Announce the policy in your syllabus and reinforce it at the start of the semester.</p>
+      </div>
+      <div class="challenge-item">
+        <strong>Technology issues</strong>
+        <p>Provide guidance on how students should report technical difficulties and consider an alternative attendance method (email, sign-in sheet) for documented technology failures. EchoPoll access issues are rare but worth planning for.</p>
+      </div>
+      <div class="challenge-item">
+        <strong>Overemphasis on attendance</strong>
+        <p>Attendance tracking should support learning objectives, not replace them. Activities are most effective when they are connected to course content — not when they exist solely to document presence.</p>
+      </div>
+    </div>
+
+    <hr class="article-divider" />
+
+    <!-- ATS Recommendation -->
+    <div class="callout teal">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <div class="callout-label">ATS Recommendation</div>
+        <div class="callout-text">The most effective EchoPoll attendance activities connect to course content, encourage participation, require minimal time, and provide useful feedback to instructors. Rather than asking students if they are present, ask them to think, reflect, and respond. <strong>Attendance becomes a learning moment rather than an administrative checkpoint.</strong></div>
+      </div>
+    </div>
+
+    <hr class="article-divider" />
+
+    <!-- Related Articles -->
+    <h2 class="section-heading">Related Articles</h2>
+    <ul class="related-list">
+      <li>
+        <span class="ri-icon">🚀</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019748">Getting Started with EchoPoll — access EchoPoll, create activities, and launch your first poll</a>
+        <span class="ri-arrow">›</span>
+      </li>
+      <li>
+        <span class="ri-icon">📊</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019747">Using EchoPoll to Increase Student Engagement — strategies for participation and active learning</a>
+        <span class="ri-arrow">›</span>
+      </li>
+      <li>
+        <span class="ri-icon">❓</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019749">Using EchoPoll for Knowledge Checks and Formative Assessment</a>
+        <span class="ri-arrow">›</span>
+      </li>
+      <li>
+        <span class="ri-icon">💡</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019740">EchoPoll Activity Ideas — attendance, engagement, and assessment activity templates</a>
+        <span class="ri-arrow">›</span>
+      </li>
+      <li>
+        <span class="ri-icon">🔧</span>
+        <a href="https://rutgers.service-now.com/kb_view.do?sysparm_article=kb0019750">EchoPoll Troubleshooting — resolve common technical issues</a>
+        <span class="ri-arrow">›</span>
+      </li>
+    </ul>
+
+    <hr class="article-divider" />
+
+    <!-- Support Block (F1 — sb1 standard) -->
+    <div class="sb1">
+      <div class="sb1-section"><div class="sb1-section-label">Getting Help</div></div>
+      <div class="sb1-card">
+        <div class="sb1-card-header">
+          <div class="sb1-card-icon">🎓</div>
+          <div>
+            <div class="sb1-card-name">RU-N Academic Technology Services</div>
+            <div class="sb1-card-role">Instructional Technology Support</div>
+          </div>
+        </div>
+        <ul class="sb1-contact-list">
+          <li><span class="sb1-contact-label">Phone</span><span class="sb1-contact-value"><a href="tel:9733531713">973-353-1713</a></span></li>
+          <li><span class="sb1-contact-label">Email</span><span class="sb1-contact-value"><a href="mailto:atshelp@newark.rutgers.edu">atshelp@newark.rutgers.edu</a></span></li>
+          <li><span class="sb1-contact-label">Location</span><span class="sb1-contact-value">Blumenthal Hall, Room 100</span></li>
+          <li><span class="sb1-contact-label">Tickets</span><span class="sb1-contact-value"><a href="https://go.rutgers.edu/RUN-Incident">go.rutgers.edu/RUN-Incident</a></span></li>
+        </ul>
+        <a href="mailto:atshelp@newark.rutgers.edu" class="sb1-cta">Schedule a Consultation →</a>
+        <div class="sb1-audience-note">For Rutgers–Newark &amp; Rutgers Business School faculty</div>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>
