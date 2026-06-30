@@ -1,0 +1,475 @@
+<!--
+=================================================================
+RUTGERS UNIVERSITY–NEWARK | myTech@Newark
+ServiceNow KB Article
+"Teams Meeting Security"
+Technology & Learning Spaces (TLS)
+=================================================================
+-->
+
+<style>
+  .kb-article * { box-sizing: border-box; }
+  .kb-article {
+    font-family: 'Libre Franklin', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #333;
+    max-width: 820px;
+  }
+  .kb-inst-header { background: #1a1a1a; border-radius: 6px 6px 0 0; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .kb-inst-left { display: flex; align-items: center; gap: 10px; }
+  .kb-r-mark { background: #CC0033; color: #fff; font-size: 15px; font-weight: 900; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Georgia, serif; flex-shrink: 0; }
+  .kb-inst-name { color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2; }
+  .kb-inst-name span { display: block; font-size: 9px; font-weight: 600; color: rgba(255,255,255,.4); letter-spacing: .08em; text-transform: uppercase; margin-top: 1px; }
+  .kb-inst-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .kb-scope-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+  .kb-scope-badge.both { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
+  .kb-scope-badge.tls { background: rgba(255,255,255,.1); color: rgba(255,255,255,.65); }
+  .kb-article-header { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 22px 24px 18px; border-bottom: 1px solid #e0e0e0; }
+  .kb-tier-row { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .kb-tier { display: inline-flex; align-items: center; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .kb-tier.practice { background: #FFF4E6; color: #C96A00; }
+  .kb-h1 { font-size: 24px; font-weight: 900; color: #1a1a1a; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 8px; }
+  .kb-summary { font-size: 13.5px; color: #555; line-height: 1.65; margin-bottom: 14px; max-width: 640px; }
+  .kb-meta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 11px; color: #999; }
+  .kb-meta-item { display: flex; align-items: center; gap: 4px; font-weight: 600; }
+  .kb-meta-item strong { color: #555; font-weight: 700; }
+  .kb-tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+  .kb-tag { font-size: 10px; font-weight: 700; color: #1B3A6B; background: #EEF2F8; padding: 2px 8px; border-radius: 20px; }
+  .kb-body { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 24px 24px 8px; border-radius: 0 0 6px 6px; }
+  .kb-h2 { font-size: 16px; font-weight: 800; color: #1a1a1a; margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #1a1a1a; letter-spacing: -.01em; }
+  .kb-h2:first-child { margin-top: 0; }
+  .kb-h3 { font-size: 12.5px; font-weight: 800; color: #1a1a1a; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: .07em; }
+  .kb-p { font-size: 13.5px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+  .kb-steps { list-style: none; counter-reset: steps; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .kb-steps li { counter-increment: steps; display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: #333; line-height: 1.55; padding: 10px 14px; background: #fafafa; border: 1px solid #ebebeb; border-radius: 5px; }
+  .kb-steps li::before { content: counter(steps); background: #CC0033; color: #fff; font-size: 10px; font-weight: 900; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .kb-steps li strong { font-weight: 800; color: #1a1a1a; }
+  .kb-ul { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-ul li { font-size: 13px; color: #444; line-height: 1.5; padding-left: 14px; position: relative; }
+  .kb-ul li::before { content: '–'; position: absolute; left: 0; color: #CC0033; font-weight: 700; }
+  .kb-callout { border-radius: 6px; padding: 14px 16px; margin: 16px 0; display: flex; align-items: flex-start; gap: 12px; }
+  .kb-callout-icon { width: 30px; height: 30px; border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+  .kb-callout-body { flex: 1; min-width: 0; }
+  .kb-callout-label { font-size: 8.5px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 3px; }
+  .kb-callout-text { font-size: 12.5px; line-height: 1.6; font-weight: 500; }
+  .kb-callout-text strong { font-weight: 800; }
+  .kb-callout-text a { font-weight: 700; }
+  .kb-callout.policy { background: #fdf2f4; border: 1px solid #f5c6d0; border-left: 4px solid #CC0033; }
+  .kb-callout.policy .kb-callout-icon { background: #f9d0d9; color: #CC0033; }
+  .kb-callout.policy .kb-callout-label { color: #CC0033; }
+  .kb-callout.policy .kb-callout-text { color: #7a001f; }
+  .kb-callout.policy .kb-callout-text a { color: #CC0033; }
+  .kb-callout.building { background: #FFF4E6; border: 1px solid #f5d9a8; border-left: 4px solid #C96A00; }
+  .kb-callout.building .kb-callout-icon { background: #f9e2bd; color: #C96A00; }
+  .kb-callout.building .kb-callout-label { color: #C96A00; }
+  .kb-callout.building .kb-callout-text { color: #7a3f00; }
+  .kb-callout.support { background: #E6F4ED; border: 1px solid #a8d5b8; border-left: 4px solid #1A7A4A; }
+  .kb-callout.support .kb-callout-icon { background: #c2e5cf; color: #1A7A4A; }
+  .kb-callout.support .kb-callout-label { color: #1A7A4A; }
+  .kb-callout.support .kb-callout-text { color: #0f4a2b; }
+  .kb-callout.support .kb-callout-text a { color: #1A7A4A; }
+  .kb-callout.workflow { background: #EEF2F8; border: 1px solid #b3c4dd; border-left: 4px solid #1B3A6B; }
+  .kb-callout.workflow .kb-callout-icon { background: #c5d3e8; color: #1B3A6B; }
+  .kb-callout.workflow .kb-callout-label { color: #1B3A6B; }
+  .kb-callout.workflow .kb-callout-text { color: #0f2447; }
+  .kb-tip { background: #fafafa; border: 1px solid #e0e0e0; border-left: 3px solid #CC0033; border-radius: 4px; padding: 12px 16px; margin: 16px 0; font-size: 12.5px; color: #444; line-height: 1.6; }
+  .kb-tip-label { font-size: 8.5px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #CC0033; margin-bottom: 4px; }
+  /* Roles table & settings tables */
+  .kb-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 12px 0 16px; }
+  .kb-table th { background: #1a1a1a; color: #fff; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 8px 12px; text-align: left; }
+  .kb-table td { padding: 9px 12px; border-bottom: 1px solid #ebebeb; color: #444; vertical-align: top; line-height: 1.5; }
+  .kb-table tr:last-child td { border-bottom: none; }
+  .kb-table tr:nth-child(even) td { background: #fafafa; }
+  .kb-table td:first-child { font-weight: 700; color: #1a1a1a; }
+  /* Settings quick-ref grid */
+  .kb-settings-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; margin: 12px 0 20px; }
+  .kb-settings-row { display: flex; align-items: flex-start; gap: 0; border-bottom: 1px solid #ebebeb; }
+  .kb-settings-row:last-child { border-bottom: none; }
+  .kb-settings-setting { font-size: 12px; font-weight: 700; color: #1a1a1a; background: #f5f5f5; padding: 10px 13px; flex: 0 0 180px; border-right: 1px solid #e0e0e0; display: flex; align-items: flex-start; }
+  .kb-settings-rec { font-size: 12px; color: #444; padding: 10px 13px; flex: 1; line-height: 1.5; }
+  .kb-settings-rec strong { font-weight: 800; color: #1a1a1a; }
+  @media (max-width: 540px) {
+    .kb-settings-row { flex-direction: column; }
+    .kb-settings-setting { flex: none; border-right: none; border-bottom: 1px solid #e0e0e0; width: 100%; }
+  }
+  /* Do/Don't */
+  .kb-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 20px; }
+  .kb-dodont-col { border-radius: 5px; padding: 14px 16px; }
+  .kb-dodont-col.do { background: #E6F4ED; border: 1px solid #a8d5b8; }
+  .kb-dodont-col.dont { background: #fdf2f4; border: 1px solid #f5c6d0; }
+  .kb-dodont-label { font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+  .kb-dodont-col.do .kb-dodont-label { color: #1A7A4A; }
+  .kb-dodont-col.dont .kb-dodont-label { color: #CC0033; }
+  .kb-dodont-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-dodont-col ul li { font-size: 12px; color: #444; line-height: 1.45; padding-left: 16px; position: relative; }
+  .kb-dodont-col.do ul li::before { content: '✓'; position: absolute; left: 0; color: #1A7A4A; font-weight: 900; }
+  .kb-dodont-col.dont ul li::before { content: '✕'; position: absolute; left: 0; color: #CC0033; font-weight: 900; }
+  @media (max-width: 540px) { .kb-dodont { grid-template-columns: 1fr; } }
+  /* FAQ */
+  .kb-faq { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 20px; }
+  .kb-faq-item { border: 1px solid #ebebeb; border-radius: 5px; overflow: hidden; }
+  .kb-faq-q { font-size: 13px; font-weight: 700; color: #1a1a1a; background: #fafafa; padding: 11px 14px; border-bottom: 1px solid #ebebeb; }
+  .kb-faq-a { font-size: 12.5px; color: #444; line-height: 1.6; padding: 11px 14px; }
+  .kb-related { border-top: 2px solid #1a1a1a; margin-top: 28px; padding-top: 16px; }
+  .kb-related-label { font-size: 9.5px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #1a1a1a; margin-bottom: 12px; }
+  .kb-related-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
+  .kb-related-item { display: flex; align-items: center; gap: 11px; padding: 11px 14px; border-bottom: 1px solid #f0f0f0; text-decoration: none; }
+  .kb-related-item:last-child { border-bottom: none; }
+  .kb-related-dot { width: 8px; height: 8px; border-radius: 50%; background: #CC0033; flex-shrink: 0; }
+  .kb-related-dot.teal { background: #00626D; }
+  .kb-related-dot.navy { background: #1B3A6B; }
+  .kb-related-dot.gold { background: #C96A00; }
+  .kb-related-text { flex: 1; }
+  .kb-related-title { font-size: 12.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 1px; }
+  .kb-related-meta { font-size: 10.5px; color: #999; }
+  .kb-related-arrow { color: #ccc; font-size: 13px; }
+  .kb-footer { background: #1a1a1a; border-radius: 0 0 6px 6px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .kb-footer-left { display: flex; align-items: center; gap: 8px; }
+  .kb-footer-r { background: #CC0033; color: #fff; font-size: 11px; font-weight: 900; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Georgia, serif; flex-shrink: 0; }
+  .kb-footer-info { font-size: 10px; color: rgba(255,255,255,.35); line-height: 1.4; }
+  .kb-footer-info strong { color: rgba(255,255,255,.65); font-weight: 700; }
+  .kb-footer-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .kb-footer-links a { font-size: 10.5px; font-weight: 700; color: rgba(255,255,255,.4); text-decoration: none; }
+</style>
+
+<div class="kb-article">
+
+  <div class="kb-inst-header">
+    <div class="kb-inst-left">
+      <div class="kb-r-mark">R</div>
+      <div class="kb-inst-name">
+        Rutgers University–Newark
+        <span>myTech@Newark Knowledge Base</span>
+      </div>
+    </div>
+    <div class="kb-inst-right">
+      <span class="kb-scope-badge both">Faculty &amp; Staff</span>
+      <span class="kb-scope-badge tls">Technology &amp; Learning Spaces</span>
+    </div>
+  </div>
+
+  <div class="kb-article-header">
+    <div class="kb-tier-row">
+      <span class="kb-tier practice">Best Practice</span>
+    </div>
+    <h1 class="kb-h1">Teams Meeting Security</h1>
+    <p class="kb-summary">How to configure Microsoft Teams meeting settings to control access, manage participant permissions, protect sensitive discussions, and prevent disruptions — with scenario-specific recommendations for classes, advising, HR conversations, and committee work.</p>
+    <div class="kb-meta-row">
+      <div class="kb-meta-item"><strong>Category:</strong>&nbsp; Teach in the Classroom</div>
+      <div class="kb-meta-item"><strong>Audience:</strong>&nbsp; Faculty &amp; Staff</div>
+      <div class="kb-meta-item"><strong>Last reviewed:</strong>&nbsp; May 2026</div>
+      <div class="kb-meta-item"><strong>Reviewed by:</strong>&nbsp; TLS, Rutgers–Newark</div>
+    </div>
+    <div class="kb-tag-row">
+      <span class="kb-tag">Microsoft Teams</span>
+      <span class="kb-tag">Meeting Security</span>
+      <span class="kb-tag">Privacy</span>
+      <span class="kb-tag">FERPA</span>
+      <span class="kb-tag">Lobby</span>
+      <span class="kb-tag">Permissions</span>
+      <span class="kb-tag">Microsoft 365</span>
+    </div>
+  </div>
+
+  <div class="kb-body">
+
+    <h2 class="kb-h2">Before You Schedule a Sensitive Meeting</h2>
+    <p class="kb-p">Most Teams security problems happen because meeting options are left at their defaults. A two-minute review before sending the invitation prevents the most common issues — unexpected participants, unintended screen sharing, and recordings that go further than intended.</p>
+    <ul class="kb-ul">
+      <li>Who needs to attend — only internal Rutgers participants, or external guests as well?</li>
+      <li>Should participants be held in a lobby for your approval, or can they join directly?</li>
+      <li>Who should be able to share their screen or manage participants?</li>
+      <li>Will the meeting be recorded — and have all participants been informed?</li>
+      <li>Does the meeting involve student records, personnel matters, or other sensitive information?</li>
+    </ul>
+
+    <h2 class="kb-h2">Meeting Roles and Permissions</h2>
+    <p class="kb-p">Every Teams meeting participant has one of four roles. Understanding these determines which security settings are available to you and what you need to configure for others.</p>
+
+    <table class="kb-table">
+      <thead>
+        <tr>
+          <th>Role</th>
+          <th>What They Can Do</th>
+          <th>Who Gets It</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Organizer</td>
+          <td>Full control — all meeting options, participant management, recording, and lobby admission</td>
+          <td>Person who scheduled the meeting</td>
+        </tr>
+        <tr>
+          <td>Co-organizer</td>
+          <td>Same as organizer — can manage settings, admit from lobby, remove participants</td>
+          <td>Assigned by organizer in Meeting Options</td>
+        </tr>
+        <tr>
+          <td>Presenter</td>
+          <td>Can share content, manage participants, and start recordings (depending on settings)</td>
+          <td>Assigned by organizer; default varies by meeting type</td>
+        </tr>
+        <tr>
+          <td>Attendee</td>
+          <td>Standard participant — can speak, use chat, and view shared content</td>
+          <td>Anyone not designated as presenter or organizer</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="kb-h2">Accessing Meeting Options</h2>
+
+    <ol class="kb-steps">
+      <li><strong>Open the meeting</strong> — In Outlook or the Teams Calendar, open the meeting you want to configure.</li>
+      <li><strong>Click "Meeting Options"</strong> — Select <em>Meeting Options</em> from the meeting toolbar or the meeting details view. This opens a settings page in your browser where all security controls are available.</li>
+      <li><strong>Configure settings and save</strong> — Adjust the options described below, then click <em>Save</em>. Changes take effect immediately and can also be made during a live meeting.</li>
+    </ol>
+
+    <div class="kb-tip">
+      <div class="kb-tip-label">💡 Configure before you send</div>
+      Meeting Options can be set before or after sending the invitation — but setting them before is better practice. Participants who join before you've configured the lobby or presenter permissions may enter with more access than intended.
+    </div>
+
+    <h2 class="kb-h2">Lobby Settings</h2>
+    <p class="kb-p">The lobby holds participants in a waiting area until the organizer or co-organizer admits them. It is the single most effective access control in Teams — use it for any meeting involving sensitive content or external guests.</p>
+
+    <div class="kb-settings-grid">
+      <div class="kb-settings-row">
+        <div class="kb-settings-setting">Internal team meeting</div>
+        <div class="kb-settings-rec"><strong>People in my organization</strong> — Rutgers participants join directly; external guests wait in lobby</div>
+      </div>
+      <div class="kb-settings-row">
+        <div class="kb-settings-setting">Advising / student support</div>
+        <div class="kb-settings-rec"><strong>People I invite</strong> or <strong>Organizer only</strong> — admit each participant individually to confirm who is joining</div>
+      </div>
+      <div class="kb-settings-row">
+        <div class="kb-settings-setting">HR / personnel meeting</div>
+        <div class="kb-settings-rec"><strong>Everyone waits in lobby</strong> — full admission control; organizer admits each person before proceeding</div>
+      </div>
+      <div class="kb-settings-row">
+        <div class="kb-settings-setting">Large lecture / workshop</div>
+        <div class="kb-settings-rec"><strong>People in my organization</strong> for internal sessions; <strong>Everyone waits in lobby</strong> if the link was shared publicly</div>
+      </div>
+      <div class="kb-settings-row">
+        <div class="kb-settings-setting">Public event with external guests</div>
+        <div class="kb-settings-rec"><strong>Everyone waits in lobby</strong> — prevents uninvited participants from joining; use registration if available for large public events</div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Presenter Permissions</h2>
+    <p class="kb-p">Presenters can share their screen, mute other participants, and in some configurations start recordings. The default setting in most Teams meetings is too permissive for sensitive or large sessions.</p>
+
+    <table class="kb-table">
+      <thead>
+        <tr>
+          <th>Meeting Type</th>
+          <th>Recommended Presenter Setting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Large class or lecture</td>
+          <td>Organizer only — prevents students from accidentally sharing their screen</td>
+        </tr>
+        <tr>
+          <td>Advising or student support</td>
+          <td>Organizer only — keeps full control with the faculty member or advisor</td>
+        </tr>
+        <tr>
+          <td>HR or personnel meeting</td>
+          <td>Organizer and co-organizers only</td>
+        </tr>
+        <tr>
+          <td>Workshop with facilitators</td>
+          <td>Specific people — name only the facilitators who need to share content</td>
+        </tr>
+        <tr>
+          <td>Small collaborative meeting</td>
+          <td>Everyone — appropriate when all participants need to share and collaborate equally</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="kb-h2">Screen Sharing and Audio/Video Controls</h2>
+    <p class="kb-p">Beyond presenter permissions, organizers can control screen sharing and participant audio more granularly during the meeting.</p>
+    <ul class="kb-ul">
+      <li><strong>Screen sharing</strong> — Set to Organizer &amp; Presenters or Organizer Only for large classes, lectures, and sensitive meetings. Only change to Everyone for small sessions where all participants legitimately need to share.</li>
+      <li><strong>Microphone for attendees</strong> — Disable participant mics for large meetings or formal presentations; enable for discussions and collaborative sessions. Participants can still be unmuted individually.</li>
+      <li><strong>Camera for attendees</strong> — Consider disabling participant cameras in sensitive meetings (HR, student discipline) where visual participation may create discomfort or privacy concerns.</li>
+    </ul>
+
+    <h2 class="kb-h2">Managing External Guests</h2>
+    <p class="kb-p">External participants — guest speakers, vendors, external collaborators — join Teams meetings without a Rutgers account. They have more limited permissions by default but still require careful management.</p>
+    <ul class="kb-ul">
+      <li>Always use lobby approval for external guests — never allow them to bypass the lobby</li>
+      <li>Share meeting links directly with named guests rather than posting them publicly</li>
+      <li>Limit presenter permissions for guests unless they specifically need to share content</li>
+      <li>Avoid sharing sensitive files or recordings with external participants unless explicitly required</li>
+      <li>Remove unexpected participants promptly — see below for how</li>
+    </ul>
+
+    <h2 class="kb-h2">Recording and Privacy</h2>
+    <p class="kb-p">Teams recordings capture audio, video, screen sharing, chat, and transcripts. Before recording any meeting at Rutgers–Newark, confirm you have met these expectations:</p>
+
+    <div class="kb-callout policy">
+      <div class="kb-callout-icon">⚖️</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">FERPA and Sensitive Meetings</div>
+        <div class="kb-callout-text">
+          Meetings involving <strong>student records, grades, advising discussions, or academic standing</strong> are subject to FERPA. Do not record these sessions without a clear educational or administrative need, and do not share recordings beyond those directly involved. Similarly, <strong>HR, personnel, and disciplinary meetings</strong> should not be recorded without appropriate authorization. When in doubt, don't record — meeting notes are a better documentation approach for sensitive conversations.
+        </div>
+      </div>
+    </div>
+
+    <ul class="kb-ul">
+      <li>Inform all participants before recording begins — verbally at the start and in the invitation if possible</li>
+      <li>After recording, check OneDrive or SharePoint sharing permissions before distributing the link</li>
+      <li>Use "People in Rutgers University with the link" rather than "Anyone with the link" for internal recordings</li>
+      <li>Delete recordings when they are no longer needed — they don't need to be retained indefinitely</li>
+    </ul>
+
+    <h2 class="kb-h2">Removing a Participant</h2>
+    <p class="kb-p">If an unexpected or disruptive participant joins, you can remove them immediately from the meeting without ending the session for everyone else.</p>
+
+    <ol class="kb-steps">
+      <li><strong>Open the Participants panel</strong> — Click the <em>People</em> icon in the meeting toolbar.</li>
+      <li><strong>Find the participant</strong> — Locate their name in the participant list.</li>
+      <li><strong>Open More Options</strong> — Click the three-dot menu (<em>•••</em>) next to their name.</li>
+      <li><strong>Select "Remove from Meeting"</strong> — The participant is immediately removed and cannot rejoin unless re-invited.</li>
+    </ol>
+
+    <div class="kb-callout workflow">
+      <div class="kb-callout-icon">🔒</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Locking a Meeting After Everyone Joins</div>
+        <div class="kb-callout-text">
+          For sensitive meetings where you know the full attendee list in advance, you can <strong>lock the meeting</strong> once everyone has joined. Open the meeting controls, go to <em>More (•••) → Meeting Info → Lock Meeting</em>. No new participants — even those with the link — can join a locked meeting. This is especially useful for confidential discussions where you want to ensure the room is closed once the session begins.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Preventing Disruptions</h2>
+    <ul class="kb-ul">
+      <li>Do not post meeting links publicly unless the session is intentionally open — a link on social media or a public page invites uninvited participants</li>
+      <li>Use a lobby for any meeting where participant identity matters</li>
+      <li>Restrict presenter access in large or public sessions to prevent accidental or intentional disruption via screen sharing</li>
+      <li>Monitor the participant list during sensitive meetings — look for unfamiliar names</li>
+      <li>Temporarily disable chat if it becomes disruptive during a presentation</li>
+    </ul>
+
+    <h2 class="kb-h2">Troubleshooting Common Security Issues</h2>
+
+    <div class="kb-faq">
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">Someone unexpected joined my meeting.</div>
+        <div class="kb-faq-a">This usually means the meeting link was forwarded or shared beyond the intended recipients, or the lobby was set to allow open entry. Remove the participant immediately using the steps above. For future meetings, switch to "Everyone waits in lobby" and share links only via direct calendar invitation rather than in public spaces like Canvas announcements or email signatures.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">A participant is sharing their screen when they shouldn't be.</div>
+        <div class="kb-faq-a">Open Meeting Options and change the presenter permissions to Organizer Only or Organizer and Specific People. This takes effect immediately during a live meeting. You can also ask the participant to stop sharing directly — if they don't respond, mute their presenter role from the participant panel.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">A recording was shared more broadly than intended.</div>
+        <div class="kb-faq-a">Go to the recording file in OneDrive (for standard meetings) or SharePoint (for channel meetings). Click <em>Share</em> and review the current permissions. Remove any "Anyone with the link" access and replace with specific people or "People in Rutgers University with the link." You can also disable the sharing link entirely if the recording should no longer be accessible.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">I need to discuss sensitive student information in a Teams meeting. What should I do?</div>
+        <div class="kb-faq-a">Use the strictest lobby setting (Everyone waits in lobby), limit participants to only those with a need to know, disable recording unless there is a specific documented reason to record, and do not share any documents in the meeting chat that contain identifiable student information unless absolutely necessary. Consider whether Teams is the right venue — some sensitive conversations are more appropriately handled in person or via secure email.</div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Do's and Don'ts</h2>
+
+    <div class="kb-dodont">
+      <div class="kb-dodont-col do">
+        <div class="kb-dodont-label">✓ Do</div>
+        <ul>
+          <li>Review Meeting Options before every important or sensitive meeting</li>
+          <li>Use lobby settings appropriate to the audience</li>
+          <li>Limit presenter permissions in large or open sessions</li>
+          <li>Inform participants before recording any session</li>
+          <li>Check sharing permissions on recordings before distributing</li>
+          <li>Remove unexpected participants promptly</li>
+          <li>Lock meetings once all intended participants have joined</li>
+        </ul>
+      </div>
+      <div class="kb-dodont-col dont">
+        <div class="kb-dodont-label">✕ Don't</div>
+        <ul>
+          <li>Leave presenter permissions open to everyone by default</li>
+          <li>Post meeting links publicly without planning for open access</li>
+          <li>Record sensitive meetings without a clear need and participant notice</li>
+          <li>Share recordings with "Anyone with the link" access</li>
+          <li>Leave outdated sharing permissions on recordings or files</li>
+          <li>Ignore unfamiliar names in the participant list during sensitive meetings</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kb-callout support">
+      <div class="kb-callout-icon">🎧</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Getting Help at Rutgers–Newark</div>
+        <div class="kb-callout-text">
+          For help with Canvas, Microsoft Teams, classroom technology, and all instructional or IT questions, contact the <strong>RU–N IT Service Center</strong>:<br>
+          📍 Hill Hall, Room 109 &nbsp;·&nbsp;
+          📞 <strong>(973) 353-5083</strong> &nbsp;·&nbsp;
+          📞 Toll Free: <strong>833-OIT-HELP (648-4357)</strong><br>
+          ✉️ <a href="mailto:help@newark.rutgers.edu">help@newark.rutgers.edu</a> &nbsp;·&nbsp;
+          🔗 <a href="https://ithelp.rutgers.edu/sp">RU–N IT Help Portal</a><br><br>
+          <strong>Faculty and staff</strong> needing instructional technology support can also <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">schedule a consultation</a> through myTech@Newark.<br><br>
+          <strong>From another Rutgers campus?</strong> Faculty, staff, and students from Rutgers–New Brunswick, Rutgers–Camden, Rutgers Health, or other Rutgers units should contact their local campus IT support or the Rutgers University Help Desk.
+        </div>
+      </div>
+    </div>
+
+    <div class="kb-related">
+      <div class="kb-related-label">Related Articles</div>
+      <div class="kb-related-grid">
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot teal"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Schedule a Microsoft Teams Meeting</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot navy"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Record a Microsoft Teams Meeting</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot gold"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Teams Chat &amp; Collaboration</div>
+            <div class="kb-related-meta">Best Practice &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="kb-footer">
+    <div class="kb-footer-left">
+      <div class="kb-footer-r">R</div>
+      <div class="kb-footer-info">
+        <strong>Rutgers University–Newark</strong><br>
+        Technology &amp; Learning Spaces · myTech@Newark
+      </div>
+    </div>
+    <div class="kb-footer-links">
+      <a href="https://account577280.wixsite.com/mytechnewark" target="_top">myTech@Newark</a>
+      <a href="https://teams.microsoft.com">Microsoft Teams</a>
+      <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">Get Support</a>
+    </div>
+  </div>
+
+</div>

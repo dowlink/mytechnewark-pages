@@ -1,0 +1,508 @@
+<!--
+=================================================================
+RUTGERS UNIVERSITY–NEWARK | myTech@Newark
+ServiceNow KB Article
+"Teams Chat & Collaboration"
+Technology & Learning Spaces (TLS)
+=================================================================
+-->
+
+<style>
+  .kb-article * { box-sizing: border-box; }
+  .kb-article {
+    font-family: 'Libre Franklin', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #333;
+    max-width: 820px;
+  }
+  .kb-inst-header { background: #1a1a1a; border-radius: 6px 6px 0 0; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .kb-inst-left { display: flex; align-items: center; gap: 10px; }
+  .kb-r-mark { background: #CC0033; color: #fff; font-size: 15px; font-weight: 900; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Georgia, serif; flex-shrink: 0; }
+  .kb-inst-name { color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2; }
+  .kb-inst-name span { display: block; font-size: 9px; font-weight: 600; color: rgba(255,255,255,.4); letter-spacing: .08em; text-transform: uppercase; margin-top: 1px; }
+  .kb-inst-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .kb-scope-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+  .kb-scope-badge.both { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
+  .kb-scope-badge.tls { background: rgba(255,255,255,.1); color: rgba(255,255,255,.65); }
+  .kb-article-header { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 22px 24px 18px; border-bottom: 1px solid #e0e0e0; }
+  .kb-tier-row { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .kb-tier { display: inline-flex; align-items: center; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .kb-tier.howto { background: #E3F3F0; color: #00626D; }
+  .kb-tier.practice { background: #FFF4E6; color: #C96A00; }
+  .kb-h1 { font-size: 24px; font-weight: 900; color: #1a1a1a; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 8px; }
+  .kb-summary { font-size: 13.5px; color: #555; line-height: 1.65; margin-bottom: 14px; max-width: 640px; }
+  .kb-meta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 11px; color: #999; }
+  .kb-meta-item { display: flex; align-items: center; gap: 4px; font-weight: 600; }
+  .kb-meta-item strong { color: #555; font-weight: 700; }
+  .kb-tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+  .kb-tag { font-size: 10px; font-weight: 700; color: #1B3A6B; background: #EEF2F8; padding: 2px 8px; border-radius: 20px; }
+  .kb-body { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 24px 24px 8px; border-radius: 0 0 6px 6px; }
+  .kb-h2 { font-size: 16px; font-weight: 800; color: #1a1a1a; margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #1a1a1a; letter-spacing: -.01em; }
+  .kb-h2:first-child { margin-top: 0; }
+  .kb-h3 { font-size: 12.5px; font-weight: 800; color: #1a1a1a; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: .07em; }
+  .kb-p { font-size: 13.5px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+  .kb-steps { list-style: none; counter-reset: steps; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .kb-steps li { counter-increment: steps; display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: #333; line-height: 1.55; padding: 10px 14px; background: #fafafa; border: 1px solid #ebebeb; border-radius: 5px; }
+  .kb-steps li::before { content: counter(steps); background: #CC0033; color: #fff; font-size: 10px; font-weight: 900; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .kb-steps li strong { font-weight: 800; color: #1a1a1a; }
+  .kb-ul { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-ul li { font-size: 13px; color: #444; line-height: 1.5; padding-left: 14px; position: relative; }
+  .kb-ul li::before { content: '–'; position: absolute; left: 0; color: #CC0033; font-weight: 700; }
+  .kb-callout { border-radius: 6px; padding: 14px 16px; margin: 16px 0; display: flex; align-items: flex-start; gap: 12px; }
+  .kb-callout-icon { width: 30px; height: 30px; border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+  .kb-callout-body { flex: 1; min-width: 0; }
+  .kb-callout-label { font-size: 8.5px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 3px; }
+  .kb-callout-text { font-size: 12.5px; line-height: 1.6; font-weight: 500; }
+  .kb-callout-text strong { font-weight: 800; }
+  .kb-callout-text a { font-weight: 700; }
+  .kb-callout.software { background: #E3F3F0; border: 1px solid #a8d5ce; border-left: 4px solid #00626D; }
+  .kb-callout.software .kb-callout-icon { background: #c2e8e3; color: #00626D; }
+  .kb-callout.software .kb-callout-label { color: #00626D; }
+  .kb-callout.software .kb-callout-text { color: #004d55; }
+  .kb-callout.building { background: #FFF4E6; border: 1px solid #f5d9a8; border-left: 4px solid #C96A00; }
+  .kb-callout.building .kb-callout-icon { background: #f9e2bd; color: #C96A00; }
+  .kb-callout.building .kb-callout-label { color: #C96A00; }
+  .kb-callout.building .kb-callout-text { color: #7a3f00; }
+  .kb-callout.support { background: #E6F4ED; border: 1px solid #a8d5b8; border-left: 4px solid #1A7A4A; }
+  .kb-callout.support .kb-callout-icon { background: #c2e5cf; color: #1A7A4A; }
+  .kb-callout.support .kb-callout-label { color: #1A7A4A; }
+  .kb-callout.support .kb-callout-text { color: #0f4a2b; }
+  .kb-callout.support .kb-callout-text a { color: #1A7A4A; }
+  .kb-callout.workflow { background: #EEF2F8; border: 1px solid #b3c4dd; border-left: 4px solid #1B3A6B; }
+  .kb-callout.workflow .kb-callout-icon { background: #c5d3e8; color: #1B3A6B; }
+  .kb-callout.workflow .kb-callout-label { color: #1B3A6B; }
+  .kb-callout.workflow .kb-callout-text { color: #0f2447; }
+  .kb-tip { background: #fafafa; border: 1px solid #e0e0e0; border-left: 3px solid #CC0033; border-radius: 4px; padding: 12px 16px; margin: 16px 0; font-size: 12.5px; color: #444; line-height: 1.6; }
+  .kb-tip-label { font-size: 8.5px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #CC0033; margin-bottom: 4px; }
+  /* Tool overview table */
+  .kb-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 12px 0 16px; }
+  .kb-table th { background: #1a1a1a; color: #fff; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 8px 12px; text-align: left; }
+  .kb-table td { padding: 9px 12px; border-bottom: 1px solid #ebebeb; color: #444; vertical-align: top; line-height: 1.5; }
+  .kb-table tr:last-child td { border-bottom: none; }
+  .kb-table tr:nth-child(even) td { background: #fafafa; }
+  .kb-table td:first-child { font-weight: 700; color: #1a1a1a; }
+  /* Chat vs Channel decision cards */
+  .kb-decision { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 20px; }
+  .kb-decision-col { border-radius: 6px; padding: 14px 16px; }
+  .kb-decision-col.chat { background: #EEF2F8; border: 1px solid #b3c4dd; border-top: 3px solid #1B3A6B; }
+  .kb-decision-col.channel { background: #E3F3F0; border: 1px solid #a8d5ce; border-top: 3px solid #00626D; }
+  .kb-decision-label { font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px; }
+  .kb-decision-col.chat .kb-decision-label { color: #1B3A6B; }
+  .kb-decision-col.channel .kb-decision-label { color: #00626D; }
+  .kb-decision-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-decision-col ul li { font-size: 12px; line-height: 1.45; padding-left: 14px; position: relative; }
+  .kb-decision-col.chat ul li { color: #0f2447; }
+  .kb-decision-col.channel ul li { color: #004d55; }
+  .kb-decision-col.chat ul li::before { content: '–'; position: absolute; left: 0; color: #1B3A6B; font-weight: 700; }
+  .kb-decision-col.channel ul li::before { content: '–'; position: absolute; left: 0; color: #00626D; font-weight: 700; }
+  @media (max-width: 520px) { .kb-decision { grid-template-columns: 1fr; } }
+  /* Workflow scenario cards */
+  .kb-workflow-grid { display: flex; flex-direction: column; gap: 12px; margin: 12px 0 20px; }
+  .kb-workflow-card { border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; }
+  .kb-workflow-card-header { background: #1a1a1a; padding: 9px 14px; display: flex; align-items: center; gap: 8px; }
+  .kb-workflow-card-title { font-size: 11px; font-weight: 800; color: #fff; letter-spacing: .04em; }
+  .kb-workflow-card-body { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+  .kb-workflow-cell { padding: 10px 13px; border-right: 1px solid #ebebeb; font-size: 12px; line-height: 1.45; }
+  .kb-workflow-cell:last-child { border-right: none; }
+  .kb-workflow-cell-label { font-size: 8.5px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; color: #999; margin-bottom: 3px; }
+  .kb-workflow-cell-value { color: #333; font-weight: 600; }
+  @media (max-width: 520px) { .kb-workflow-card-body { grid-template-columns: 1fr 1fr; } }
+  /* Do/Don't */
+  .kb-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 20px; }
+  .kb-dodont-col { border-radius: 5px; padding: 14px 16px; }
+  .kb-dodont-col.do { background: #E6F4ED; border: 1px solid #a8d5b8; }
+  .kb-dodont-col.dont { background: #fdf2f4; border: 1px solid #f5c6d0; }
+  .kb-dodont-label { font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+  .kb-dodont-col.do .kb-dodont-label { color: #1A7A4A; }
+  .kb-dodont-col.dont .kb-dodont-label { color: #CC0033; }
+  .kb-dodont-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-dodont-col ul li { font-size: 12px; color: #444; line-height: 1.45; padding-left: 16px; position: relative; }
+  .kb-dodont-col.do ul li::before { content: '✓'; position: absolute; left: 0; color: #1A7A4A; font-weight: 900; }
+  .kb-dodont-col.dont ul li::before { content: '✕'; position: absolute; left: 0; color: #CC0033; font-weight: 900; }
+  @media (max-width: 540px) { .kb-dodont { grid-template-columns: 1fr; } }
+  .kb-related { border-top: 2px solid #1a1a1a; margin-top: 28px; padding-top: 16px; }
+  .kb-related-label { font-size: 9.5px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #1a1a1a; margin-bottom: 12px; }
+  .kb-related-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
+  .kb-related-item { display: flex; align-items: center; gap: 11px; padding: 11px 14px; border-bottom: 1px solid #f0f0f0; text-decoration: none; }
+  .kb-related-item:last-child { border-bottom: none; }
+  .kb-related-dot { width: 8px; height: 8px; border-radius: 50%; background: #CC0033; flex-shrink: 0; }
+  .kb-related-dot.teal { background: #00626D; }
+  .kb-related-dot.navy { background: #1B3A6B; }
+  .kb-related-dot.gold { background: #C96A00; }
+  .kb-related-text { flex: 1; }
+  .kb-related-title { font-size: 12.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 1px; }
+  .kb-related-meta { font-size: 10.5px; color: #999; }
+  .kb-related-arrow { color: #ccc; font-size: 13px; }
+  .kb-footer { background: #1a1a1a; border-radius: 0 0 6px 6px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .kb-footer-left { display: flex; align-items: center; gap: 8px; }
+  .kb-footer-r { background: #CC0033; color: #fff; font-size: 11px; font-weight: 900; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Georgia, serif; flex-shrink: 0; }
+  .kb-footer-info { font-size: 10px; color: rgba(255,255,255,.35); line-height: 1.4; }
+  .kb-footer-info strong { color: rgba(255,255,255,.65); font-weight: 700; }
+  .kb-footer-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .kb-footer-links a { font-size: 10.5px; font-weight: 700; color: rgba(255,255,255,.4); text-decoration: none; }
+</style>
+
+<div class="kb-article">
+
+  <div class="kb-inst-header">
+    <div class="kb-inst-left">
+      <div class="kb-r-mark">R</div>
+      <div class="kb-inst-name">
+        Rutgers University–Newark
+        <span>myTech@Newark Knowledge Base</span>
+      </div>
+    </div>
+    <div class="kb-inst-right">
+      <span class="kb-scope-badge both">Faculty &amp; Staff</span>
+      <span class="kb-scope-badge tls">Technology &amp; Learning Spaces</span>
+    </div>
+  </div>
+
+  <div class="kb-article-header">
+    <div class="kb-tier-row">
+      <span class="kb-tier practice">Best Practice</span>
+    </div>
+    <h1 class="kb-h1">Teams Chat &amp; Collaboration</h1>
+    <p class="kb-summary">How to use Microsoft Teams chat, channels, and file collaboration at Rutgers–Newark — including when to use chat versus channels, how to create and organize Teams and channels, real-time document collaboration, and workflow examples for committees, teaching, and project teams.</p>
+    <div class="kb-meta-row">
+      <div class="kb-meta-item"><strong>Category:</strong>&nbsp; Teach in the Classroom</div>
+      <div class="kb-meta-item"><strong>Audience:</strong>&nbsp; Faculty &amp; Staff</div>
+      <div class="kb-meta-item"><strong>Last reviewed:</strong>&nbsp; May 2026</div>
+      <div class="kb-meta-item"><strong>Reviewed by:</strong>&nbsp; TLS, Rutgers–Newark</div>
+    </div>
+    <div class="kb-tag-row">
+      <span class="kb-tag">Microsoft Teams</span>
+      <span class="kb-tag">Chat</span>
+      <span class="kb-tag">Channels</span>
+      <span class="kb-tag">Collaboration</span>
+      <span class="kb-tag">File Sharing</span>
+      <span class="kb-tag">OneDrive</span>
+      <span class="kb-tag">Microsoft 365</span>
+    </div>
+  </div>
+
+  <div class="kb-body">
+
+    <h2 class="kb-h2">Teams Collaboration Tools at a Glance</h2>
+    <p class="kb-p">Teams includes several distinct tools that work together. Understanding what each one is for prevents the most common problems — communication scattered across the wrong places, duplicate files, and Teams proliferation that nobody maintains.</p>
+
+    <table class="kb-table">
+      <thead>
+        <tr>
+          <th>Tool</th>
+          <th>Best For</th>
+          <th>Lifespan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Chat</td>
+          <td>Direct messages, quick questions, small-group coordination</td>
+          <td>Temporary to ongoing</td>
+        </tr>
+        <tr>
+          <td>Teams</td>
+          <td>Long-term groups — departments, committees, course teams</td>
+          <td>Semester or longer</td>
+        </tr>
+        <tr>
+          <td>Channels</td>
+          <td>Organizing conversations and files within a Team by topic or project</td>
+          <td>As long as the Team</td>
+        </tr>
+        <tr>
+          <td>Meetings</td>
+          <td>Real-time discussion, office hours, hybrid sessions</td>
+          <td>Point in time</td>
+        </tr>
+        <tr>
+          <td>Files (OneDrive / SharePoint)</td>
+          <td>Shared document storage and real-time co-authoring</td>
+          <td>Persistent</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="kb-h2">Chat vs. Channels: Which Should You Use?</h2>
+    <p class="kb-p">This is the most common source of Teams confusion. The short answer: use Chat for quick, short-lived conversations; use Channels for ongoing work that benefits from organized history, shared files, and persistent structure.</p>
+
+    <div class="kb-decision">
+      <div class="kb-decision-col chat">
+        <div class="kb-decision-label">💬 Use Chat When…</div>
+        <ul>
+          <li>You need a quick answer from one or two people</li>
+          <li>The conversation is temporary and won't need to be referenced later</li>
+          <li>You're coordinating a small group for a single event or task</li>
+          <li>Following up directly after a meeting</li>
+          <li>The topic doesn't belong to a specific project or Team</li>
+        </ul>
+      </div>
+      <div class="kb-decision-col channel">
+        <div class="kb-decision-label">📢 Use Channels When…</div>
+        <ul>
+          <li>The work is ongoing across multiple weeks or months</li>
+          <li>Multiple people need visibility into the same conversation</li>
+          <li>Files, decisions, and history need to stay organized in one place</li>
+          <li>You're coordinating a committee, department, or project team</li>
+          <li>New members need to be able to catch up on past discussions</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kb-tip">
+      <div class="kb-tip-label">💡 Rule of Thumb</div>
+      If you'd want to search for this conversation in three months, put it in a Channel. If it's a quick back-and-forth that you won't need to reference again, Chat is fine. Important decisions, shared files, and meeting outcomes should always live in a Channel — not a chat that gets buried.
+    </div>
+
+    <h2 class="kb-h2">Using Teams Chat</h2>
+    <p class="kb-p">Teams Chat supports one-on-one and group messaging with persistent history, file sharing, @mentions, formatting, and quick audio or video calls — all without scheduling a formal meeting.</p>
+
+    <ol class="kb-steps">
+      <li><strong>Open Chat</strong> — Select <em>Chat</em> from the left navigation bar in Microsoft Teams.</li>
+      <li><strong>Start a new conversation</strong> — Click the <em>New Chat</em> icon (pencil) at the top of the chat list. Enter the name or email address of the person or people you want to message. For group chats, add multiple names and give the group a clear title so it's easy to find later.</li>
+      <li><strong>Send your message</strong> — Type in the compose box. Use the formatting toolbar for bold, bullets, or code blocks when needed. Attach files directly from OneDrive or your device. Use @mentions to notify someone specifically within a group chat.</li>
+    </ol>
+
+    <div class="kb-callout software">
+      <div class="kb-callout-icon">💡</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Chat Features Worth Knowing</div>
+        <div class="kb-callout-text">
+          <strong>Reactions</strong> — Use emoji reactions to acknowledge a message without sending a reply, reducing notification noise for everyone. <strong>Pinned messages</strong> — Pin important links, decisions, or files to the top of a chat so they don't get buried. <strong>Loop components</strong> — Embed collaborative lists, tables, or task trackers directly inside a chat message that all participants can edit in real time.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Using Teams Channels</h2>
+    <p class="kb-p">Channels live inside a Team and organize conversations, files, and meeting recordings by topic or project. Every Team has a General channel by default; you can add as many additional channels as your group needs.</p>
+
+    <h3 class="kb-h3">Channel Types</h3>
+    <ul class="kb-ul">
+      <li><strong>Standard channels</strong> — Visible to all Team members. Best for shared work, department-wide announcements, and open collaboration.</li>
+      <li><strong>Private channels</strong> — Restricted to specific members of the Team. Best for leadership discussions, confidential planning, or small working groups within a larger Team.</li>
+    </ul>
+
+    <h3 class="kb-h3">Creating a Channel</h3>
+    <ol class="kb-steps">
+      <li><strong>Open the Team</strong> — Select the Team from your Teams list in the left navigation.</li>
+      <li><strong>Open More Options</strong> — Click the three-dot menu (<em>•••</em>) next to the Team name.</li>
+      <li><strong>Select "Add Channel"</strong> — Enter a clear, descriptive channel name, an optional description, and choose Standard or Private for the privacy setting.</li>
+      <li><strong>Click Create</strong> — The channel appears in the Team's channel list immediately.</li>
+    </ol>
+
+    <div class="kb-callout building">
+      <div class="kb-callout-icon">⚠️</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Avoid Teams Sprawl</div>
+        <div class="kb-callout-text">
+          One of the most common Teams problems at universities is creating too many separate Teams that end up abandoned. <strong>Before creating a new Team, check whether an existing one could serve the purpose with an added channel.</strong> A department committee doesn't need its own Team — a channel inside the department's Team works better and keeps files and conversations in one place. Archive or delete Teams when projects end rather than leaving them active indefinitely.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">File Collaboration in Teams</h2>
+    <p class="kb-p">Every channel has a built-in Files tab backed by SharePoint. Every chat has a Files tab backed by OneDrive. Files stored here can be co-authored by multiple people simultaneously in Word, Excel, or PowerPoint — no emailing attachments back and forth, no version confusion.</p>
+    <ul class="kb-ul">
+      <li>Open any Office file in a channel's Files tab and multiple people can edit it at the same time — changes appear in real time with color-coded cursors</li>
+      <li>Version history is automatic — you can restore any previous version from the file's version history menu</li>
+      <li>Use descriptive file names and organized folder structures within channels so files are easy to find without searching</li>
+      <li>Avoid duplicating files across channels — store the file once and share the link</li>
+      <li>Share files from within Teams (using the <em>Attach</em> button) rather than emailing attachments; this keeps everyone working on the same version</li>
+    </ul>
+
+    <h2 class="kb-h2">Using @Mentions</h2>
+    <p class="kb-p">@mentions send a direct notification to a person, channel, or entire Team. Use them intentionally — over-mentioning creates alert fatigue and people start ignoring notifications.</p>
+
+    <table class="kb-table">
+      <thead>
+        <tr>
+          <th>Mention Type</th>
+          <th>Syntax</th>
+          <th>When to Use</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Person</td>
+          <td>@Name</td>
+          <td>When a specific person needs to see or act on a message</td>
+        </tr>
+        <tr>
+          <td>Channel</td>
+          <td>@General</td>
+          <td>When all members of a channel should be notified — use sparingly</td>
+        </tr>
+        <tr>
+          <td>Team</td>
+          <td>@TeamName</td>
+          <td>When all Team members need to see the message — use very sparingly</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="kb-h2">Managing Notifications</h2>
+    <p class="kb-p">Unmanaged Teams notifications are one of the fastest ways to make people stop using Teams effectively. Spend a few minutes configuring notifications at the start of each semester — it pays off immediately.</p>
+    <ul class="kb-ul">
+      <li>Right-click any channel and choose <em>Channel notifications</em> to control what triggers alerts for that channel specifically</li>
+      <li>Mute low-priority channels by right-clicking and selecting <em>Mute</em> — you can still see new messages when you visit, but they won't generate notifications</li>
+      <li>Configure global notification settings in <em>Settings → Notifications</em> to set defaults for mentions, replies, and chat messages</li>
+      <li>Use <em>Do Not Disturb</em> in Teams during focused work or presentations to suppress all notifications temporarily</li>
+    </ul>
+
+    <h2 class="kb-h2">Collaboration Workflow Examples</h2>
+    <p class="kb-p">Here's how the different Tools work together in three common RU-N scenarios:</p>
+
+    <div class="kb-workflow-grid">
+      <div class="kb-workflow-card">
+        <div class="kb-workflow-card-header">
+          <div class="kb-workflow-card-title">🏛️ Committee Collaboration</div>
+        </div>
+        <div class="kb-workflow-card-body">
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Team</div>
+            <div class="kb-workflow-cell-value">Committee workspace — all members</div>
+          </div>
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Channels</div>
+            <div class="kb-workflow-cell-value">General, Agenda &amp; Minutes, Subcommittees</div>
+          </div>
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Files</div>
+            <div class="kb-workflow-cell-value">Shared agendas, minutes, and reports in channel Files tab</div>
+          </div>
+        </div>
+      </div>
+      <div class="kb-workflow-card">
+        <div class="kb-workflow-card-header">
+          <div class="kb-workflow-card-title">📚 Teaching Collaboration</div>
+        </div>
+        <div class="kb-workflow-card-body">
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Chat</div>
+            <div class="kb-workflow-cell-value">Quick instructor-to-TA coordination</div>
+          </div>
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Channels</div>
+            <div class="kb-workflow-cell-value">Curriculum planning, grading coordination</div>
+          </div>
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Meetings</div>
+            <div class="kb-workflow-cell-value">Virtual office hours, co-instructor syncs</div>
+          </div>
+        </div>
+      </div>
+      <div class="kb-workflow-card">
+        <div class="kb-workflow-card-header">
+          <div class="kb-workflow-card-title">🗂️ Project Team</div>
+        </div>
+        <div class="kb-workflow-card-body">
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Channels</div>
+            <div class="kb-workflow-cell-value">One per project phase or workstream</div>
+          </div>
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Files</div>
+            <div class="kb-workflow-cell-value">Shared deliverables co-authored in real time</div>
+          </div>
+          <div class="kb-workflow-cell">
+            <div class="kb-workflow-cell-label">Meetings</div>
+            <div class="kb-workflow-cell-value">Weekly standups with recorded notes</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Do's and Don'ts</h2>
+
+    <div class="kb-dodont">
+      <div class="kb-dodont-col do">
+        <div class="kb-dodont-label">✓ Do</div>
+        <ul>
+          <li>Use Channels for ongoing work, Chat for quick exchanges</li>
+          <li>Give channels clear, descriptive names</li>
+          <li>Store files in channel Files tabs — not email attachments</li>
+          <li>Use @mentions intentionally to avoid notification fatigue</li>
+          <li>Mute low-priority channels rather than leaving notifications on</li>
+          <li>Archive or delete Teams when projects or committees end</li>
+          <li>Check whether an existing Team can accommodate new work before creating another</li>
+        </ul>
+      </div>
+      <div class="kb-dodont-col dont">
+        <div class="kb-dodont-label">✕ Don't</div>
+        <ul>
+          <li>Create new Teams for every small project or working group</li>
+          <li>Use Chat for long-term project management or important decisions</li>
+          <li>Duplicate files across multiple channels</li>
+          <li>Store important information only in meeting recordings</li>
+          <li>Use vague channel names like "General Work" or "Stuff"</li>
+          <li>Leave abandoned Teams and channels active indefinitely</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kb-callout support">
+      <div class="kb-callout-icon">🎧</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Getting Help at Rutgers–Newark</div>
+        <div class="kb-callout-text">
+          For help with Canvas, Microsoft Teams, classroom technology, and all instructional or IT questions, contact the <strong>RU–N IT Service Center</strong>:<br>
+          📍 Hill Hall, Room 109 &nbsp;·&nbsp;
+          📞 <strong>(973) 353-5083</strong> &nbsp;·&nbsp;
+          📞 Toll Free: <strong>833-OIT-HELP (648-4357)</strong><br>
+          ✉️ <a href="mailto:help@newark.rutgers.edu">help@newark.rutgers.edu</a> &nbsp;·&nbsp;
+          🔗 <a href="https://ithelp.rutgers.edu/sp">RU–N IT Help Portal</a><br><br>
+          <strong>Faculty and staff</strong> needing instructional technology support can also <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">schedule a consultation</a> through myTech@Newark.<br><br>
+          <strong>From another Rutgers campus?</strong> Faculty, staff, and students from Rutgers–New Brunswick, Rutgers–Camden, Rutgers Health, or other Rutgers units should contact their local campus IT support or the Rutgers University Help Desk.
+        </div>
+      </div>
+    </div>
+
+    <div class="kb-related">
+      <div class="kb-related-label">Related Articles</div>
+      <div class="kb-related-grid">
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot teal"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Schedule a Microsoft Teams Meeting</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot navy"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Share Your Screen in Microsoft Teams</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot gold"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Record a Microsoft Teams Meeting</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="kb-footer">
+    <div class="kb-footer-left">
+      <div class="kb-footer-r">R</div>
+      <div class="kb-footer-info">
+        <strong>Rutgers University–Newark</strong><br>
+        Technology &amp; Learning Spaces · myTech@Newark
+      </div>
+    </div>
+    <div class="kb-footer-links">
+      <a href="https://account577280.wixsite.com/mytechnewark" target="_top">myTech@Newark</a>
+      <a href="https://teams.microsoft.com">Microsoft Teams</a>
+      <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">Get Support</a>
+    </div>
+  </div>
+
+</div>

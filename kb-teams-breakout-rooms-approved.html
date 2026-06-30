@@ -1,0 +1,472 @@
+<!--
+=================================================================
+RUTGERS UNIVERSITY–NEWARK | myTech@Newark
+ServiceNow KB Article
+"Manage Breakout Rooms in Microsoft Teams"
+Technology & Learning Spaces (TLS)
+=================================================================
+-->
+
+<style>
+  .kb-article * { box-sizing: border-box; }
+  .kb-article {
+    font-family: 'Libre Franklin', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #333;
+    max-width: 820px;
+  }
+  .kb-inst-header { background: #1a1a1a; border-radius: 6px 6px 0 0; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .kb-inst-left { display: flex; align-items: center; gap: 10px; }
+  .kb-r-mark { background: #CC0033; color: #fff; font-size: 15px; font-weight: 900; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Georgia, serif; flex-shrink: 0; }
+  .kb-inst-name { color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2; }
+  .kb-inst-name span { display: block; font-size: 9px; font-weight: 600; color: rgba(255,255,255,.4); letter-spacing: .08em; text-transform: uppercase; margin-top: 1px; }
+  .kb-inst-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .kb-scope-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+  .kb-scope-badge.both { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
+  .kb-scope-badge.tls { background: rgba(255,255,255,.1); color: rgba(255,255,255,.65); }
+  .kb-article-header { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 22px 24px 18px; border-bottom: 1px solid #e0e0e0; }
+  .kb-tier-row { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .kb-tier { display: inline-flex; align-items: center; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .kb-tier.howto { background: #E3F3F0; color: #00626D; }
+  .kb-h1 { font-size: 24px; font-weight: 900; color: #1a1a1a; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 8px; }
+  .kb-summary { font-size: 13.5px; color: #555; line-height: 1.65; margin-bottom: 14px; max-width: 640px; }
+  .kb-meta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 11px; color: #999; }
+  .kb-meta-item { display: flex; align-items: center; gap: 4px; font-weight: 600; }
+  .kb-meta-item strong { color: #555; font-weight: 700; }
+  .kb-tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+  .kb-tag { font-size: 10px; font-weight: 700; color: #1B3A6B; background: #EEF2F8; padding: 2px 8px; border-radius: 20px; }
+  .kb-body { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 24px 24px 8px; border-radius: 0 0 6px 6px; }
+  .kb-h2 { font-size: 16px; font-weight: 800; color: #1a1a1a; margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #1a1a1a; letter-spacing: -.01em; }
+  .kb-h2:first-child { margin-top: 0; }
+  .kb-h3 { font-size: 12.5px; font-weight: 800; color: #1a1a1a; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: .07em; }
+  .kb-p { font-size: 13.5px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+  .kb-steps { list-style: none; counter-reset: steps; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .kb-steps li { counter-increment: steps; display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: #333; line-height: 1.55; padding: 10px 14px; background: #fafafa; border: 1px solid #ebebeb; border-radius: 5px; }
+  .kb-steps li::before { content: counter(steps); background: #CC0033; color: #fff; font-size: 10px; font-weight: 900; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .kb-steps li strong { font-weight: 800; color: #1a1a1a; }
+  .kb-ul { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-ul li { font-size: 13px; color: #444; line-height: 1.5; padding-left: 14px; position: relative; }
+  .kb-ul li::before { content: '–'; position: absolute; left: 0; color: #CC0033; font-weight: 700; }
+  .kb-callout { border-radius: 6px; padding: 14px 16px; margin: 16px 0; display: flex; align-items: flex-start; gap: 12px; }
+  .kb-callout-icon { width: 30px; height: 30px; border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+  .kb-callout-body { flex: 1; min-width: 0; }
+  .kb-callout-label { font-size: 8.5px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 3px; }
+  .kb-callout-text { font-size: 12.5px; line-height: 1.6; font-weight: 500; }
+  .kb-callout-text strong { font-weight: 800; }
+  .kb-callout-text a { font-weight: 700; }
+  .kb-callout.software { background: #E3F3F0; border: 1px solid #a8d5ce; border-left: 4px solid #00626D; }
+  .kb-callout.software .kb-callout-icon { background: #c2e8e3; color: #00626D; }
+  .kb-callout.software .kb-callout-label { color: #00626D; }
+  .kb-callout.software .kb-callout-text { color: #004d55; }
+  .kb-callout.building { background: #FFF4E6; border: 1px solid #f5d9a8; border-left: 4px solid #C96A00; }
+  .kb-callout.building .kb-callout-icon { background: #f9e2bd; color: #C96A00; }
+  .kb-callout.building .kb-callout-label { color: #C96A00; }
+  .kb-callout.building .kb-callout-text { color: #7a3f00; }
+  .kb-callout.support { background: #E6F4ED; border: 1px solid #a8d5b8; border-left: 4px solid #1A7A4A; }
+  .kb-callout.support .kb-callout-icon { background: #c2e5cf; color: #1A7A4A; }
+  .kb-callout.support .kb-callout-label { color: #1A7A4A; }
+  .kb-callout.support .kb-callout-text { color: #0f4a2b; }
+  .kb-callout.support .kb-callout-text a { color: #1A7A4A; }
+  .kb-callout.workflow { background: #EEF2F8; border: 1px solid #b3c4dd; border-left: 4px solid #1B3A6B; }
+  .kb-callout.workflow .kb-callout-icon { background: #c5d3e8; color: #1B3A6B; }
+  .kb-callout.workflow .kb-callout-label { color: #1B3A6B; }
+  .kb-callout.workflow .kb-callout-text { color: #0f2447; }
+  .kb-tip { background: #fafafa; border: 1px solid #e0e0e0; border-left: 3px solid #CC0033; border-radius: 4px; padding: 12px 16px; margin: 16px 0; font-size: 12.5px; color: #444; line-height: 1.6; }
+  .kb-tip-label { font-size: 8.5px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #CC0033; margin-bottom: 4px; }
+  /* Assignment method cards */
+  .kb-assign-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 20px; }
+  .kb-assign-card { border-radius: 6px; padding: 14px 16px; }
+  .kb-assign-card.auto { background: #E3F3F0; border: 1px solid #a8d5ce; border-top: 3px solid #00626D; }
+  .kb-assign-card.manual { background: #EEF2F8; border: 1px solid #b3c4dd; border-top: 3px solid #1B3A6B; }
+  .kb-assign-label { font-size: 10px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 6px; }
+  .kb-assign-card.auto .kb-assign-label { color: #00626D; }
+  .kb-assign-card.manual .kb-assign-label { color: #1B3A6B; }
+  .kb-assign-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .kb-assign-card ul li { font-size: 12px; line-height: 1.45; padding-left: 14px; position: relative; }
+  .kb-assign-card.auto ul li { color: #004d55; }
+  .kb-assign-card.manual ul li { color: #0f2447; }
+  .kb-assign-card ul li::before { content: '–'; position: absolute; left: 0; font-weight: 700; }
+  .kb-assign-card.auto ul li::before { color: #00626D; }
+  .kb-assign-card.manual ul li::before { color: #1B3A6B; }
+  @media (max-width: 520px) { .kb-assign-grid { grid-template-columns: 1fr; } }
+  /* Session phase timeline */
+  .kb-phase { display: flex; flex-direction: column; gap: 0; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; margin: 12px 0 20px; }
+  .kb-phase-row { display: flex; align-items: flex-start; gap: 14px; padding: 12px 16px; border-bottom: 1px solid #ebebeb; }
+  .kb-phase-row:last-child { border-bottom: none; }
+  .kb-phase-badge { font-size: 9px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; min-width: 90px; text-align: center; }
+  .kb-phase-badge.before  { background: #EEF2F8; color: #1B3A6B; border: 1px solid #b3c4dd; }
+  .kb-phase-badge.during  { background: #E3F3F0; color: #00626D; border: 1px solid #a8d5ce; }
+  .kb-phase-badge.closing { background: #FFF4E6; color: #C96A00; border: 1px solid #f5d9a8; }
+  .kb-phase-badge.after   { background: #E6F4ED; color: #1A7A4A; border: 1px solid #a8d5b8; }
+  .kb-phase-body { flex: 1; font-size: 12.5px; color: #444; line-height: 1.55; }
+  .kb-phase-body strong { font-weight: 800; color: #1a1a1a; display: block; margin-bottom: 2px; }
+  /* Timing table */
+  .kb-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 12px 0 16px; }
+  .kb-table th { background: #1a1a1a; color: #fff; font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 8px 12px; text-align: left; }
+  .kb-table td { padding: 9px 12px; border-bottom: 1px solid #ebebeb; color: #444; vertical-align: top; line-height: 1.5; }
+  .kb-table tr:last-child td { border-bottom: none; }
+  .kb-table tr:nth-child(even) td { background: #fafafa; }
+  .kb-table td:first-child { font-weight: 700; color: #1a1a1a; }
+  /* Do/Don't */
+  .kb-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 20px; }
+  .kb-dodont-col { border-radius: 5px; padding: 14px 16px; }
+  .kb-dodont-col.do { background: #E6F4ED; border: 1px solid #a8d5b8; }
+  .kb-dodont-col.dont { background: #fdf2f4; border: 1px solid #f5c6d0; }
+  .kb-dodont-label { font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+  .kb-dodont-col.do .kb-dodont-label { color: #1A7A4A; }
+  .kb-dodont-col.dont .kb-dodont-label { color: #CC0033; }
+  .kb-dodont-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-dodont-col ul li { font-size: 12px; color: #444; line-height: 1.45; padding-left: 16px; position: relative; }
+  .kb-dodont-col.do ul li::before { content: '✓'; position: absolute; left: 0; color: #1A7A4A; font-weight: 900; }
+  .kb-dodont-col.dont ul li::before { content: '✕'; position: absolute; left: 0; color: #CC0033; font-weight: 900; }
+  @media (max-width: 540px) { .kb-dodont { grid-template-columns: 1fr; } }
+  /* FAQ */
+  .kb-faq { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 20px; }
+  .kb-faq-item { border: 1px solid #ebebeb; border-radius: 5px; overflow: hidden; }
+  .kb-faq-q { font-size: 13px; font-weight: 700; color: #1a1a1a; background: #fafafa; padding: 11px 14px; border-bottom: 1px solid #ebebeb; }
+  .kb-faq-a { font-size: 12.5px; color: #444; line-height: 1.6; padding: 11px 14px; }
+  .kb-related { border-top: 2px solid #1a1a1a; margin-top: 28px; padding-top: 16px; }
+  .kb-related-label { font-size: 9.5px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #1a1a1a; margin-bottom: 12px; }
+  .kb-related-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
+  .kb-related-item { display: flex; align-items: center; gap: 11px; padding: 11px 14px; border-bottom: 1px solid #f0f0f0; text-decoration: none; }
+  .kb-related-item:last-child { border-bottom: none; }
+  .kb-related-dot { width: 8px; height: 8px; border-radius: 50%; background: #CC0033; flex-shrink: 0; }
+  .kb-related-dot.teal { background: #00626D; }
+  .kb-related-dot.navy { background: #1B3A6B; }
+  .kb-related-dot.gold { background: #C96A00; }
+  .kb-related-text { flex: 1; }
+  .kb-related-title { font-size: 12.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 1px; }
+  .kb-related-meta { font-size: 10.5px; color: #999; }
+  .kb-related-arrow { color: #ccc; font-size: 13px; }
+  .kb-footer { background: #1a1a1a; border-radius: 0 0 6px 6px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .kb-footer-left { display: flex; align-items: center; gap: 8px; }
+  .kb-footer-r { background: #CC0033; color: #fff; font-size: 11px; font-weight: 900; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Georgia, serif; flex-shrink: 0; }
+  .kb-footer-info { font-size: 10px; color: rgba(255,255,255,.35); line-height: 1.4; }
+  .kb-footer-info strong { color: rgba(255,255,255,.65); font-weight: 700; }
+  .kb-footer-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .kb-footer-links a { font-size: 10.5px; font-weight: 700; color: rgba(255,255,255,.4); text-decoration: none; }
+</style>
+
+<div class="kb-article">
+
+  <div class="kb-inst-header">
+    <div class="kb-inst-left">
+      <div class="kb-r-mark">R</div>
+      <div class="kb-inst-name">
+        Rutgers University–Newark
+        <span>myTech@Newark Knowledge Base</span>
+      </div>
+    </div>
+    <div class="kb-inst-right">
+      <span class="kb-scope-badge both">Faculty &amp; Staff</span>
+      <span class="kb-scope-badge tls">Technology &amp; Learning Spaces</span>
+    </div>
+  </div>
+
+  <div class="kb-article-header">
+    <div class="kb-tier-row">
+      <span class="kb-tier howto">How To</span>
+    </div>
+    <h1 class="kb-h1">Manage Breakout Rooms in Microsoft Teams</h1>
+    <p class="kb-summary">How to create, assign, manage, and close breakout rooms during Teams meetings — for small-group discussion, active learning, workshops, and committee work — including timing guidance, hybrid considerations, and troubleshooting.</p>
+    <div class="kb-meta-row">
+      <div class="kb-meta-item"><strong>Category:</strong>&nbsp; Teach in the Classroom</div>
+      <div class="kb-meta-item"><strong>Audience:</strong>&nbsp; Faculty &amp; Staff</div>
+      <div class="kb-meta-item"><strong>Last reviewed:</strong>&nbsp; May 2026</div>
+      <div class="kb-meta-item"><strong>Reviewed by:</strong>&nbsp; TLS, Rutgers–Newark</div>
+    </div>
+    <div class="kb-tag-row">
+      <span class="kb-tag">Microsoft Teams</span>
+      <span class="kb-tag">Breakout Rooms</span>
+      <span class="kb-tag">Active Learning</span>
+      <span class="kb-tag">Hybrid Teaching</span>
+      <span class="kb-tag">Collaboration</span>
+      <span class="kb-tag">Microsoft 365</span>
+    </div>
+  </div>
+
+  <div class="kb-body">
+
+    <h2 class="kb-h2">Before You Create Breakout Rooms</h2>
+    <p class="kb-p">Breakout rooms work best when the activity is planned before the meeting starts. A few minutes of preparation prevents the most common problems — participants joining the wrong room, unclear instructions, and sessions that run too long without a clear purpose.</p>
+    <ul class="kb-ul">
+      <li>Decide how many groups you need and approximately how many people per group</li>
+      <li>Choose whether participants will be assigned automatically (random) or manually (intentional grouping)</li>
+      <li>Prepare written instructions and discussion prompts to share in chat before opening rooms</li>
+      <li>Set a time limit and plan how you'll signal when time is running out</li>
+      <li>For hybrid meetings, decide whether groups will mix remote and in-person participants — and whether room audio supports that</li>
+    </ul>
+
+    <div class="kb-callout building">
+      <div class="kb-callout-icon">ℹ️</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Organizer and Manager Permissions Required</div>
+        <div class="kb-callout-text">
+          Only the <strong>meeting organizer</strong> and participants designated as breakout room managers can create and manage rooms. If you're running a session as a guest or were added to someone else's meeting, confirm organizer permissions in advance. Some breakout room features may also vary depending on your Teams version, meeting type, and organizational settings.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Creating and Opening Breakout Rooms</h2>
+
+    <ol class="kb-steps">
+      <li><strong>Start the Teams meeting</strong> — Join or begin the meeting normally from the Teams Calendar or a meeting link.</li>
+      <li><strong>Open Breakout Rooms</strong> — Click <em>Breakout Rooms</em> in the meeting toolbar. The breakout room management panel opens on the right side of your screen.</li>
+      <li><strong>Set the number of rooms</strong> — Select how many rooms you need. Teams will show you how many participants will be in each room based on current attendance.</li>
+      <li><strong>Choose your assignment method</strong> — Select Automatic or Manual (see below). You can reassign participants after rooms are created.</li>
+      <li><strong>Share instructions before opening</strong> — Post your discussion prompt, goals, and any relevant links in the main meeting chat before clicking Open Rooms. Once participants are in their rooms, they can't easily see what you post in the main meeting chat.</li>
+      <li><strong>Click "Open Rooms"</strong> — Participants move into their assigned rooms automatically or receive a prompt to join. The breakout room panel updates to show who is in each room.</li>
+    </ol>
+
+    <h2 class="kb-h2">Automatic vs. Manual Assignment</h2>
+
+    <div class="kb-assign-grid">
+      <div class="kb-assign-card auto">
+        <div class="kb-assign-label">⚡ Automatic Assignment</div>
+        <ul>
+          <li>Teams distributes participants evenly at random</li>
+          <li>Fast to set up for large groups</li>
+          <li>Best for open discussion, brainstorming, peer review without fixed groups</li>
+          <li>Good for workshops and randomized activities</li>
+        </ul>
+      </div>
+      <div class="kb-assign-card manual">
+        <div class="kb-assign-label">🎯 Manual Assignment</div>
+        <ul>
+          <li>You choose who goes in each room</li>
+          <li>Takes more setup time but gives full control</li>
+          <li>Best for planned project teams, committee subgroups, or intentional student grouping</li>
+          <li>Required when mixing remote and in-person participants deliberately</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kb-tip">
+      <div class="kb-tip-label">💡 Pre-assign rooms before the meeting</div>
+      If you're using manual assignment for a large group, set up room assignments before the meeting starts. In the meeting options, you can pre-assign participants to rooms by name — this saves significant time during the live session and avoids the awkward pause while everyone waits to be placed.
+    </div>
+
+    <h2 class="kb-h2">Managing Rooms During the Session</h2>
+    <p class="kb-p">While rooms are open, you have full visibility and control from the breakout room panel without disrupting participants.</p>
+
+    <h3 class="kb-h3">Visiting a Room</h3>
+    <p class="kb-p">Open the breakout room panel, select the room you want to join, and click <em>Join Room</em>. You can move between rooms freely — participants will see you join and leave. Use this to check in on discussions, answer questions, or observe group dynamics without hovering. Announce yourself briefly when entering so participants aren't caught off guard.</p>
+
+    <h3 class="kb-h3">Sending Announcements to All Rooms</h3>
+    <p class="kb-p">Use the <em>Make an Announcement</em> option in the breakout room panel to send a message that appears in every room simultaneously — without you needing to visit each one. This is the most effective way to give time warnings.</p>
+    <ul class="kb-ul">
+      <li>"You have 5 minutes remaining — begin wrapping up."</li>
+      <li>"Please choose a spokesperson before returning to the main room."</li>
+      <li>"Remember to note your top three takeaways in the chat."</li>
+    </ul>
+
+    <h3 class="kb-h3">Reassigning Participants</h3>
+    <p class="kb-p">If someone joined the wrong room or you need to rebalance groups, open the breakout room panel, find the participant, and drag or reassign them to the correct room. They'll receive a prompt to move.</p>
+
+    <h2 class="kb-h2">Closing Rooms and Debriefing</h2>
+
+    <ol class="kb-steps">
+      <li><strong>Send a time warning</strong> — Use Make an Announcement at least 2 minutes before you plan to close rooms so participants can wrap up their discussion.</li>
+      <li><strong>Click "Close Rooms"</strong> — All participants automatically return to the main meeting. A countdown timer appears in each room before the move.</li>
+      <li><strong>Debrief as a full group</strong> — Allow time for each group to share a key insight, decision, or question. Designating a spokesperson before participants leave their rooms makes this faster and more structured.</li>
+    </ol>
+
+    <h2 class="kb-h2">Session Workflow at a Glance</h2>
+
+    <div class="kb-phase">
+      <div class="kb-phase-row">
+        <span class="kb-phase-badge before">Before Rooms Open</span>
+        <div class="kb-phase-body">
+          <strong>Set up the activity</strong>
+          Post written instructions and discussion prompts in the meeting chat. Explain the task, expected output, and time limit verbally before opening rooms. Share any relevant files or links participants will need.
+        </div>
+      </div>
+      <div class="kb-phase-row">
+        <span class="kb-phase-badge during">Rooms Open</span>
+        <div class="kb-phase-body">
+          <strong>Monitor and support</strong>
+          Visit rooms periodically to observe progress and answer questions. Send time updates via announcements. Avoid hovering in one room — circulate to keep all groups on track.
+        </div>
+      </div>
+      <div class="kb-phase-row">
+        <span class="kb-phase-badge closing">Closing Time</span>
+        <div class="kb-phase-body">
+          <strong>Signal and wrap up</strong>
+          Send a 2-minute warning announcement. Ask groups to identify a spokesperson or key takeaway before returning. Then click Close Rooms.
+        </div>
+      </div>
+      <div class="kb-phase-row">
+        <span class="kb-phase-badge after">After Returning</span>
+        <div class="kb-phase-body">
+          <strong>Debrief with the full group</strong>
+          Invite each group to share a brief summary. Capture key points in the meeting chat or a shared document. Connect the activity back to the session's learning goals.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Suggested Timing by Activity Type</h2>
+
+    <table class="kb-table">
+      <thead>
+        <tr>
+          <th>Activity Type</th>
+          <th>Suggested Duration</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Quick discussion / check-in</td>
+          <td>5–10 minutes</td>
+          <td>Keep the prompt focused and specific — one question works better than three</td>
+        </tr>
+        <tr>
+          <td>Peer review or feedback</td>
+          <td>10–20 minutes</td>
+          <td>Provide a structured feedback template in the chat beforehand</td>
+        </tr>
+        <tr>
+          <td>Workshop activity</td>
+          <td>15–30 minutes</td>
+          <td>Visit each room at least once; send a mid-session check-in announcement</td>
+        </tr>
+        <tr>
+          <td>Group project or case study</td>
+          <td>20–45 minutes</td>
+          <td>Share a shared document for each group to record their work; debrief with structure</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="kb-h2">Breakout Rooms in Hybrid Meetings</h2>
+    <p class="kb-p">Hybrid breakout rooms — where some participants are in the physical room and others join remotely — require extra planning to ensure remote participants aren't isolated.</p>
+
+    <div class="kb-callout workflow">
+      <div class="kb-callout-icon">🏫</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Hybrid Breakout Room Planning</div>
+        <div class="kb-callout-text">
+          Consider deliberately mixing remote and in-person participants in the same virtual rooms — this prevents in-person clusters from dominating while remote participants sit idle. <strong>Share all instructions in writing in the chat</strong> before opening rooms; in-person participants may be away from their screens when you post. Remind in-room students to use their own devices and headphones when entering breakout rooms so remote participants can hear them clearly rather than relying on the room microphone.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Troubleshooting</h2>
+
+    <div class="kb-faq">
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">Participants can't join their assigned room.</div>
+        <div class="kb-faq-a">The most common cause is an outdated Teams client — ask participants to update Teams and rejoin the meeting. Browser-based Teams users may also have limited breakout room support; if possible, have participants use the Teams desktop app. If one or two people still can't join, manually reassign them in the panel or have them join a room directly from the panel prompt.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">A participant ended up in the wrong room.</div>
+        <div class="kb-faq-a">Open the breakout room panel, find the participant's name under the incorrect room, and drag or use the reassign option to move them to the correct room. They'll receive a notification to move. If rooms are already closed and you're back in the main meeting, you can reopen rooms and reassign before the next activity.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">Participants returned to the main room before I closed them.</div>
+        <div class="kb-faq-a">Participants can leave their breakout room and return to the main meeting at any time — this is by design. If this is disrupting the activity, send an announcement reminding participants to stay in their room until they receive the close notification. You can also set a timer in the breakout room panel that automatically returns participants when it expires.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">Audio is poor inside a breakout room.</div>
+        <div class="kb-faq-a">Each breakout room is its own audio environment. Common causes: participants joining without a headset, multiple devices in the same physical location causing echo, or background noise. Encourage participants to mute when not speaking and use headphones. For in-person students joining a virtual room, have them sit apart and use individual devices with earbuds.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">I don't see the Breakout Rooms button in the meeting toolbar.</div>
+        <div class="kb-faq-a">Breakout rooms are only available to the meeting organizer and designated managers. If you scheduled the meeting, confirm you're signed into the correct Rutgers account. If the meeting was scheduled by someone else, ask the organizer to add you as a co-organizer before the session begins — this can be done in the meeting options.</div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Do's and Don'ts</h2>
+
+    <div class="kb-dodont">
+      <div class="kb-dodont-col do">
+        <div class="kb-dodont-label">✓ Do</div>
+        <ul>
+          <li>Post written instructions in chat before opening rooms</li>
+          <li>Set a clear time limit and stick to it</li>
+          <li>Send time warning announcements 2 minutes before closing</li>
+          <li>Visit each room at least once during the activity</li>
+          <li>Ask groups to designate a spokesperson before returning</li>
+          <li>Plan a structured debrief after rooms close</li>
+          <li>Mix remote and in-person participants in hybrid sessions</li>
+        </ul>
+      </div>
+      <div class="kb-dodont-col dont">
+        <div class="kb-dodont-label">✕ Don't</div>
+        <ul>
+          <li>Open rooms without first explaining the task and expected output</li>
+          <li>Create more rooms than you need — smaller groups work better</li>
+          <li>Let activities run too long without a check-in or time signal</li>
+          <li>Forget to debrief after participants return to the main room</li>
+          <li>Ignore remote participants in hybrid breakout sessions</li>
+          <li>Skip the spokesperson or reporting structure — debriefs stall without one</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kb-callout support">
+      <div class="kb-callout-icon">🎧</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Getting Help at Rutgers–Newark</div>
+        <div class="kb-callout-text">
+          For help with Canvas, Microsoft Teams, classroom technology, and all instructional or IT questions, contact the <strong>RU–N IT Service Center</strong>:<br>
+          📍 Hill Hall, Room 109 &nbsp;·&nbsp;
+          📞 <strong>(973) 353-5083</strong> &nbsp;·&nbsp;
+          📞 Toll Free: <strong>833-OIT-HELP (648-4357)</strong><br>
+          ✉️ <a href="mailto:help@newark.rutgers.edu">help@newark.rutgers.edu</a> &nbsp;·&nbsp;
+          🔗 <a href="https://ithelp.rutgers.edu/sp">RU–N IT Help Portal</a><br><br>
+          <strong>Faculty and staff</strong> needing instructional technology support can also <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">schedule a consultation</a> through myTech@Newark.<br><br>
+          <strong>From another Rutgers campus?</strong> Faculty, staff, and students from Rutgers–New Brunswick, Rutgers–Camden, Rutgers Health, or other Rutgers units should contact their local campus IT support or the Rutgers University Help Desk.
+        </div>
+      </div>
+    </div>
+
+    <div class="kb-related">
+      <div class="kb-related-label">Related Articles</div>
+      <div class="kb-related-grid">
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot teal"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Schedule a Microsoft Teams Meeting</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot navy"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Share Your Screen in Microsoft Teams</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot gold"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Use PowerPoint Live in Microsoft Teams</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="kb-footer">
+    <div class="kb-footer-left">
+      <div class="kb-footer-r">R</div>
+      <div class="kb-footer-info">
+        <strong>Rutgers University–Newark</strong><br>
+        Technology &amp; Learning Spaces · myTech@Newark
+      </div>
+    </div>
+    <div class="kb-footer-links">
+      <a href="https://account577280.wixsite.com/mytechnewark" target="_top">myTech@Newark</a>
+      <a href="https://teams.microsoft.com">Microsoft Teams</a>
+      <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">Get Support</a>
+    </div>
+  </div>
+
+</div>

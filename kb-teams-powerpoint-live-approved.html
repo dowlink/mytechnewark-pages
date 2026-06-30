@@ -1,0 +1,459 @@
+<!--
+=================================================================
+RUTGERS UNIVERSITY–NEWARK | myTech@Newark
+ServiceNow KB Article
+"Use PowerPoint Live in Microsoft Teams"
+Technology & Learning Spaces (TLS)
+=================================================================
+-->
+
+<style>
+  .kb-article * { box-sizing: border-box; }
+  .kb-article {
+    font-family: 'Libre Franklin', -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: #333;
+    max-width: 820px;
+  }
+  .kb-inst-header { background: #1a1a1a; border-radius: 6px 6px 0 0; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+  .kb-inst-left { display: flex; align-items: center; gap: 10px; }
+  .kb-r-mark { background: #CC0033; color: #fff; font-size: 15px; font-weight: 900; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Georgia, serif; flex-shrink: 0; }
+  .kb-inst-name { color: #fff; font-size: 12px; font-weight: 700; line-height: 1.2; }
+  .kb-inst-name span { display: block; font-size: 9px; font-weight: 600; color: rgba(255,255,255,.4); letter-spacing: .08em; text-transform: uppercase; margin-top: 1px; }
+  .kb-inst-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .kb-scope-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 9.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+  .kb-scope-badge.both { background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); }
+  .kb-scope-badge.tls { background: rgba(255,255,255,.1); color: rgba(255,255,255,.65); }
+  .kb-article-header { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 22px 24px 18px; border-bottom: 1px solid #e0e0e0; }
+  .kb-tier-row { display: flex; align-items: center; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
+  .kb-tier { display: inline-flex; align-items: center; font-size: 9px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 20px; }
+  .kb-tier.howto { background: #E3F3F0; color: #00626D; }
+  .kb-h1 { font-size: 24px; font-weight: 900; color: #1a1a1a; line-height: 1.15; letter-spacing: -.02em; margin-bottom: 8px; }
+  .kb-summary { font-size: 13.5px; color: #555; line-height: 1.65; margin-bottom: 14px; max-width: 640px; }
+  .kb-meta-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 11px; color: #999; }
+  .kb-meta-item { display: flex; align-items: center; gap: 4px; font-weight: 600; }
+  .kb-meta-item strong { color: #555; font-weight: 700; }
+  .kb-tag-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 12px; }
+  .kb-tag { font-size: 10px; font-weight: 700; color: #1B3A6B; background: #EEF2F8; padding: 2px 8px; border-radius: 20px; }
+  .kb-body { background: #fff; border: 1px solid #e0e0e0; border-top: none; padding: 24px 24px 8px; border-radius: 0 0 6px 6px; }
+  .kb-h2 { font-size: 16px; font-weight: 800; color: #1a1a1a; margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #1a1a1a; letter-spacing: -.01em; }
+  .kb-h2:first-child { margin-top: 0; }
+  .kb-h3 { font-size: 12.5px; font-weight: 800; color: #1a1a1a; margin: 20px 0 8px; text-transform: uppercase; letter-spacing: .07em; }
+  .kb-p { font-size: 13.5px; color: #444; line-height: 1.7; margin-bottom: 12px; }
+  .kb-steps { list-style: none; counter-reset: steps; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .kb-steps li { counter-increment: steps; display: flex; align-items: flex-start; gap: 12px; font-size: 13px; color: #333; line-height: 1.55; padding: 10px 14px; background: #fafafa; border: 1px solid #ebebeb; border-radius: 5px; }
+  .kb-steps li::before { content: counter(steps); background: #CC0033; color: #fff; font-size: 10px; font-weight: 900; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .kb-steps li strong { font-weight: 800; color: #1a1a1a; }
+  .kb-ul { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-ul li { font-size: 13px; color: #444; line-height: 1.5; padding-left: 14px; position: relative; }
+  .kb-ul li::before { content: '–'; position: absolute; left: 0; color: #CC0033; font-weight: 700; }
+  .kb-callout { border-radius: 6px; padding: 14px 16px; margin: 16px 0; display: flex; align-items: flex-start; gap: 12px; }
+  .kb-callout-icon { width: 30px; height: 30px; border-radius: 5px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 15px; margin-top: 1px; }
+  .kb-callout-body { flex: 1; min-width: 0; }
+  .kb-callout-label { font-size: 8.5px; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; margin-bottom: 3px; }
+  .kb-callout-text { font-size: 12.5px; line-height: 1.6; font-weight: 500; }
+  .kb-callout-text strong { font-weight: 800; }
+  .kb-callout-text a { font-weight: 700; }
+  .kb-callout.software { background: #E3F3F0; border: 1px solid #a8d5ce; border-left: 4px solid #00626D; }
+  .kb-callout.software .kb-callout-icon { background: #c2e8e3; color: #00626D; }
+  .kb-callout.software .kb-callout-label { color: #00626D; }
+  .kb-callout.software .kb-callout-text { color: #004d55; }
+  .kb-callout.building { background: #FFF4E6; border: 1px solid #f5d9a8; border-left: 4px solid #C96A00; }
+  .kb-callout.building .kb-callout-icon { background: #f9e2bd; color: #C96A00; }
+  .kb-callout.building .kb-callout-label { color: #C96A00; }
+  .kb-callout.building .kb-callout-text { color: #7a3f00; }
+  .kb-callout.support { background: #E6F4ED; border: 1px solid #a8d5b8; border-left: 4px solid #1A7A4A; }
+  .kb-callout.support .kb-callout-icon { background: #c2e5cf; color: #1A7A4A; }
+  .kb-callout.support .kb-callout-label { color: #1A7A4A; }
+  .kb-callout.support .kb-callout-text { color: #0f4a2b; }
+  .kb-callout.support .kb-callout-text a { color: #1A7A4A; }
+  .kb-callout.workflow { background: #EEF2F8; border: 1px solid #b3c4dd; border-left: 4px solid #1B3A6B; }
+  .kb-callout.workflow .kb-callout-icon { background: #c5d3e8; color: #1B3A6B; }
+  .kb-callout.workflow .kb-callout-label { color: #1B3A6B; }
+  .kb-callout.workflow .kb-callout-text { color: #0f2447; }
+  .kb-tip { background: #fafafa; border: 1px solid #e0e0e0; border-left: 3px solid #CC0033; border-radius: 4px; padding: 12px 16px; margin: 16px 0; font-size: 12.5px; color: #444; line-height: 1.6; }
+  .kb-tip-label { font-size: 8.5px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #CC0033; margin-bottom: 4px; }
+  /* Benefits comparison */
+  .kb-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 20px; }
+  .kb-compare-col { border-radius: 6px; padding: 14px 16px; }
+  .kb-compare-col.old { background: #fafafa; border: 1px solid #e0e0e0; }
+  .kb-compare-col.new { background: #E3F3F0; border: 1px solid #a8d5ce; }
+  .kb-compare-label { font-size: 9px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 8px; }
+  .kb-compare-col.old .kb-compare-label { color: #999; }
+  .kb-compare-col.new .kb-compare-label { color: #00626D; }
+  .kb-compare-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-compare-col ul li { font-size: 12px; line-height: 1.45; padding-left: 16px; position: relative; }
+  .kb-compare-col.old ul li { color: #777; }
+  .kb-compare-col.new ul li { color: #004d55; }
+  .kb-compare-col.old ul li::before { content: '–'; position: absolute; left: 0; color: #ccc; font-weight: 700; }
+  .kb-compare-col.new ul li::before { content: '✓'; position: absolute; left: 0; color: #00626D; font-weight: 900; }
+  @media (max-width: 520px) { .kb-compare { grid-template-columns: 1fr; } }
+  /* Presenter tool cards */
+  .kb-tool-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; margin: 12px 0 20px; }
+  .kb-tool-row { display: flex; align-items: flex-start; gap: 14px; padding: 12px 16px; border-bottom: 1px solid #ebebeb; }
+  .kb-tool-row:last-child { border-bottom: none; }
+  .kb-tool-icon { font-size: 18px; flex-shrink: 0; width: 28px; text-align: center; margin-top: 1px; }
+  .kb-tool-body { flex: 1; font-size: 12.5px; color: #444; line-height: 1.5; }
+  .kb-tool-body strong { font-weight: 800; color: #1a1a1a; display: block; margin-bottom: 1px; }
+  /* Monitor cards */
+  .kb-monitor-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0 20px; }
+  .kb-monitor-card { border: 1px solid #e0e0e0; border-radius: 6px; padding: 14px 16px; background: #fafafa; }
+  .kb-monitor-card-title { font-size: 11px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; color: #1a1a1a; margin-bottom: 6px; }
+  .kb-monitor-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .kb-monitor-card ul li { font-size: 12px; color: #444; padding-left: 12px; position: relative; line-height: 1.45; }
+  .kb-monitor-card ul li::before { content: '–'; position: absolute; left: 0; color: #CC0033; font-weight: 700; }
+  @media (max-width: 520px) { .kb-monitor-grid { grid-template-columns: 1fr; } }
+  /* Do/Don't */
+  .kb-dodont { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0 20px; }
+  .kb-dodont-col { border-radius: 5px; padding: 14px 16px; }
+  .kb-dodont-col.do { background: #E6F4ED; border: 1px solid #a8d5b8; }
+  .kb-dodont-col.dont { background: #fdf2f4; border: 1px solid #f5c6d0; }
+  .kb-dodont-label { font-size: 9px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 8px; }
+  .kb-dodont-col.do .kb-dodont-label { color: #1A7A4A; }
+  .kb-dodont-col.dont .kb-dodont-label { color: #CC0033; }
+  .kb-dodont-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 5px; }
+  .kb-dodont-col ul li { font-size: 12px; color: #444; line-height: 1.45; padding-left: 16px; position: relative; }
+  .kb-dodont-col.do ul li::before { content: '✓'; position: absolute; left: 0; color: #1A7A4A; font-weight: 900; }
+  .kb-dodont-col.dont ul li::before { content: '✕'; position: absolute; left: 0; color: #CC0033; font-weight: 900; }
+  @media (max-width: 540px) { .kb-dodont { grid-template-columns: 1fr; } }
+  /* FAQ */
+  .kb-faq { display: flex; flex-direction: column; gap: 8px; margin: 12px 0 20px; }
+  .kb-faq-item { border: 1px solid #ebebeb; border-radius: 5px; overflow: hidden; }
+  .kb-faq-q { font-size: 13px; font-weight: 700; color: #1a1a1a; background: #fafafa; padding: 11px 14px; border-bottom: 1px solid #ebebeb; }
+  .kb-faq-a { font-size: 12.5px; color: #444; line-height: 1.6; padding: 11px 14px; }
+  .kb-related { border-top: 2px solid #1a1a1a; margin-top: 28px; padding-top: 16px; }
+  .kb-related-label { font-size: 9.5px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; color: #1a1a1a; margin-bottom: 12px; }
+  .kb-related-grid { display: flex; flex-direction: column; gap: 0; border: 1px solid #e0e0e0; border-radius: 5px; overflow: hidden; margin-bottom: 20px; }
+  .kb-related-item { display: flex; align-items: center; gap: 11px; padding: 11px 14px; border-bottom: 1px solid #f0f0f0; text-decoration: none; }
+  .kb-related-item:last-child { border-bottom: none; }
+  .kb-related-dot { width: 8px; height: 8px; border-radius: 50%; background: #CC0033; flex-shrink: 0; }
+  .kb-related-dot.teal { background: #00626D; }
+  .kb-related-dot.navy { background: #1B3A6B; }
+  .kb-related-dot.gold { background: #C96A00; }
+  .kb-related-text { flex: 1; }
+  .kb-related-title { font-size: 12.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 1px; }
+  .kb-related-meta { font-size: 10.5px; color: #999; }
+  .kb-related-arrow { color: #ccc; font-size: 13px; }
+  .kb-footer { background: #1a1a1a; border-radius: 0 0 6px 6px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .kb-footer-left { display: flex; align-items: center; gap: 8px; }
+  .kb-footer-r { background: #CC0033; color: #fff; font-size: 11px; font-weight: 900; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; border-radius: 2px; font-family: Georgia, serif; flex-shrink: 0; }
+  .kb-footer-info { font-size: 10px; color: rgba(255,255,255,.35); line-height: 1.4; }
+  .kb-footer-info strong { color: rgba(255,255,255,.65); font-weight: 700; }
+  .kb-footer-links { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+  .kb-footer-links a { font-size: 10.5px; font-weight: 700; color: rgba(255,255,255,.4); text-decoration: none; }
+</style>
+
+<div class="kb-article">
+
+  <div class="kb-inst-header">
+    <div class="kb-inst-left">
+      <div class="kb-r-mark">R</div>
+      <div class="kb-inst-name">
+        Rutgers University–Newark
+        <span>myTech@Newark Knowledge Base</span>
+      </div>
+    </div>
+    <div class="kb-inst-right">
+      <span class="kb-scope-badge both">Faculty &amp; Staff</span>
+      <span class="kb-scope-badge tls">Technology &amp; Learning Spaces</span>
+    </div>
+  </div>
+
+  <div class="kb-article-header">
+    <div class="kb-tier-row">
+      <span class="kb-tier howto">How To</span>
+    </div>
+    <h1 class="kb-h1">Use PowerPoint Live in Microsoft Teams</h1>
+    <p class="kb-summary">How to present slides directly inside a Teams meeting using PowerPoint Live — including presenter tools, audience navigation, accessibility features, embedded media, hybrid tips, and troubleshooting.</p>
+    <div class="kb-meta-row">
+      <div class="kb-meta-item"><strong>Category:</strong>&nbsp; Teach in the Classroom</div>
+      <div class="kb-meta-item"><strong>Audience:</strong>&nbsp; Faculty &amp; Staff</div>
+      <div class="kb-meta-item"><strong>Last reviewed:</strong>&nbsp; May 2026</div>
+      <div class="kb-meta-item"><strong>Reviewed by:</strong>&nbsp; TLS, Rutgers–Newark</div>
+    </div>
+    <div class="kb-tag-row">
+      <span class="kb-tag">PowerPoint Live</span>
+      <span class="kb-tag">Microsoft Teams</span>
+      <span class="kb-tag">Presentations</span>
+      <span class="kb-tag">Hybrid Teaching</span>
+      <span class="kb-tag">Accessibility</span>
+      <span class="kb-tag">Microsoft 365</span>
+    </div>
+  </div>
+
+  <div class="kb-body">
+
+    <h2 class="kb-h2">What Is PowerPoint Live?</h2>
+    <p class="kb-p">PowerPoint Live is a presentation mode built into Microsoft Teams. Instead of screen sharing a PowerPoint window — which shows participants your desktop and application chrome — PowerPoint Live uploads your slides directly into the meeting as a native Teams experience. Participants see a clean, dedicated slide view; you see your presenter notes, upcoming slides, and meeting controls privately.</p>
+
+    <div class="kb-compare">
+      <div class="kb-compare-col old">
+        <div class="kb-compare-label">Traditional Screen Share</div>
+        <ul>
+          <li>Participants see your desktop and taskbar</li>
+          <li>Notifications can interrupt the presentation</li>
+          <li>Presenter notes visible if not careful</li>
+          <li>Participants can't navigate independently</li>
+          <li>No built-in captions or translation</li>
+          <li>Performance degrades on slow connections</li>
+        </ul>
+      </div>
+      <div class="kb-compare-col new">
+        <div class="kb-compare-label">PowerPoint Live</div>
+        <ul>
+          <li>Clean slide view — no desktop clutter</li>
+          <li>Notifications never appear to participants</li>
+          <li>Presenter notes stay private</li>
+          <li>Participants can navigate slides independently</li>
+          <li>Live captions and translation built in</li>
+          <li>Streams efficiently at any connection speed</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Before You Present</h2>
+    <ul class="kb-ul">
+      <li>Finalize your presentation and save it to <strong>OneDrive</strong> — PowerPoint Live pulls files from OneDrive automatically</li>
+      <li>Test any embedded videos or audio clips in advance; media that plays fine locally may behave differently when uploaded to Teams</li>
+      <li>Confirm slide text is readable at smaller screen sizes — remote participants may be viewing on laptops or phones</li>
+      <li>Prepare your presenter notes if you plan to use them; they will be visible only to you during the presentation</li>
+      <li>Confirm you are signed into the correct Rutgers Microsoft 365 account in Teams</li>
+    </ul>
+
+    <h2 class="kb-h2">Starting PowerPoint Live</h2>
+
+    <ol class="kb-steps">
+      <li><strong>Join the Teams meeting</strong> — Open the meeting normally from the Teams Calendar, Outlook, or a meeting link.</li>
+      <li><strong>Click Share in the meeting toolbar</strong> — The sharing panel opens at the bottom of your screen.</li>
+      <li><strong>Select your file under PowerPoint Live</strong> — Recent OneDrive presentations appear automatically. If your file isn't listed, click <em>Browse</em> to upload from your device or search OneDrive. Teams uploads the file directly into the meeting.</li>
+      <li><strong>Wait for the upload to complete</strong> — A progress indicator will appear for larger files. Do not close the panel or navigate away while uploading.</li>
+      <li><strong>Begin presenting</strong> — Once loaded, participants see your slides in a clean Teams view. Your presenter controls — notes, slide panel, and navigation — appear privately on your screen.</li>
+    </ol>
+
+    <div class="kb-tip">
+      <div class="kb-tip-label">💡 Save to OneDrive First</div>
+      PowerPoint Live works most reliably when your file is already in OneDrive before the meeting starts. Uploading a large file from your device mid-meeting can cause delays. Save or sync your finalized presentation to OneDrive in advance, then select it directly from the PowerPoint Live panel.
+    </div>
+
+    <h2 class="kb-h2">Presenter Tools</h2>
+    <p class="kb-p">PowerPoint Live gives you a private presenter view that participants cannot see, plus in-meeting annotation tools to direct audience attention.</p>
+
+    <div class="kb-tool-grid">
+      <div class="kb-tool-row">
+        <div class="kb-tool-icon">📝</div>
+        <div class="kb-tool-body">
+          <strong>Presenter Notes</strong>
+          Your slide notes appear alongside the current slide in your private view. Participants see only the slide — never your notes.
+        </div>
+      </div>
+      <div class="kb-tool-row">
+        <div class="kb-tool-icon">🗂️</div>
+        <div class="kb-tool-body">
+          <strong>Slide Navigation Panel</strong>
+          Thumbnail previews of all slides appear in your presenter view. Jump to any slide at any time without participants seeing you navigate.
+        </div>
+      </div>
+      <div class="kb-tool-row">
+        <div class="kb-tool-icon">🔴</div>
+        <div class="kb-tool-body">
+          <strong>Laser Pointer</strong>
+          A virtual laser pointer lets you highlight specific areas of a slide in real time for all participants — without drawing permanently on the slide.
+        </div>
+      </div>
+      <div class="kb-tool-row">
+        <div class="kb-tool-icon">✏️</div>
+        <div class="kb-tool-body">
+          <strong>Annotation and Highlighting</strong>
+          Draw, highlight, or annotate directly on slides during the presentation. Useful for emphasizing key points or working through problems live.
+        </div>
+      </div>
+      <div class="kb-tool-row">
+        <div class="kb-tool-icon">💬</div>
+        <div class="kb-tool-body">
+          <strong>Meeting Chat and Reactions</strong>
+          The Teams chat and participant panel remain accessible while you present — monitor questions and reactions without leaving the presentation view.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Audience Experience</h2>
+    <p class="kb-p">Participants receive a more flexible experience than traditional screen sharing. They can zoom in on slide content, use screen readers to access the slide text, view live captions or translations in their preferred language, and — depending on your settings — navigate to previous slides independently without disrupting where you are in the presentation.</p>
+
+    <div class="kb-callout software">
+      <div class="kb-callout-icon">♿</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Accessibility Features Built In</div>
+        <div class="kb-callout-text">
+          PowerPoint Live automatically enables <strong>live captions</strong> and <strong>translated captions</strong> for participants — they can choose their preferred language without any action from you. Screen readers can access slide text directly. Participants on mobile devices get high-quality slide scaling that screen sharing cannot match. Use readable fonts, high-contrast colors, and descriptive alt text on images to get the most out of these features.
+        </div>
+      </div>
+    </div>
+
+    <div class="kb-tip">
+      <div class="kb-tip-label">💡 Controlling Audience Navigation</div>
+      By default, participants can navigate to previous slides independently. If you prefer everyone to follow your pace — for example during a timed assessment or step-by-step walkthrough — you can disable independent navigation in the PowerPoint Live presenter controls (<em>Presentation Settings → Prevent participants from advancing slides</em>).
+    </div>
+
+    <h2 class="kb-h2">Embedded Videos and Audio</h2>
+    <p class="kb-p">PowerPoint Live supports embedded videos, audio clips, and animations. However, media that works perfectly in the PowerPoint desktop app may behave differently when uploaded to Teams — test everything before an important session.</p>
+    <ul class="kb-ul">
+      <li>Test all embedded media with a colleague before the actual meeting</li>
+      <li>Keep video files optimized — large, high-bitrate videos may stutter on upload or playback</li>
+      <li>Pause briefly before playing media so participants have a moment to prepare</li>
+      <li>If a video fails to play, have a backup plan — the direct URL or a separately shared file</li>
+    </ul>
+
+    <h2 class="kb-h2">Using Multiple Monitors</h2>
+    <p class="kb-p">A two-monitor setup significantly improves the PowerPoint Live experience — you get a full presenter view on one screen while the Teams meeting controls stay visible on the other.</p>
+
+    <div class="kb-monitor-grid">
+      <div class="kb-monitor-card">
+        <div class="kb-monitor-card-title">🖥️ Primary Monitor — Presentation</div>
+        <ul>
+          <li>Slides and presenter notes</li>
+          <li>Slide navigation panel</li>
+          <li>Annotation and laser pointer tools</li>
+        </ul>
+      </div>
+      <div class="kb-monitor-card">
+        <div class="kb-monitor-card-title">💻 Secondary Monitor — Meeting Controls</div>
+        <ul>
+          <li>Teams meeting chat and questions</li>
+          <li>Participant list and reactions</li>
+          <li>Timer, agenda, or speaker cues</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Hybrid Meetings</h2>
+    <p class="kb-p">PowerPoint Live is especially well-suited for hybrid teaching and meetings because remote participants receive the same dedicated slide view as in-room participants — without depending on a camera pointed at a projected screen.</p>
+
+    <div class="kb-callout workflow">
+      <div class="kb-callout-icon">🏫</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Hybrid Presenting with PowerPoint Live</div>
+        <div class="kb-callout-text">
+          Share your slides via PowerPoint Live even when projecting in the classroom — remote participants get a crisp, independently navigable slide view rather than a camera feed of your projection screen. <strong>Post the presentation file in the Teams meeting chat</strong> at the start of class so students have it for reference and review after the session. Repeat all in-room questions aloud before answering, and monitor the Teams chat throughout so remote students can participate on equal footing.
+        </div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Troubleshooting</h2>
+
+    <div class="kb-faq">
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">My presentation isn't appearing in the PowerPoint Live panel.</div>
+        <div class="kb-faq-a">PowerPoint Live pulls files from OneDrive. If your file isn't showing, save it to your Rutgers OneDrive first, then return to the sharing panel — it should appear under recent files. If you still don't see it, click <em>Browse</em> to upload from your device directly. Large files may take a moment to process before they're selectable.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">The file is uploading very slowly or getting stuck.</div>
+        <div class="kb-faq-a">Large files with many high-resolution images or embedded videos take longer to upload. Try compressing images in PowerPoint (<em>File → Compress Media / Compress Pictures</em>) and re-uploading. If you're on Wi-Fi, move closer to the router or switch to a wired connection. Uploading the file to OneDrive before the meeting (rather than uploading from your device mid-meeting) is significantly faster.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">Embedded video won't play or has no audio.</div>
+        <div class="kb-faq-a">Confirm the video is fully embedded in the PowerPoint file — linked videos (not embedded) will not play after upload. Check that the video format is supported (MP4 is most reliable). If audio is missing, verify the Teams meeting audio is working and that the video's audio track is embedded, not just the video. As a fallback, share the video file separately in the meeting chat.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">Participants say slides look blurry.</div>
+        <div class="kb-faq-a">Blurry slides are usually a bandwidth issue on the participant's end, not the presenter's. PowerPoint Live scales slides to the participant's connection quality automatically. If this affects many participants, simplify slide design by reducing the number of large images and using text-based slides where possible. Avoid using high-resolution photos as full-slide backgrounds.</div>
+      </div>
+      <div class="kb-faq-item">
+        <div class="kb-faq-q">Participants are advancing slides on their own and getting ahead of me.</div>
+        <div class="kb-faq-a">Open the PowerPoint Live presenter controls and go to <em>Presentation Settings</em>. Enable <em>Prevent participants from advancing slides</em> to lock everyone to your current slide. You can toggle this on and off during the presentation — for example, enabling independent navigation during a self-paced review segment and disabling it when presenting new content.</div>
+      </div>
+    </div>
+
+    <h2 class="kb-h2">Do's and Don'ts</h2>
+
+    <div class="kb-dodont">
+      <div class="kb-dodont-col do">
+        <div class="kb-dodont-label">✓ Do</div>
+        <ul>
+          <li>Save your presentation to OneDrive before the meeting</li>
+          <li>Use PowerPoint Live instead of screen sharing slides</li>
+          <li>Test all embedded video and audio before presenting</li>
+          <li>Use presenter notes — participants can't see them</li>
+          <li>Use readable fonts, high contrast, and clean layouts</li>
+          <li>Share the file in the meeting chat for participant reference</li>
+          <li>Monitor chat throughout the presentation</li>
+        </ul>
+      </div>
+      <div class="kb-dodont-col dont">
+        <div class="kb-dodont-label">✕ Don't</div>
+        <ul>
+          <li>Upload large files from your device mid-meeting — sync to OneDrive first</li>
+          <li>Rely on linked (non-embedded) videos — they won't play after upload</li>
+          <li>Use small text or low-contrast color schemes</li>
+          <li>Overload slides with text — remote viewers read at their own pace</li>
+          <li>Ignore remote participants during hybrid sessions</li>
+          <li>Forget to test embedded media before an important presentation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="kb-callout support">
+      <div class="kb-callout-icon">🎧</div>
+      <div class="kb-callout-body">
+        <div class="kb-callout-label">Getting Help at Rutgers–Newark</div>
+        <div class="kb-callout-text">
+          For help with Canvas, Microsoft Teams, classroom technology, and all instructional or IT questions, contact the <strong>RU–N IT Service Center</strong>:<br>
+          📍 Hill Hall, Room 109 &nbsp;·&nbsp;
+          📞 <strong>(973) 353-5083</strong> &nbsp;·&nbsp;
+          📞 Toll Free: <strong>833-OIT-HELP (648-4357)</strong><br>
+          ✉️ <a href="mailto:help@newark.rutgers.edu">help@newark.rutgers.edu</a> &nbsp;·&nbsp;
+          🔗 <a href="https://ithelp.rutgers.edu/sp">RU–N IT Help Portal</a><br><br>
+          <strong>Faculty and staff</strong> needing instructional technology support can also <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">schedule a consultation</a> through myTech@Newark.<br><br>
+          <strong>From another Rutgers campus?</strong> Faculty, staff, and students from Rutgers–New Brunswick, Rutgers–Camden, Rutgers Health, or other Rutgers units should contact their local campus IT support or the Rutgers University Help Desk.
+        </div>
+      </div>
+    </div>
+
+    <div class="kb-related">
+      <div class="kb-related-label">Related Articles</div>
+      <div class="kb-related-grid">
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot teal"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Share Your Screen in Microsoft Teams</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot navy"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Schedule a Microsoft Teams Meeting</div>
+            <div class="kb-related-meta">How To &nbsp;·&nbsp; Teach in the Classroom</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+        <a href="#" class="kb-related-item">
+          <div class="kb-related-dot gold"></div>
+          <div class="kb-related-text">
+            <div class="kb-related-title">Using Blackboard Ally to Improve Course Accessibility</div>
+            <div class="kb-related-meta">Best Practice &nbsp;·&nbsp; Accessibility &amp; Inclusion</div>
+          </div>
+          <div class="kb-related-arrow">›</div>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="kb-footer">
+    <div class="kb-footer-left">
+      <div class="kb-footer-r">R</div>
+      <div class="kb-footer-info">
+        <strong>Rutgers University–Newark</strong><br>
+        Technology &amp; Learning Spaces · myTech@Newark
+      </div>
+    </div>
+    <div class="kb-footer-links">
+      <a href="https://account577280.wixsite.com/mytechnewark" target="_top">myTech@Newark</a>
+      <a href="https://teams.microsoft.com">Microsoft Teams</a>
+      <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">Get Support</a>
+    </div>
+  </div>
+
+</div>
