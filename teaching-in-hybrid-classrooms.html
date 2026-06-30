@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teaching in Hybrid Classrooms | myTech@Newark</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --scarlet:#CC0033;--scarlet-dk:#9e0025;--scarlet-bg:#fdf2f4;
+      --navy:#1B3A6B;--navy-dk:#1a2d5a;--navy-bg:#EEF2F8;
+      --teal:#00626D;--teal-bg:#E3F3F0;
+      --green:#1A7A4A;--green-bg:#E6F4ED;
+      --black:#1a1a1a;--gray-dark:#333333;--gray-mid:#595959;
+      --gray-light:#f5f5f5;--gray-border:#e0e0e0;--white:#ffffff;
+      --font:'Libre Franklin',Arial,sans-serif;--radius:6px;
+    }
+    body{font-family:var(--font);color:var(--gray-dark);background:var(--white);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:var(--scarlet);text-decoration:none;}
+    a:hover{text-decoration:underline;}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--scarlet);outline-offset:2px;border-radius:2px;}
+    img{display:block;width:100%;}
+
+    /* ── BUTTONS ── */
+    .btn-primary{display:inline-flex;align-items:center;gap:6px;background:var(--scarlet);color:#fff;padding:10px 20px;border-radius:var(--radius);font-size:13px;font-weight:700;text-decoration:none;transition:background .12s;}
+    .btn-primary:hover{background:var(--scarlet-dk);text-decoration:none;color:#fff;}
+    .btn-outline{display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--navy);border:2px solid var(--navy);padding:10px 20px;border-radius:var(--radius);font-size:13px;font-weight:700;text-decoration:none;transition:background .12s;}
+    .btn-outline:hover{background:var(--navy-bg);text-decoration:none;color:var(--navy);}
+    .btn-sm{display:inline-flex;align-items:center;justify-content:center;padding:9px 16px;border-radius:var(--radius);font-size:12px;font-weight:700;text-decoration:none;transition:background .12s;}
+    .btn-sm:hover{text-decoration:none;}
+    .btn-sm.red{background:var(--scarlet);color:#fff;}.btn-sm.red:hover{background:var(--scarlet-dk);color:#fff;}
+    .btn-sm.dark{background:var(--navy-dk);color:#fff;}.btn-sm.dark:hover{background:#0f1e3d;color:#fff;}
+    .btn-sm.teal{background:var(--teal);color:#fff;}.btn-sm.teal:hover{background:#004a54;color:#fff;}
+    .btn-sm.navy{background:var(--navy);color:#fff;}.btn-sm.navy:hover{background:#142d58;color:#fff;}
+    .btn-block{display:block;text-align:center;}
+
+    /* ── HERO ── */
+    .hero{display:grid;grid-template-columns:1fr 50%;min-height:280px;}
+    .hero-left{padding:36px 32px 36px 24px;background:#fff;display:flex;flex-direction:column;justify-content:center;}
+    .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--scarlet);margin-bottom:10px;}
+    .hero-left h1{font-size:clamp(26px,3vw,38px);font-weight:800;color:var(--black);line-height:1.1;margin-bottom:12px;letter-spacing:-.02em;}
+    .hero-left p{font-size:13px;color:var(--gray-mid);line-height:1.65;margin-bottom:6px;max-width:420px;}
+    .hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;}
+    .hero-right{position:relative;overflow:hidden;background:#2b4c8c;}
+    .hero-right img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;}
+    .hero-badge{position:absolute;bottom:20px;right:20px;background:rgba(10,20,40,.82);color:#fff;padding:14px 18px;border-radius:var(--radius);font-size:13px;font-weight:700;line-height:1.7;display:flex;align-items:center;gap:12px;}
+    .hero-badge svg{width:30px;height:30px;opacity:.6;flex-shrink:0;}
+
+    /* ── SECTION ── */
+    .section{padding:28px 24px;border-top:1px solid var(--gray-border);}
+    .section-hd{margin-bottom:20px;}
+    .section-hd h2{font-size:20px;font-weight:800;color:var(--black);letter-spacing:-.01em;margin-bottom:4px;}
+    .section-hd p{font-size:13px;color:var(--gray-mid);}
+
+    /* ── STEPS (6 across) ── */
+    .steps-layout{display:grid;grid-template-columns:1fr 220px;gap:28px;align-items:start;}
+    .steps-row{display:grid;grid-template-columns:repeat(6,1fr);gap:0;position:relative;}
+    .steps-row::before{content:'';position:absolute;top:18px;left:8%;right:8%;height:1px;background:var(--gray-border);z-index:0;}
+    .step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 4px;position:relative;z-index:1;}
+    .step-num{width:36px;height:36px;border-radius:50%;background:var(--scarlet);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;margin-bottom:10px;flex-shrink:0;}
+    .step-icon{margin-bottom:8px;color:var(--black);}
+    .step-icon svg{width:26px;height:26px;}
+    .step-label{font-size:11px;color:var(--gray-dark);line-height:1.4;max-width:80px;}
+    .steps-panel{background:var(--gray-light);border-radius:var(--radius);overflow:hidden;border:1px solid var(--gray-border);}
+    .steps-panel-img{height:150px;background:#c8d4e8;overflow:hidden;}
+    .steps-panel-img img{width:100%;height:100%;object-fit:cover;}
+    .steps-panel-cap{padding:12px 14px;font-size:12px;color:var(--gray-mid);line-height:1.55;}
+
+    /* ── FEATURE ICONS ── */
+    .features-row{display:grid;grid-template-columns:repeat(6,1fr);border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;}
+    .feat-item{padding:20px 12px 16px;border-right:1px solid var(--gray-border);text-align:center;}
+    .feat-item:last-child{border-right:none;}
+    .feat-icon{width:56px;height:56px;margin:0 auto 12px;color:var(--navy-dk);}
+    .feat-icon svg{width:100%;height:100%;}
+    .feat-item h4{font-size:12px;font-weight:700;color:var(--black);margin-bottom:6px;line-height:1.3;}
+    .feat-item p{font-size:11px;color:var(--gray-mid);line-height:1.55;margin-bottom:10px;flex:1;}
+    .feat-link{font-size:11px;font-weight:700;color:var(--scarlet);text-decoration:none;display:inline-block;}
+    .feat-link:hover{text-decoration:underline;}
+
+    /* ── SIGNS SECTION ── */
+    .signs-layout{display:grid;grid-template-columns:1fr 240px;gap:24px;align-items:start;}
+    .signs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+    .sign-card{border:1px solid var(--gray-border);border-radius:var(--radius);padding:14px;display:flex;gap:12px;align-items:flex-start;}
+    .sign-icon-wrap{flex-shrink:0;width:48px;}
+    .sign-icon-wrap img{width:100%;height:auto;display:block;}
+    .sign-card h4{font-size:12px;font-weight:700;color:var(--navy-dk);margin-bottom:3px;}
+    .sign-card p{font-size:11px;color:var(--gray-mid);line-height:1.5;}
+    .signs-cta-box{background:var(--gray-light);border:1px solid var(--gray-border);border-radius:var(--radius);padding:18px;}
+    .signs-cta-box p{font-size:12px;color:var(--gray-mid);line-height:1.55;margin-bottom:14px;}
+    .signs-cta-box a{font-size:12px;font-weight:700;color:var(--scarlet);}
+
+    /* ── UTILIZING (3-col) ── */
+    .utilizing-grid{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;}
+    .util-col{padding:20px 18px;border-right:1px solid var(--gray-border);display:flex;flex-direction:column;}
+    .util-col:last-child{border-right:none;}
+    .util-col h3{font-size:14px;font-weight:800;color:var(--navy-dk);margin-bottom:12px;padding-bottom:8px;border-bottom:2px solid var(--gray-border);}
+    .util-steps{list-style:none;display:flex;flex-direction:column;gap:10px;flex:1;margin-bottom:14px;}
+    .util-steps li{display:flex;gap:10px;align-items:flex-start;}
+    .util-step-num{width:20px;height:20px;border-radius:50%;background:var(--scarlet);color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+    .util-steps li span{font-size:12px;color:var(--gray-dark);line-height:1.5;}
+    .util-bullets{list-style:none;display:flex;flex-direction:column;gap:7px;flex:1;margin-bottom:14px;}
+    .util-bullets li{font-size:12px;color:var(--gray-dark);line-height:1.5;padding-left:14px;position:relative;}
+    .util-bullets li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--scarlet);}
+    .util-link{font-size:12px;font-weight:700;color:var(--scarlet);}
+    .util-link:hover{text-decoration:underline;}
+
+    /* ── PANELS ROW (4-col) ── */
+    .panels-row{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--gray-border);border-radius:var(--radius);overflow:hidden;}
+    .panel{padding:18px 16px;border-right:1px solid var(--gray-border);display:flex;flex-direction:column;}
+    .panel:last-child{border-right:none;}
+    .panel-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:10px;flex-shrink:0;}
+    .panel-icon svg{width:18px;height:18px;}
+    .panel-icon.scarlet{background:var(--scarlet-bg);color:var(--scarlet);}
+    .panel-icon.navy{background:var(--navy-bg);color:var(--navy);}
+    .panel-icon.teal{background:var(--teal-bg);color:var(--teal);}
+    .panel-icon.green{background:var(--green-bg);color:var(--green);}
+    .panel h3{font-size:13px;font-weight:700;color:var(--navy-dk);margin-bottom:6px;line-height:1.3;}
+    .panel > p{font-size:12px;color:var(--gray-mid);line-height:1.55;margin-bottom:10px;}
+    .panel-list{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:14px;flex:1;}
+    .panel-list li{font-size:11px;color:var(--gray-dark);line-height:1.4;padding-left:14px;position:relative;}
+    .panel-list li::before{content:'✓';position:absolute;left:0;color:var(--scarlet);font-size:10px;font-weight:700;}
+
+    /* ── LOCATIONS + NEED HELP ── */
+    .locations-section{padding:24px;border-top:1px solid var(--gray-border);display:grid;grid-template-columns:1fr 280px;gap:24px;align-items:start;}
+    .locations-left h2{font-size:18px;font-weight:800;color:var(--navy-dk);margin-bottom:4px;}
+    .locations-left .sub{font-size:13px;color:var(--gray-mid);margin-bottom:16px;}
+    .bldg-row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:14px;}
+    .bldg-item{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:var(--navy-dk);}
+    .bldg-item svg{width:16px;height:16px;color:var(--gray-mid);}
+    .bldg-rooms{font-size:12px;color:var(--gray-mid);font-weight:400;margin-left:4px;}
+    .need-help-box{background:var(--gray-light);border:1px solid var(--gray-border);border-radius:var(--radius);padding:18px;}
+    .need-help-box h3{font-size:15px;font-weight:700;color:var(--navy-dk);margin-bottom:12px;}
+    .contact-items{display:flex;flex-direction:column;gap:8px;margin-bottom:16px;}
+    .contact-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray-dark);}
+    .contact-item svg{width:15px;height:15px;color:var(--scarlet);flex-shrink:0;}
+    .contact-item a{color:var(--gray-dark);}
+    .hours-note{font-size:11px;color:var(--gray-mid);margin-bottom:12px;line-height:1.5;}
+    .include-note{font-size:11px;color:var(--gray-mid);margin-bottom:8px;}
+    .include-list{list-style:none;margin-bottom:14px;}
+    .include-list li{font-size:11px;color:var(--gray-mid);padding-left:12px;position:relative;line-height:1.6;}
+    .include-list li::before{content:'•';position:absolute;left:0;color:var(--gray-mid);}
+    .btn-request{display:block;text-align:center;border:2px solid var(--scarlet);color:var(--scarlet);background:#fff;padding:10px;border-radius:var(--radius);font-size:13px;font-weight:700;text-decoration:none;margin-bottom:14px;}
+    .btn-request:hover{background:var(--scarlet-bg);text-decoration:none;color:var(--scarlet);}
+
+    /* ── SUPPORT CARDS ── */
+    .support-row{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--gray-border);}
+    .support-card{padding:22px 20px;border-right:1px solid var(--gray-border);display:flex;align-items:flex-start;gap:14px;}
+    .support-card:last-child{border-right:none;}
+    .sc-icon{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .sc-icon svg{width:20px;height:20px;}
+    .sc-icon.scarlet{background:var(--scarlet-bg);color:var(--scarlet);}
+    .sc-icon.navy{background:var(--navy-bg);color:var(--navy);}
+    .sc-icon.teal{background:var(--teal-bg);color:var(--teal);}
+    .sc-body h4{font-size:14px;font-weight:700;color:var(--navy-dk);margin-bottom:5px;}
+    .sc-body p{font-size:12px;color:var(--gray-mid);line-height:1.55;margin-bottom:10px;}
+    .sc-links{display:flex;flex-direction:column;gap:4px;}
+    .sc-links a{font-size:12px;font-weight:700;}
+    .sc-links a.scarlet{color:var(--scarlet);}
+    .sc-links a.navy{color:var(--navy);}
+    .sc-links a.teal{color:var(--teal);}
+
+    /* ── FOOTER LINKS ── */
+    .footer-section{padding:20px 24px;border-top:1px solid var(--gray-border);display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+    .footer-col h3{font-size:14px;font-weight:700;color:var(--navy-dk);margin-bottom:10px;}
+    .footer-info{font-size:12px;color:var(--gray-mid);line-height:1.7;margin-bottom:4px;}
+    .footer-info a{color:var(--gray-dark);}
+    .footer-links-list{list-style:none;display:flex;flex-direction:column;gap:5px;}
+    .footer-links-list li a{font-size:13px;color:var(--navy);font-weight:600;display:flex;align-items:center;gap:5px;}
+    .footer-links-list li a:hover{color:var(--scarlet);text-decoration:none;}
+    .footer-links-list li a::before{content:'→';color:var(--scarlet);font-size:12px;}
+  </style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Teaching in Our Classrooms</div>
+    <h1>Teaching in<br>Hybrid Classrooms</h1>
+    <p>Hybrid Classrooms at Rutgers–Newark support teaching with both in-person and remote participants.</p>
+    <p>These spaces are designed for lectures, seminars, discussions, guest speakers, and hybrid instruction using integrated classroom technology, Zoom, InstructorCams, microphones, displays, and recording tools.</p>
+    <div class="hero-btns">
+      <a href="#support" class="btn-outline" target="_top">Get Classroom Support</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <!-- Replace src with Wix Media URL after upload -->
+    <img src="Conklin449Hybrid.jpg" alt="Instructor teaching in a hybrid classroom at Rutgers–Newark" />
+    <div class="hero-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <div>Flexible Teaching.<br>Engaged Learning.<br>Stronger Outcomes.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ GETTING STARTED ══ -->
+<section class="section" id="getting-started">
+  <div class="section-hd">
+    <h2>Getting Started in Your Hybrid Classroom</h2>
+    <p>Follow these simple steps to get your class started.</p>
+  </div>
+  <div class="steps-layout">
+    <div>
+      <div class="steps-row" role="list">
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-label="Step 1">1</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="step-label">Log in with your NetID</div>
+        </div>
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-label="Step 2">2</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="step-label">Wake the touch control panel</div>
+        </div>
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-label="Step 3">3</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="step-label">Select your presentation source</div>
+        </div>
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-label="Step 4">4</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="step-label">Launch Zoom</div>
+        </div>
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-label="Step 5">5</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </div>
+          <div class="step-label">Verify camera, mic &amp; speakers</div>
+        </div>
+
+        <div class="step" role="listitem">
+          <div class="step-num" aria-label="Step 6">6</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>
+          </div>
+          <div class="step-label">Admit remote participants</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="steps-panel">
+      <div class="steps-panel-img">
+        <img src="panel.png" alt="Classroom touch control panel" />
+      </div>
+      <div class="steps-panel-cap">Use the touch control panel to manage AV sources, displays, audio, and Zoom from the podium.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ WHAT YOU CAN DO ══ -->
+<section class="section">
+  <div class="section-hd">
+    <h2>What You Can Do in Hybrid Classrooms</h2>
+  </div>
+  <div class="features-row">
+
+    <div class="feat-item">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+      </div>
+      <h4>Use the Classroom</h4>
+      <p>Use the classroom for recording, hybrid instruction, presentations, and demonstrations.</p>
+      <a href="#" target="_top" class="feat-link">Learn more →</a>
+    </div>
+
+    <div class="feat-item">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h4>Hybrid Teaching</h4>
+      <p>Support in-person, remote, and hybrid students simultaneously with built-in AV and web tools.</p>
+      <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/zoom-teach-effectively" target="_top" class="feat-link">Learn more →</a>
+    </div>
+
+    <div class="feat-item">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+      </div>
+      <h4>Touch Display</h4>
+      <p>Interact directly with content, annotate presentations, and navigate applications using touch.</p>
+      <a href="#" target="_top" class="feat-link">Learn more →</a>
+    </div>
+
+    <div class="feat-item">
+      <div class="feat-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108.11 108.11" aria-hidden="true"><rect fill="#fff" stroke="#1B3A6B" stroke-miterlimit="10" stroke-width="3" x="1.5" y="1.5" width="105.11" height="105.11" rx="12" ry="12"/><path fill="#010101" d="M70.22,15.76c-.25,0-.5-.1-.69-.29-7.56-7.56-19.87-7.56-27.43,0-.38.38-1,.38-1.39,0s-.38-1,0-1.39c8.33-8.33,21.87-8.33,30.2,0,.38.38.38,1,0,1.39-.19.19-.44.29-.69.29z"/><path fill="#010101" d="M66.07,19.92c-.25,0-.5-.1-.69-.29-5.27-5.27-13.85-5.27-19.12,0-.38.38-1,.38-1.39,0s-.38-1,0-1.39c6.03-6.04,15.85-6.04,21.89,0,.38.38.38,1,0,1.39-.19.19-.44.29-.69.29z"/><path fill="#010101" d="M61.91,24.07c-.25,0-.5-.1-.69-.29-2.98-2.98-7.83-2.98-10.81,0-.38.38-1,.38-1.39,0-.38-.38-.38-1,0-1.39,3.74-3.74,9.83-3.74,13.58,0,.38.38.38,1,0,1.39-.19.19-.44.29-.69.29z"/><path fill="#010101" d="M27.97,66.64v.2c0,1.83,1.49,3.31,3.31,3.31h50.18c1.83,0,3.31-1.49,3.31-3.31v-.2H27.97zM60.24,69.32h-7.73c-.54,0-.98-.44-.98-.98s.44-.98.98-.98h7.73c.54,0,.98.44.98.98s-.44.98-.98.98z"/><path fill="#010101" d="M75.66,30.63h-38.57c-2.91,0-5.28,2.37-5.28,5.28v28.77h49.13v-28.77c0-2.91-2.37-5.28-5.28-5.28zM76.69,60.33c0,.54-.44.98-.98.98h-38.67c-.54,0-.98-.44-.98-.98v-24.21c0-.54.44-.98.98-.98h38.67c.54,0,.98.43.98.98v24.21z"/><text fill="#231f20" font-family="Arial,sans-serif" font-size="12" font-weight="700" x="28.92" y="85.66">Wireless </text><text fill="#231f20" font-family="Arial,sans-serif" font-size="12" font-weight="700" x="28.42" y="100.06">Projector</text></svg>
+      </div>
+      <h4>Wireless Presentation</h4>
+      <p>Present wirelessly from laptops or mobile devices using AirMedia. Move freely around the room.</p>
+      <a href="#" target="_top" class="feat-link">Learn more →</a>
+    </div>
+
+    <div class="feat-item">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+      </div>
+      <h4>Audio Support</h4>
+      <p>Clear sound with ceiling speakers, microphones, and audio reinforcement in many rooms.</p>
+      <a href="#" target="_top" class="feat-link">Learn more →</a>
+    </div>
+
+    <div class="feat-item">
+      <div class="feat-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.36a1 1 0 0 1-1.447.89L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/></svg>
+      </div>
+      <h4>Connect with Zoom</h4>
+      <p>Launch Zoom directly from the podium PC to include remote participants in any lecture.</p>
+      <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/instructorcam-zoom" target="_top" class="feat-link">Learn more →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CLASSROOM TECHNOLOGY SIGNS ══ -->
+<section class="section">
+  <div class="section-hd">
+    <h2>Classroom Technology Signs</h2>
+    <p>These signs help you quickly identify the technology features available in your room.</p>
+  </div>
+  <div class="signs-layout">
+    <div class="signs-grid">
+
+      <div class="sign-card">
+        <div class="sign-icon-wrap">
+          <img src="PowerSymbolGreen.png" alt="Power Available sign" />
+        </div>
+        <div>
+          <h4>Power Available</h4>
+          <p>Standard power outlets at student seats and the podium.</p>
+        </div>
+      </div>
+
+      <div class="sign-card">
+        <div class="sign-icon-wrap">
+          <img src="sign-instructorcam.svg" alt="InstructorCam sign" />
+        </div>
+        <div>
+          <h4>InstructorCam</h4>
+          <p>Auto-tracking camera supports hybrid and recorded class sessions.</p>
+        </div>
+      </div>
+
+      <div class="sign-card">
+        <div class="sign-icon-wrap">
+          <img src="sign-wireless-projector.svg" alt="Wireless Projector sign" />
+        </div>
+        <div>
+          <h4>Wireless Projection</h4>
+          <p>Students and instructors can present wirelessly using AirMedia.</p>
+        </div>
+      </div>
+
+      <div class="sign-card">
+        <div class="sign-icon-wrap">
+          <img src="sign-adjustable-height.svg" alt="Adjustable Height sign" />
+        </div>
+        <div>
+          <h4>Adjustable Podium</h4>
+          <p>Podium height can be adjusted for accessibility and comfort.</p>
+        </div>
+      </div>
+
+      <div class="sign-card">
+        <div class="sign-icon-wrap">
+          <img src="TouchScreenWhite.svg" alt="Touch Control Panel sign" />
+        </div>
+        <div>
+          <h4>Touch Control Panel</h4>
+          <p>A touch panel controls all AV, display, and audio in the room.</p>
+        </div>
+      </div>
+
+    </div>
+    <div class="signs-cta-box">
+      <p>Look for these signs in your classroom and understand the technology at-a-glance before your first session.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ UTILIZING A HYBRID CLASSROOM ══ -->
+<section class="section">
+  <div class="section-hd">
+    <h2>Utilizing a Hybrid Classroom</h2>
+    <p>Follow these best practices to ensure hybrid lectures are ready to present at the beginning of class.</p>
+  </div>
+  <div class="utilizing-grid">
+
+    <div class="util-col">
+      <h3>Activating Your Rutgers Zoom Account</h3>
+      <p style="font-size:12px;color:var(--gray-mid);line-height:1.55;margin-bottom:12px;">Activating your Rutgers Zoom account is paramount to ensure that you are ready to provide hybrid instruction when class begins.</p>
+      <ol class="util-steps">
+        <li><div class="util-step-num">1</div><span>Visit <strong>netid.rutgers.edu</strong></span></li>
+        <li><div class="util-step-num">2</div><span>Select <strong>Service Activation</strong></span></li>
+        <li><div class="util-step-num">3</div><span>Log in with your NetID and password</span></li>
+        <li><div class="util-step-num">4</div><span>Select <strong>Activate or update a service on my account</strong></span></li>
+        <li><div class="util-step-num">5</div><span>Click <strong>Rutgers Zoom</strong></span></li>
+        <li><div class="util-step-num">6</div><span>Click <strong>Activate Service</strong></span></li>
+        <li><div class="util-step-num">7</div><span>After activation, sign in at <strong>rutgers.zoom.us</strong> using SSO</span></li>
+      </ol>
+      <a href="https://it.rutgers.edu/2023/09/05/how-to-sign-up-for-email-web-conferencing-and-more-essential-tech-services-at-rutgers/" target="_top" class="util-link">Learn more →</a>
+    </div>
+
+    <div class="util-col">
+      <h3>Linking Zoom Meetings Via Canvas</h3>
+      <p style="font-size:12px;color:var(--gray-mid);line-height:1.55;margin-bottom:12px;">Arrive prepared with a scheduled Zoom meeting on Canvas so students can join remotely when class begins.</p>
+      <ol class="util-steps">
+        <li><div class="util-step-num">1</div><span>Log on to Canvas at <strong>canvas.rutgers.edu</strong></span></li>
+        <li><div class="util-step-num">2</div><span>Open your course</span></li>
+        <li><div class="util-step-num">3</div><span>Select <strong>Zoom</strong> from the course navigation menu</span></li>
+        <li><div class="util-step-num">4</div><span>Click <strong>Schedule a New Meeting</strong></span></li>
+        <li><div class="util-step-num">5</div><span>Enter meeting information — title, date, time, and recurrence settings</span></li>
+        <li><div class="util-step-num">6</div><span>Save the meeting</span></li>
+        <li><div class="util-step-num">7</div><span>Start the meeting when your lecture begins — students join remotely via Zoom</span></li>
+        <li><div class="util-step-num">8</div><span>Recordings can be published to the Canvas course page for students to review later</span></li>
+      </ol>
+      <a href="https://community.instructure.com/en/discussion/261826/using-zoom-with-canvas-faq" target="_top" class="util-link">Learn more →</a>
+    </div>
+
+    <div class="util-col">
+      <h3>Hybrid Classroom Best Practices</h3>
+      <ul class="util-bullets">
+        <li>Start class a few minutes early to test technology before instruction begins</li>
+        <li>Launch Zoom at the start of class and confirm settings are correct before admitting participants</li>
+        <li>Monitor Zoom chat regularly for participant questions or statements</li>
+        <li>Repeat in-room questions from students before answering so the microphone clearly captures the question</li>
+        <li>Enable captions when a guest speaker or presenter is connected via Zoom</li>
+        <li>Pause periodically to gauge student understanding and check audio/video quality</li>
+        <li>Share slides, links, and follow-up materials in Canvas after class</li>
+      </ul>
+      <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/zoom-teach-effectively" target="_top" class="util-link">Learn more →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ INSTRUCTORCAM / CAPTURE / HYBRID / FITS ══ -->
+<section class="section">
+  <div class="section-hd">
+    <h2>InstructorCam, Classroom Capture, Hybrid Teaching &amp; FITS</h2>
+  </div>
+  <div class="panels-row">
+
+    <div class="panel">
+      <div class="panel-icon scarlet">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 10l4.553-2.069A1 1 0 0 1 21 8.82v6.36a1 1 0 0 1-1.447.89L15 14M3 8a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"/></svg>
+      </div>
+      <h3>InstructorCam &amp; Hybrid Teaching</h3>
+      <p>InstructorCam supports hybrid and in-person class delivery. The auto-tracking camera follows the instructor throughout the room.</p>
+      <ul class="panel-list">
+        <li>Live-stream to remote students</li>
+        <li>Record class sessions</li>
+        <li>Auto-follow camera tracking</li>
+        <li>Hybrid-ready AV setups</li>
+        <li>Works with Zoom and Kaltura</li>
+      </ul>
+      <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/instructorcam-zoom" target="_top" class="btn-sm red btn-block">Learn About InstructorCam →</a>
+    </div>
+
+    <div class="panel">
+      <div class="panel-icon navy">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+      </div>
+      <h3>Classroom Capture</h3>
+      <p>Capture video and audio of your hybrid classroom session with Kaltura. Recordings are stored in your Kaltura folder and sync to Canvas automatically.</p>
+      <ul class="panel-list">
+        <li>Automatic recording available</li>
+        <li>Students access via Canvas</li>
+        <li>Add captions and chapters</li>
+        <li>Create lecture highlights</li>
+      </ul>
+      <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/kaltura-personal-capture-record" target="_top" class="btn-sm dark btn-block">Learn About Classroom Capture →</a>
+    </div>
+
+    <div class="panel">
+      <div class="panel-icon teal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Teaching Online &amp; Hybrid</h3>
+      <p>Make the most of your hybrid classroom for courses with remote participants. Zoom-enabled rooms let you see remote students on screen while teaching in-person.</p>
+      <ul class="panel-list">
+        <li>Set up Zoom for hybrid delivery</li>
+        <li>See remote students on classroom display</li>
+        <li>Use captions when recording</li>
+        <li>Share class materials in Canvas</li>
+      </ul>
+      <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/zoom-teach-effectively" target="_top" class="btn-sm teal btn-block">Hybrid Teaching Setup Guide →</a>
+    </div>
+
+    <div class="panel">
+      <div class="panel-icon green">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <h3>Faculty Innovation &amp; Teaching Studio (FITS)</h3>
+      <p>Explore, practice, and create with media tools and flexible spaces designed to support in-classroom teaching.</p>
+      <ul class="panel-list">
+        <li>Try out digital classroom AV</li>
+        <li>Record a practice session</li>
+        <li>Test hybrid teaching workflows</li>
+        <li>Get one-on-one tool training</li>
+        <li>Work with an instructional designer</li>
+      </ul>
+      <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top" class="btn-sm navy btn-block">View FITS Guide →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ CLASSROOMS AT RUTGERS–NEWARK ══ -->
+<div class="locations-section" id="classrooms">
+  <div class="locations-left">
+    <h2>Hybrid Classrooms at Rutgers–Newark</h2>
+    <p class="sub">Hybrid classrooms are available across two major academic buildings at Rutgers–Newark.</p>
+    <div class="bldg-row">
+      <div class="bldg-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Conklin Hall
+        <span class="bldg-rooms">— Conklin 449</span>
+      </div>
+      <div class="bldg-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Center for Law and Justice
+        <span class="bldg-rooms">— CLJ 202, CLJ 392</span>
+      </div>
+    </div>
+    <a href="https://account577280.wixsite.com/mytechnewark/teaching-in-our-classrooms" target="_top" class="btn-sm red" style="margin-top:4px;">View All Classrooms →</a>
+  </div>
+
+  <div class="need-help-box" id="support">
+    <h3>Need Help?</h3>
+    <div class="contact-items">
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2A19.79 19.79 0 0 1 11.69 19a19.5 19.5 0 0 1-3.77-2.33 19.79 19.79 0 0 1-2.33-3.77A19.79 19.79 0 0 1 3.1 4.18 2 2 0 0 1 5.08 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L9.34 9.62a16 16 0 0 0 5.04 5.04l.99-.99a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:9733531713">(973) 353-1713</a>
+      </div>
+      <div class="contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Hill Hall, Room 109</span>
+      </div>
+    </div>
+    <p class="hours-note">Mon – Fri: 8:00 AM – 6:30 PM</p>
+    <p class="include-note">When contacting support, include:</p>
+    <ul class="include-list">
+      <li>Building and room number</li>
+      <li>Description of the issue</li>
+      <li>Your contact information</li>
+    </ul>
+    <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top" class="btn-request">Request Classroom Support →</a>
+  </div>
+</div>
+
+<!-- ══ RESOURCES & SUPPORT ══ -->
+<div class="support-row">
+
+  <div class="support-card">
+    <div class="sc-icon scarlet">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </div>
+    <div class="sc-body">
+      <h4>In-Person Training</h4>
+      <p>Hands-on training in the FITS studio covering hybrid classroom AV, recording, and Zoom setup.</p>
+      <div class="sc-links">
+        <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top" class="scarlet">Register for a session →</a>
+        <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top" class="scarlet">One-on-one training by request →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="support-card">
+    <div class="sc-icon navy">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+    </div>
+    <div class="sc-body">
+      <h4>User Guides &amp; Resources</h4>
+      <p>Step-by-step guides for all hybrid classroom systems and tools.</p>
+      <div class="sc-links">
+        <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/instructorcam-zoom" target="_top" class="navy">InstructorCam guide →</a>
+        <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/zoom-teach-effectively" target="_top" class="navy">Hybrid teaching guide →</a>
+        <a href="https://account577280.wixsite.com/mytechnewark/kbarticles/kaltura-personal-capture-record" target="_top" class="navy">Kaltura recording guide →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="support-card">
+    <div class="sc-icon teal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+    </div>
+    <div class="sc-body">
+      <h4>Report an Issue</h4>
+      <p>Contact AV support immediately for any technical issues during or before class.</p>
+      <div class="sc-links">
+        <a href="tel:9733531713" class="teal">📞 (973) 353-1713</a>
+        <a href="mailto:mytech@newark.rutgers.edu" class="teal">✉️ mytech@newark.rutgers.edu</a>
+        <a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top" class="teal">Submit a ticket online →</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══ FOOTER LINKS ══ -->
+<div class="footer-section">
+  <div class="footer-col">
+    <h3>Get In Touch</h3>
+    <p class="footer-info">myTech@Newark — AV &amp; Classroom Support</p>
+    <p class="footer-info">Hill Hall, Room 109 · Newark, NJ 07102</p>
+    <p class="footer-info"><a href="tel:9733531713">(973) 353-1713</a></p>
+    <p class="footer-info"><a href="mailto:mytech@newark.rutgers.edu">mytech@newark.rutgers.edu</a></p>
+    <p class="footer-info">Mon – Fri: 8:00 AM – 6:30 PM</p>
+    <p style="margin-top:10px;"><a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top" style="font-size:12px;font-weight:700;color:var(--scarlet);">Submit a support ticket →</a></p>
+  </div>
+  <div class="footer-col">
+    <h3>Quick Links</h3>
+    <ul class="footer-links-list">
+      <li><a href="https://account577280.wixsite.com/mytechnewark/teaching-in-our-classrooms" target="_top">Teaching in Our Classrooms</a></li>
+      <li><a href="https://account577280.wixsite.com/mytechnewark/teaching-in-lecture-halls" target="_top">Lecture Halls &amp; Auditoriums</a></li>
+      <li><a href="https://account577280.wixsite.com/mytechnewark/teaching-in-digital-classrooms" target="_top">Digital Classrooms</a></li>
+      <li><a href="https://account577280.wixsite.com/mytechnewark/kbarticles/instructorcam-zoom" target="_top">InstructorCam &amp; Zoom</a></li>
+      <li><a href="https://account577280.wixsite.com/mytechnewark/kbarticles/kaltura-personal-capture-record" target="_top">Kaltura Lecture Recording</a></li>
+      <li><a href="https://account577280.wixsite.com/mytechnewark/getting-support" target="_top">Faculty Innovation &amp; Teaching Studio (FITS)</a></li>
+    </ul>
+  </div>
+</div>
+
+</body>
+</html>
