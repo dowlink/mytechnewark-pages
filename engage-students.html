@@ -200,34 +200,6 @@
     .goal-tag.c-green   { color: var(--green);   border-color: #9ad4b4; background: var(--green-bg); }
     .goal-tag.c-purple  { color: var(--purple);  border-color: #c9b8e8; background: var(--purple-bg); }
 
-    /* ── TEACHING FOR ENGAGEMENT ── */
-    .teach-section { margin-bottom: 28px; }
-    .teach-grid {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-    .teach-card {
-      border: 1px solid var(--gray-border);
-      border-radius: var(--radius); overflow: hidden;
-      display: flex; flex-direction: column;
-      transition: box-shadow .15s;
-    }
-    .teach-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
-    .teach-card-photo {
-      height: 100px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 36px;
-    }
-    .teach-card-photo.tp-scarlet { background: var(--scarlet-bg); }
-    .teach-card-photo.tp-teal    { background: var(--teal-bg); }
-    .teach-card-photo.tp-navy    { background: var(--navy-bg); }
-    .teach-card-photo.tp-green   { background: var(--green-bg); }
-    .teach-card-body { padding: 14px 14px 16px; flex: 1; display: flex; flex-direction: column; }
-    .teach-card-body h3 { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 5px; line-height: 1.3; }
-    .teach-card-body p  { font-size: 12px; color: var(--gray-mid); line-height: 1.5; flex: 1; margin-bottom: 10px; }
-    .teach-card-link { font-size: 12px; font-weight: 700; color: var(--scarlet); }
-    .teach-card-link:hover { text-decoration: underline; }
-
     /* ── ECHOPOLL FEATURE BANNER ── */
     .feature-banner {
       background: #122a50;
@@ -238,13 +210,16 @@
       overflow: hidden;
       min-height: 260px;
     }
+    /* Left: laptop visual */
     .feature-visual {
       background: #0d1f3c;
       display: flex; align-items: center; justify-content: center;
       padding: 28px 24px;
       border-right: 1px solid rgba(255,255,255,.08);
     }
-    .laptop-mock { width: 220px; }
+    .laptop-mock {
+      width: 220px;
+    }
     .laptop-screen {
       background: #1e3a5f;
       border-radius: 6px 6px 0 0;
@@ -267,8 +242,15 @@
     .poll-bar-fill.c { background: var(--navy);    width: 10%; }
     .poll-bar-pct { font-size: 7px; font-weight: 700; color: #333; width: 20px; text-align: right; }
     .poll-count { font-size: 7px; color: #999; margin-top: 6px; text-align: right; }
-    .laptop-base { background: #2d4f7a; height: 8px; border-radius: 0 0 4px 4px; }
-    .laptop-stand { width: 40px; height: 5px; background: #2d4f7a; margin: 0 auto; border-radius: 0 0 3px 3px; }
+    .laptop-base {
+      background: #2d4f7a;
+      height: 8px; border-radius: 0 0 4px 4px;
+    }
+    .laptop-stand {
+      width: 40px; height: 5px; background: #2d4f7a;
+      margin: 0 auto; border-radius: 0 0 3px 3px;
+    }
+    /* Right: content */
     .feature-body {
       padding: 28px 32px;
       display: flex; flex-direction: column; justify-content: center;
@@ -295,7 +277,10 @@
       display: flex; align-items: center; gap: 8px;
     }
     .feature-list li svg { width: 13px; height: 13px; color: #7ab8f5; flex-shrink: 0; }
-    .feature-divider { border-top: 1px solid rgba(255,255,255,.12); padding-top: 14px; margin-bottom: 14px; }
+    .feature-divider {
+      border-top: 1px solid rgba(255,255,255,.12);
+      padding-top: 14px; margin-bottom: 14px;
+    }
     .feature-used-label {
       font-size: 10px; font-weight: 700; letter-spacing: .07em;
       text-transform: uppercase; color: rgba(255,255,255,.45);
@@ -358,24 +343,6 @@
     .tool-card h4 { font-size: 12px; font-weight: 700; color: var(--black); margin-bottom: 3px; line-height: 1.3; }
     .tool-card p  { font-size: 11px; color: var(--gray-mid); line-height: 1.4; }
 
-    /* ── STATS BAR ── */
-    .stats-bar {
-      background: var(--navy);
-      border-radius: var(--radius);
-      padding: 22px 32px;
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 16px; margin-bottom: 28px; text-align: center;
-    }
-    .stat-num {
-      font-size: 28px; font-weight: 800; color: var(--white);
-      letter-spacing: -.02em; line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-label {
-      font-size: 11px; font-weight: 600; color: rgba(255,255,255,.65);
-      text-transform: uppercase; letter-spacing: .06em;
-    }
-
     /* ── BOTTOM TWO-COLUMN ── */
     .bottom-cols {
       display: grid; grid-template-columns: 1fr 1fr;
@@ -386,6 +353,8 @@
       padding-bottom: 8px; border-bottom: 2px solid var(--scarlet);
       margin-bottom: 12px;
     }
+
+    /* Strategies accordion */
     .strategy-list { display: flex; flex-direction: column; }
     .strategy-item { border-bottom: 1px solid var(--gray-border); }
     .strategy-item summary {
@@ -408,6 +377,8 @@
       padding: 0 0 10px 0;
       font-size: 12px; color: var(--gray-mid); line-height: 1.6;
     }
+
+    /* Workshops */
     .workshop-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 14px; }
     .workshop-item {
       display: flex; align-items: flex-start; gap: 11px;
@@ -455,6 +426,53 @@
       margin-bottom: 10px;
     }
 
+    /* ── TEACHING FOR ENGAGEMENT ── */
+    .teach-section { margin-bottom: 28px; }
+    .teach-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .teach-card {
+      border: 1px solid var(--gray-border);
+      border-radius: var(--radius); overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: box-shadow .15s;
+    }
+    .teach-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+    .teach-card-photo {
+      height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 36px;
+    }
+    .teach-card-photo.tp-scarlet { background: var(--scarlet-bg); }
+    .teach-card-photo.tp-teal    { background: var(--teal-bg); }
+    .teach-card-photo.tp-navy    { background: var(--navy-bg); }
+    .teach-card-photo.tp-green   { background: var(--green-bg); }
+    .teach-card-body { padding: 14px 14px 16px; flex: 1; display: flex; flex-direction: column; }
+    .teach-card-body h3 { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 5px; line-height: 1.3; }
+    .teach-card-body p  { font-size: 12px; color: var(--gray-mid); line-height: 1.5; flex: 1; margin-bottom: 10px; }
+    .teach-card-link { font-size: 12px; font-weight: 700; color: var(--scarlet); }
+    .teach-card-link:hover { text-decoration: underline; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 22px 32px;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; margin-bottom: 28px; text-align: center;
+    }
+    .stat-item {}
+    .stat-num {
+      font-size: 28px; font-weight: 800; color: var(--white);
+      letter-spacing: -.02em; line-height: 1;
+      margin-bottom: 4px;
+    }
+    .stat-label {
+      font-size: 11px; font-weight: 600; color: rgba(255,255,255,.65);
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; }
@@ -469,8 +487,6 @@
       .tools-grid { grid-template-columns: repeat(2, 1fr); }
       .tool-card:nth-child(2n) { border-right: none; }
       .tool-card:nth-child(1), .tool-card:nth-child(2) { border-bottom: 1px solid var(--gray-border); }
-      .teach-grid { grid-template-columns: repeat(2, 1fr); }
-      .stats-bar { grid-template-columns: repeat(2, 1fr); }
       .bottom-cols { grid-template-columns: 1fr; }
       .support-band { grid-template-columns: 1fr; }
       .support-divider { border-left: none; border-top: 1px solid rgba(255,255,255,.15); padding-left: 0; padding-top: 20px; }
@@ -478,8 +494,6 @@
     @media (max-width: 540px) {
       .hero-text { padding: 24px 20px; }
       .goals-grid { grid-template-columns: 1fr; }
-      .teach-grid { grid-template-columns: 1fr; }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
       .page-body { padding: 0 16px; }
       .tools-strip-inner { padding: 10px 16px; }
       .support-band { padding: 20px; }
@@ -631,7 +645,7 @@
         <div class="teach-card-body">
           <h3>Encourage Participation</h3>
           <p>Use live polls, discussion prompts, and low-stakes activities to invite every student into the conversation.</p>
-          <a href="#" class="teach-card-link">Explore strategies &rarr;</a>
+          <a href="#" class="teach-card-link">Explore strategies →</a>
         </div>
       </div>
 
@@ -640,7 +654,7 @@
         <div class="teach-card-body">
           <h3>Building Connections</h3>
           <p>Foster peer relationships and community through collaborative tasks, breakout rooms, and group work.</p>
-          <a href="#" class="teach-card-link">Explore strategies &rarr;</a>
+          <a href="#" class="teach-card-link">Explore strategies →</a>
         </div>
       </div>
 
@@ -649,7 +663,7 @@
         <div class="teach-card-body">
           <h3>Supporting Student Success</h3>
           <p>Identify struggling students early and reach out with targeted, personal messages before issues escalate.</p>
-          <a href="#" class="teach-card-link">Explore strategies &rarr;</a>
+          <a href="#" class="teach-card-link">Explore strategies →</a>
         </div>
       </div>
 
@@ -657,8 +671,8 @@
         <div class="teach-card-photo tp-green">💡</div>
         <div class="teach-card-body">
           <h3>Active Learning Approaches</h3>
-          <p>Design activities that keep students doing, thinking, and applying &mdash; think-pair-share, case studies, knowledge checks.</p>
-          <a href="#" class="teach-card-link">Explore strategies &rarr;</a>
+          <p>Design activities that keep students doing, thinking, and applying — think-pair-share, case studies, knowledge checks.</p>
+          <a href="#" class="teach-card-link">Explore strategies →</a>
         </div>
       </div>
 
@@ -667,6 +681,8 @@
 
   <!-- ECHOPOLL FEATURE BANNER -->
   <div class="feature-banner">
+
+    <!-- Left: laptop visual -->
     <div class="feature-visual">
       <div class="laptop-mock">
         <div class="laptop-screen">
@@ -687,23 +703,27 @@
               <div class="poll-bar-track"><div class="poll-bar-fill c"></div></div>
               <span class="poll-bar-pct">10%</span>
             </div>
-            <div class="poll-count">32 responses &middot; Live</div>
+            <div class="poll-count">32 responses · Live</div>
           </div>
         </div>
         <div class="laptop-base"></div>
         <div class="laptop-stand"></div>
       </div>
     </div>
+
+    <!-- Right: content -->
     <div class="feature-body">
       <div class="feature-eyebrow">Featured Tool</div>
       <div class="feature-title">EchoPoll</div>
       <div class="feature-sub">Turn passive lectures into active learning. Engage every student with live polls, attendance tracking, and formative assessment.</div>
+
       <ul class="feature-list">
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Live polls, word clouds, and open-ended Q&amp;A</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Attendance tracking integrated with Canvas</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Formative assessment and knowledge checks</li>
         <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Grade sync to Canvas Gradebook</li>
       </ul>
+
       <div class="feature-divider">
         <div class="feature-used-label">Currently Used For</div>
         <ul class="feature-used-list">
@@ -712,19 +732,22 @@
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>Pre- and post-class knowledge checks</li>
         </ul>
       </div>
+
       <div class="feature-btns">
         <a href="#" class="btn-feature-primary">Request Training</a>
-        <a href="#" class="btn-feature-ghost">Find Out More &rarr;</a>
+        <a href="#" class="btn-feature-ghost">Find Out More →</a>
       </div>
     </div>
+
   </div>
 
   <!-- ENGAGEMENT TOOLS GRID -->
   <div id="tools" class="section-hd">
     <h2>Engagement Tools &amp; Resources</h2>
-    <p>Tools supported by Academic Technology Services at Rutgers&ndash;Newark.</p>
+    <p>Tools supported by Academic Technology Services at Rutgers–Newark.</p>
   </div>
   <div class="tools-grid">
+
     <div class="tool-card">
       <div class="tool-logo c-teal">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -732,6 +755,7 @@
       <h4>Canvas Discussions &amp; Announcements</h4>
       <p>Async discussion &amp; course-wide messaging</p>
     </div>
+
     <div class="tool-card">
       <div class="tool-logo c-scarlet">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
@@ -739,6 +763,7 @@
       <h4>EchoPoll</h4>
       <p>In class engagement</p>
     </div>
+
     <div class="tool-card">
       <div class="tool-logo c-purple">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -746,6 +771,7 @@
       <h4>Zoom Breakout Rooms</h4>
       <p>Small group work</p>
     </div>
+
     <div class="tool-card">
       <div class="tool-logo c-gold">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
@@ -753,6 +779,7 @@
       <h4>Kaltura</h4>
       <p>Video &amp; engagement analytics</p>
     </div>
+
   </div>
 
   <!-- STATS BAR -->
@@ -777,6 +804,8 @@
 
   <!-- BOTTOM TWO COLUMNS -->
   <div class="bottom-cols">
+
+    <!-- Teaching Strategies -->
     <div>
       <div class="panel-title">Teaching Strategies for Engagement</div>
       <div class="strategy-list">
@@ -798,41 +827,82 @@
         </details>
         <details class="strategy-item">
           <summary>Active Learning Approaches</summary>
-          <div class="strategy-body">Design activities that keep students doing, thinking, and applying throughout class &mdash; think-pair-share, EchoPoll knowledge checks, case studies, and collaborative problem-solving work well in any format.</div>
+          <div class="strategy-body">Design activities that keep students doing, thinking, and applying throughout class — think-pair-share, EchoPoll knowledge checks, case studies, and collaborative problem-solving work well in any format.</div>
         </details>
       </div>
     </div>
+
+    <!-- Workshops -->
     <div>
       <div class="panel-title">Workshops &amp; Professional Development</div>
       <div class="workshop-list">
+
         <div class="workshop-item">
-          <div class="workshop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-          <div class="workshop-info"><h4>Getting Students Talking</h4><p>Strategies for discussion in any course format.</p></div>
+          <div class="workshop-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          <div class="workshop-info">
+            <h4>Getting Students Talking</h4>
+            <p>Strategies for discussion in any course format.</p>
+          </div>
         </div>
+
         <div class="workshop-item">
-          <div class="workshop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg></div>
-          <div class="workshop-info"><h4>Using EchoPoll in Class</h4><p>Polls, attendance checks, and knowledge checks to increase participation.</p></div>
+          <div class="workshop-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <div class="workshop-info">
+            <h4>Using EchoPoll in Class</h4>
+            <p>Polls, attendance checks, and knowledge checks to increase participation.</p>
+          </div>
         </div>
+
         <div class="workshop-item">
-          <div class="workshop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><polyline points="17 8 12 3 7 8"/></svg></div>
-          <div class="workshop-info"><h4>Canvas Discussions That Work</h4><p>Design prompts and rubrics that make discussions meaningful.</p></div>
+          <div class="workshop-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><polyline points="17 8 12 3 7 8"/></svg>
+          </div>
+          <div class="workshop-info">
+            <h4>Canvas Discussions That Work</h4>
+            <p>Design prompts and rubrics that make discussions meaningful.</p>
+          </div>
         </div>
+
         <div class="workshop-item">
-          <div class="workshop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-          <div class="workshop-info"><h4>Early Alert &amp; Outreach</h4><p>Use Canvas analytics to spot struggling students early.</p></div>
+          <div class="workshop-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <div class="workshop-info">
+            <h4>Early Alert &amp; Outreach</h4>
+            <p>Use Canvas analytics to spot struggling students early.</p>
+          </div>
         </div>
+
         <div class="workshop-item">
-          <div class="workshop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-          <div class="workshop-info"><h4>Active Learning in Any Space</h4><p>Techniques for lecture halls, seminars, and online courses.</p></div>
+          <div class="workshop-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="workshop-info">
+            <h4>Active Learning in Any Space</h4>
+            <p>Techniques for lecture halls, seminars, and online courses.</p>
+          </div>
         </div>
+
         <div class="workshop-item">
-          <div class="workshop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
-          <div class="workshop-info"><h4>Building an Inclusive Classroom</h4><p>UDL strategies and tools that improve engagement for all students.</p></div>
+          <div class="workshop-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          </div>
+          <div class="workshop-info">
+            <h4>Building an Inclusive Classroom</h4>
+            <p>UDL strategies and tools that improve engagement for all students.</p>
+          </div>
         </div>
+
       </div>
-      <a href="#" class="view-all">View Upcoming Workshops &rarr;</a>
+      <a href="#" class="view-all">View Upcoming Workshops →</a>
     </div>
+
   </div>
+
 
 </div><!-- end page-body -->
 
@@ -841,7 +911,7 @@
   <div class="support-band">
     <div>
       <h3>Academic Technology Services</h3>
-      <p>ATS provides hands-on support for Rutgers&ndash;Newark faculty. We can help you choose the right tools, set up your course, and develop engagement strategies that work for your students.</p>
+      <p>ATS provides hands-on support for Rutgers–Newark faculty. We can help you choose the right tools, set up your course, and develop engagement strategies that work for your students.</p>
       <div class="support-contact">
         <div class="support-contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -860,7 +930,7 @@
     <div class="support-divider">
       <div class="support-divider-label">Book a Consultation</div>
       <p>Schedule a one-on-one session with an ATS instructional designer to build your engagement strategy.</p>
-      <a href="https://go.rutgers.edu/bookats" class="btn-feature-primary" style="width:fit-content;">Book a Session &rarr;</a>
+      <a href="https://go.rutgers.edu/bookats" class="btn-feature-primary" style="width:fit-content;">Book a Session →</a>
     </div>
   </div>
 </div>
